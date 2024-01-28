@@ -32,10 +32,9 @@ unsigned char fontset[80] =
         0xF0, 0x80, 0xF0, 0x80, 0x80  // F
 };
 
-
 void ChipSystem::initialize()
 {
-    cout << "Init!!!!";
+    cout << "Init!!!!" << endl;
     pc = 0x200;
     opcode = 0;
     I = 0;
@@ -46,6 +45,7 @@ void ChipSystem::initialize()
     // Clear registers V0-VF
     // Clear memory
 
+    // Load fontset
     for (int i = 0; i < 80; ++i)
         memory[i] = fontset[i];
 
@@ -58,7 +58,7 @@ void ChipSystem::initialize()
 }
 void ChipSystem::runCycle()
 {
-    cout << "1 cycle is being run";
+    cout << "1 cycle is being run" << endl;
     // Fetch Opcode
     opcode = memory[pc] << 8 | memory[pc + 1];
 
@@ -71,11 +71,11 @@ void ChipSystem::runCycle()
         {
         // 0x00E0: Clears the screen
         case 0x0000:
-            cout << "clear screen!";
+            cout << "clear screen!" << endl;
             break;
         // 0x00EE: Returns from subroutine
         case 0x000E:
-            cout << "return from subroutine!";
+            cout << "return from subroutine!" << endl;
             break;
         default:
             printf("Unknown opcode [0x0000]: 0x%X\n", opcode);
@@ -86,7 +86,7 @@ void ChipSystem::runCycle()
         pc += 2;
         break;
     default:
-        cout << ("Unknown opcode, " + opcode);
+        cout << ("Unknown opcode, " + opcode) << endl;
     }
 
     // Update timers
@@ -98,10 +98,8 @@ void ChipSystem::runCycle()
     {
         if (sound_timer == 1)
         {
-            cout << "BEEP";
+            cout << "BEEP" << endl;
         }
         sound_timer--;
     }
 }
-
-
