@@ -3,7 +3,9 @@
 using namespace std;
 
 int main() {
+    cout << "hello there" << endl;
     ChipSystem chip8system;
+    
 
    //Setup graphics
    //Setup input
@@ -14,6 +16,7 @@ int main() {
 
    ///while (true){
     //Emulate cycle
+    chip8system.runCycle();
     // If the draw flag is set, update the screen
         //Draw graphics
 

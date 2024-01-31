@@ -1,36 +1,4 @@
 #include "ChipSystem.h"
-using namespace std;
-
-unsigned short opcode;
-unsigned char memory[4096];
-unsigned char V[16];        // 8-bit registers, VE is the carry flag
-unsigned short I;           // index register
-unsigned short pc;          // program counter (from 0x000 to 0xFFF)
-unsigned char gfx[64 * 32]; // display
-unsigned char delay_timer;
-unsigned char sound_timer;
-unsigned short stack[16];
-unsigned short sp;     // stack pointer
-unsigned char key[16]; // keypad
-unsigned char fontset[80] =
-    {
-        0xF0, 0x90, 0x90, 0x90, 0xF0, // 0
-        0x20, 0x60, 0x20, 0x20, 0x70, // 1
-        0xF0, 0x10, 0xF0, 0x80, 0xF0, // 2
-        0xF0, 0x10, 0xF0, 0x10, 0xF0, // 3
-        0x90, 0x90, 0xF0, 0x10, 0x10, // 4
-        0xF0, 0x80, 0xF0, 0x10, 0xF0, // 5
-        0xF0, 0x80, 0xF0, 0x90, 0xF0, // 6
-        0xF0, 0x10, 0x20, 0x40, 0x40, // 7
-        0xF0, 0x90, 0xF0, 0x90, 0xF0, // 8
-        0xF0, 0x90, 0xF0, 0x10, 0xF0, // 9
-        0xF0, 0x90, 0xF0, 0x90, 0x90, // A
-        0xE0, 0x90, 0xE0, 0x90, 0xE0, // B
-        0xF0, 0x80, 0x80, 0x80, 0xF0, // C
-        0xE0, 0x90, 0x90, 0x90, 0xE0, // D
-        0xF0, 0x80, 0xF0, 0x80, 0xF0, // E
-        0xF0, 0x80, 0xF0, 0x80, 0x80  // F
-};
 
 void ChipSystem::initialize()
 {
@@ -52,15 +20,36 @@ void ChipSystem::initialize()
     // Reset timers
 
     // Load program into memory, starting at 0x200
-    //  using fopen in binary mode
-    // for(int i = 0; i < bufferSize; ++i)
-    // memory[i + 512] = buffer[i];
+    std::ifstream file("/home/robin/Desktop/Chip8 Games/INVADERS", std::ios::binary | std::ios::ate);
+
+    if (file.is_open())
+    {
+        // Get size of file and allocate a buffer to hold the contents
+        std::streampos size = file.tellg();
+        char *buffer = new char[size];
+
+        // Go back to the beginning of the file and fill the buffer
+        file.seekg(0, std::ios::beg);
+        file.read(buffer, size);
+        file.close();
+
+        // Load the ROM contents into the Chip8's memory, starting at 0x200
+        for (long i = 0; i < size; ++i)
+        {
+            memory[512 + i] = buffer[i];
+        }
+
+        // Free the buffer
+        delete[] buffer;
+    }
 }
 void ChipSystem::runCycle()
 {
     cout << "1 cycle is being run" << endl;
     // Fetch Opcode
     opcode = memory[pc] << 8 | memory[pc + 1];
+
+    execute_00E0();
 
     // Decode Opcode
     switch (opcode & 0xF000)
@@ -102,4 +91,8 @@ void ChipSystem::runCycle()
         }
         sound_timer--;
     }
+}
+
+void ChipSystem::execute_00E0(){
+    cout << "Executing 00E0";
 }
