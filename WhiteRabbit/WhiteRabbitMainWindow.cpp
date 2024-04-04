@@ -1,5 +1,6 @@
 #include "WhiteRabbitMainWindow.h"
 #include "ui_WhiteRabbitMainWindow.h"
+#include "chip8.h"
 
 WhiteRabbitMainWindow::WhiteRabbitMainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -7,6 +8,15 @@ WhiteRabbitMainWindow::WhiteRabbitMainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     ui->label->setText("Hello World\n");
+
+
+    CHIP8 mychip = CHIP8();
+    mychip.ee();
+    CHIP8::hello();
+    mychip.e();
+    mychip.ee();
+
+    CHIP8 mychip2 = CHIP8();
 }
 
 WhiteRabbitMainWindow::~WhiteRabbitMainWindow()

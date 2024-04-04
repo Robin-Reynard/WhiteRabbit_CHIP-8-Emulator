@@ -52,9 +52,11 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = ../WhiteRabbit/main.cpp \
+SOURCES       = ../WhiteRabbit/chip8.cpp \
+		../WhiteRabbit/main.cpp \
 		../WhiteRabbit/WhiteRabbitMainWindow.cpp moc_WhiteRabbitMainWindow.cpp
-OBJECTS       = main.o \
+OBJECTS       = chip8.o \
+		main.o \
 		WhiteRabbitMainWindow.o \
 		moc_WhiteRabbitMainWindow.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
@@ -147,7 +149,9 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exceptions.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
-		../WhiteRabbit/WhiteRabbit.pro ../WhiteRabbit/WhiteRabbitMainWindow.h ../WhiteRabbit/main.cpp \
+		../WhiteRabbit/WhiteRabbit.pro ../WhiteRabbit/WhiteRabbitMainWindow.h \
+		../WhiteRabbit/chip8.h ../WhiteRabbit/chip8.cpp \
+		../WhiteRabbit/main.cpp \
 		../WhiteRabbit/WhiteRabbitMainWindow.cpp
 QMAKE_TARGET  = WhiteRabbit
 DESTDIR       = 
@@ -358,8 +362,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../WhiteRabbit/WhiteRabbitMainWindow.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../WhiteRabbit/main.cpp ../WhiteRabbit/WhiteRabbitMainWindow.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../WhiteRabbit/WhiteRabbitMainWindow.h ../WhiteRabbit/chip8.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../WhiteRabbit/chip8.cpp ../WhiteRabbit/main.cpp ../WhiteRabbit/WhiteRabbitMainWindow.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../WhiteRabbit/WhiteRabbitMainWindow.ui $(DISTDIR)/
 
 
@@ -421,11 +425,15 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean compiler_ui
 
 ####### Compile
 
+chip8.o: ../WhiteRabbit/chip8.cpp ../WhiteRabbit/chip8.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o chip8.o ../WhiteRabbit/chip8.cpp
+
 main.o: ../WhiteRabbit/main.cpp ../WhiteRabbit/WhiteRabbitMainWindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../WhiteRabbit/main.cpp
 
 WhiteRabbitMainWindow.o: ../WhiteRabbit/WhiteRabbitMainWindow.cpp ../WhiteRabbit/WhiteRabbitMainWindow.h \
-		ui_WhiteRabbitMainWindow.h
+		ui_WhiteRabbitMainWindow.h \
+		../WhiteRabbit/chip8.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o WhiteRabbitMainWindow.o ../WhiteRabbit/WhiteRabbitMainWindow.cpp
 
 moc_WhiteRabbitMainWindow.o: moc_WhiteRabbitMainWindow.cpp 
