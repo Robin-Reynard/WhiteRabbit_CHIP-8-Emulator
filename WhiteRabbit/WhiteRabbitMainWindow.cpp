@@ -11,12 +11,6 @@ WhiteRabbitMainWindow::WhiteRabbitMainWindow(QWidget *parent)
 
 
     CHIP8 mychip = CHIP8();
-    mychip.ee();
-    CHIP8::hello();
-    mychip.e();
-    mychip.ee();
-
-    CHIP8 mychip2 = CHIP8();
 }
 
 WhiteRabbitMainWindow::~WhiteRabbitMainWindow()
