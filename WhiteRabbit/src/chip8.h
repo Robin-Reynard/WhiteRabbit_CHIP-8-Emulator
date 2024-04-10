@@ -7,7 +7,7 @@ public:
     CHIP8();
     static void hello();
     static void print_as_byte(int number);
-    static void load_program();
+    static void load_program(const char file_path);
 
     //--- GRAPICS
     //Display resolution of 64*32 pixels, monochrome; XOR sprites

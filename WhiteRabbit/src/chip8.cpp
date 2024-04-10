@@ -12,8 +12,9 @@ CHIP8::CHIP8()
     print_as_byte(memory[81]);
 }
 
-void CHIP8::load_program(){
-    std::cout << "Read to load program" << endl;
+void CHIP8::load_program(const char file_path){
+    std::cout << "Ready to load program" << endl;
+
     //for(int i = 0; i < bufferSize; ++i)
     //qmemory[i + 512] = buffer[i];
 }
