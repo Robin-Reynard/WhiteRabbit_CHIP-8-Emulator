@@ -1,6 +1,4 @@
 #include "chip8.h"
-#include <iostream>
-#include <fstream>
 
 using namespace std;
 
@@ -60,24 +58,25 @@ CHIP8::CHIP8()
     print_as_byte(memory[1]);
 }
 
-void CHIP8::load_program(const char* file_path){
-    cout << "Ready to load program" << endl;
+void CHIP8::load_program(const string file_path){
+    cout << "Ready to load program " << file_path << endl;
+    char data {};
+    int index {0};
 
     ifstream input_file(file_path, ios::binary);
-    if(input_file.good()){
-        std::cout << "Program file good! unga bunga";
-        int count {0};
-        int i {0};
-        while(input_file >> i){
-            memory[0x200 + count] = i;
-            count++;
+
+    if(input_file){
+        while(input_file.good() && !input_file.eof()){
+            input_file.read (&data,sizeof(char));
+            memory[0x200 + index] = data;
+            index++;
         }
+        input_file.close();
+        cout << "Program loaded sucessfully! :D" << endl;
     }
-    input_file.close();
-    /*for(int i = 0; i < 10; ++i){
-        print_as_byte(memory[i]);
-    }*/
-    //qmemory[i + 512] = buffer[i];
+    else{
+        cerr << "Could not load program T_T" << endl;
+    }
 }
 
 void CHIP8::print_as_byte(int number){

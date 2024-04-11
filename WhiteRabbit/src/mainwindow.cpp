@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "chip8.h"
+#include <string>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -12,7 +13,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 
     CHIP8 mychip = CHIP8();
-    mychip.load_program("/home/robin/Desktop/Chip8 Games/INVADERS");
+    mychip.load_program({"/home/robin/Desktop/Chip8 Games/INVADERS"});
 }
 
 MainWindow::~MainWindow()
