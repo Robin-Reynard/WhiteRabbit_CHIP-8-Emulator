@@ -18,11 +18,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     chip8.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    opcode.cpp
 
 HEADERS += \
     chip8.h \
-    mainwindow.h
+    mainwindow.h \
+    opcode.h
 
 FORMS += \
     mainwindow.ui

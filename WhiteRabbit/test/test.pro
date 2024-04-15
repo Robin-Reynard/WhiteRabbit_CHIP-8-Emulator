@@ -7,3 +7,4 @@ CONFIG -= app_bundle
 TEMPLATE = app
 
 SOURCES +=  tst_test_whiterabbit.cpp
+HEADERS += opcode.h

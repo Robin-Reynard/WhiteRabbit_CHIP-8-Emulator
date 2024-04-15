@@ -14,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     CHIP8 mychip = CHIP8();
     mychip.load_program({"/home/robin/Desktop/Chip8 Games/INVADERS"});
+    mychip.emulate_cycle();
 }
 
 MainWindow::~MainWindow()

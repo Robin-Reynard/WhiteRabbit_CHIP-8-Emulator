@@ -1,4 +1,5 @@
 #include "chip8.h"
+#include "opcode.h"
 
 using namespace std;
 
@@ -53,9 +54,61 @@ unsigned char keys[16] {};
 CHIP8::CHIP8()
 {
     cout << "Init CHIP8" << endl;
-    print_as_byte(program_counter);
-    print_as_byte(memory[0]);
-    print_as_byte(memory[1]);
+}
+
+void CHIP8::emulate_cycle(){
+    opcode = 0x2001;
+    cout << stack[stack_pointer] << endl;
+    cout << stack_pointer << endl;
+    cout << program_counter << endl;
+    cout << "Executing" << endl;
+    Opcode::execute_2NNN(opcode, stack, stack_pointer, program_counter);
+
+    cout << stack[stack_pointer] << endl;
+    cout << stack_pointer << endl;
+    cout << program_counter << endl;
+    /*print_as_byte(memory[program_counter]);
+    print_as_byte(memory[program_counter + 1]);
+    //Fetch opcode
+    opcode = memory[program_counter] << 8 | memory[program_counter + 1];
+    print_as_byte(opcode);
+
+    //Decode opcode
+    switch(opcode & 0xF000){
+    case 0x0000:
+        break;
+    case 0x1000:
+        program_counter = opcode & 0x0FFF;
+        break;
+    case 0x2000:
+        stack[stack_pointer] = program_counter;
+        stack_pointer++;
+        program_counter = opcode & 0x0FFF;
+        break;
+
+    case 0xA000:
+        I = opcode & 0x0FFF;
+        program_counter += 2;
+        break;
+    default:
+        printf ("Unknown opcode: 0x%X\n", opcode);
+    }
+
+
+
+
+
+
+    // Update timers
+    if(delay_timer > 0){
+        --delay_timer;
+    }
+    if(sound_timer > 0)
+    {
+        if(sound_timer == 1){
+            printf("BEEP!\n");}
+        --sound_timer;
+    }*/
 }
 
 void CHIP8::load_program(const string file_path){

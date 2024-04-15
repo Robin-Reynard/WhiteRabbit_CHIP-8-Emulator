@@ -10,6 +10,7 @@ public:
     static void hello();
     static void print_as_byte(int number);
     void load_program(const std::string file_path);
+    void emulate_cycle();
 
     //--- GRAPICS
     //Display resolution of 64*32 pixels, monochrome; XOR sprites
