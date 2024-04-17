@@ -17,7 +17,6 @@ public:
     unsigned char graphics[64*32] {};
 
 private:
-
 };
 
 #endif // CHIP8_H

@@ -11,3 +11,4 @@ void Opcode::execute_2NNN(unsigned short opcode, unsigned short stack[], unsigne
     ++sp;
     pc = opcode & 0x0FFF;
 }
+

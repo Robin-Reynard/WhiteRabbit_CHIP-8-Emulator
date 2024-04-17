@@ -1,10 +1,14 @@
-QT += testlib
-QT -= gui
-
-CONFIG += qt console warn_on depend_includepath testcase
-CONFIG -= app_bundle
+include(gtest_dependency.pri)
 
 TEMPLATE = app
+CONFIG += console
+CONFIG -= app_bundle
+CONFIG += thread
+CONFIG -= qt
 
-SOURCES +=  tst_test_whiterabbit.cpp
-HEADERS += opcode.h
+HEADERS += \
+        tst_opcodecase.h \
+        tst_whiterabbitcase.h
+
+SOURCES += \
+        main.cpp
