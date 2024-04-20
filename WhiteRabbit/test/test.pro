@@ -5,10 +5,15 @@ CONFIG += console
 CONFIG -= app_bundle
 CONFIG += thread
 CONFIG -= qt
+INCLUDEPATH += "../../src"
+
 
 HEADERS += \
         tst_opcodecase.h \
-        tst_whiterabbitcase.h
+        tst_whiterabbitcase.h \
+        ../../src/opcode.h
 
 SOURCES += \
-        main.cpp
+        main.cpp \
+        ../../src/opcode.cpp
+
