@@ -5,7 +5,6 @@
 #include <gmock/gmock-matchers.h>
 
 using namespace testing;
-
 TEST(WhiteRabbitSuite, WhiteRabbitCase2)
 {
     EXPECT_EQ(1, 1);

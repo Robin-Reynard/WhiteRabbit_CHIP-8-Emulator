@@ -8,6 +8,18 @@
 #include <cstdlib>
 
 using namespace testing;
+using namespace Opcode;
+
+TEST(OpcodeSuite, Execute0x1NNN){
+    srand(time(0));
+    unsigned short opcode {(unsigned short)(0x1000 + (rand() % 0x2FFF))};
+    unsigned short original_pc, pc;
+    original_pc = pc = (unsigned short)rand();
+    Opcode::execute_1NNN(opcode, pc);
+
+    ASSERT_THAT(original_pc, Not(pc));
+    ASSERT_EQ(opcode & 0x0FFF, pc);
+}
 
 TEST(OpcodeSuite, Test_0x2NNN)
 {
@@ -28,13 +40,3 @@ TEST(OpcodeSuite, Test_0x2NNN)
 }
 
 #endif // TST_OPCODECASE_H
-
-/*
-void Opcode::execute_2NNN(unsigned short opcode, unsigned short stack[], unsigned short &sp, unsigned short &pc){
-    stack[sp] = pc;
-    ++sp;
-    pc = opcode & 0x0FFF;
-}
-unsigned short stack[16]{};
-unsigned short stack_pointer {};
-unsigned short program_counter {0x200};*/

@@ -2,6 +2,7 @@
 #include "opcode.h"
 
 using namespace std;
+//using namespace Opcode;
 
 CHIP8::CHIP8()
     : memory {
