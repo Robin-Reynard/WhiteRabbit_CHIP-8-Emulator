@@ -1,8 +1,6 @@
 #ifndef OPCODE_H
 #define OPCODE_H
 
-#include "chip8.h"
-
 class Opcode
 {
 public:
