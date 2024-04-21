@@ -27,7 +27,7 @@ CHIP8::CHIP8()
       V {}, I {},
       stack {}, stack_pointer {},
       delay_timer {}, sound_timer {},
-      keys {}
+      keys {}, graphics {}
 {
     cout << "Init CHIP8" << endl;
 }

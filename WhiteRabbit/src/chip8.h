@@ -12,10 +12,6 @@ public:
     void load_program(const std::string file_path);
     void emulate_cycle();
 
-    //--- GRAPICS
-    //Display resolution of 64*32 pixels, monochrome; XOR sprites
-    unsigned char graphics[64*32] {};
-
 private:
     //--- MEMORY
     unsigned char memory[4096];
@@ -39,6 +35,9 @@ private:
     //--- INPUT
     //Done via hex keyboard (16 keys from 0 to F).
     unsigned char keys[16];
+    //--- GRAPICS
+    //Display resolution of 64*32 pixels, monochrome; XOR sprites
+    unsigned char graphics[64*32];
 };
 
 #endif // CHIP8_H

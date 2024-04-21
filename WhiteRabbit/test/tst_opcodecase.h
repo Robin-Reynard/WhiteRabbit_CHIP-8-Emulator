@@ -12,9 +12,9 @@ using namespace Opcode;
 
 TEST(OpcodeSuite, Execute0x1NNN){
     srand(time(0));
-    unsigned short opcode {(unsigned short)(0x1000 + (rand() % 0x2FFF))};
-    unsigned short original_pc, pc;
-    original_pc = pc = (unsigned short)rand();
+    u_short opcode {(u_short)(0x1000 + (rand() % 0x2FFF))};
+    u_short original_pc, pc;
+    original_pc = pc = (u_short)rand();
     Opcode::execute_1NNN(opcode, pc);
 
     ASSERT_THAT(original_pc, Not(pc));
@@ -26,12 +26,12 @@ TEST(OpcodeSuite, Test_0x2NNN)
     srand(time(0));
 
 
-    unsigned short original_sp, sp;
-    original_sp = sp = (unsigned short)(rand() % 15);
-    unsigned short original_pc, pc;
-    original_pc = pc = (unsigned short)rand();
-    unsigned short opcode {(unsigned short)(0x2000 + (rand() % 0x2FFF))};
-    unsigned short stack[16] {};
+    u_short original_sp, sp;
+    original_sp = sp = (u_short)(rand() % 15);
+    u_short original_pc, pc;
+    original_pc = pc = (u_short)rand();
+    u_short opcode {(u_short)(0x2000 + (rand() % 0x2FFF))};
+    u_short stack[16] {};
 
     Opcode::execute_2NNN(opcode, stack, sp, pc);
     ASSERT_EQ(stack[original_sp], original_pc);
