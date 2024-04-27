@@ -17,8 +17,8 @@ TEST(OpcodeSuite, Execute0x1NNN){
     original_pc = pc = (u_short)rand();
     Opcode::execute_1NNN(opcode, pc);
 
-    ASSERT_THAT(original_pc, Not(pc));
-    ASSERT_EQ(opcode & 0x0FFF, pc);
+    EXPECT_THAT(original_pc, Not(pc));
+    EXPECT_EQ(opcode & 0x0FFF, pc);
 }
 
 TEST(OpcodeSuite, Test_0x2NNN)
@@ -34,9 +34,9 @@ TEST(OpcodeSuite, Test_0x2NNN)
     u_short stack[16] {};
 
     Opcode::execute_2NNN(opcode, stack, sp, pc);
-    ASSERT_EQ(stack[original_sp], original_pc);
-    ASSERT_EQ(original_sp + 1, sp);
-    ASSERT_EQ(opcode & 0x0FFF, pc);
+    EXPECT_EQ(stack[original_sp], original_pc);
+    EXPECT_EQ(original_sp + 1, sp);
+    EXPECT_EQ(opcode & 0x0FFF, pc);
 }
 
 #endif // TST_OPCODECASE_H
