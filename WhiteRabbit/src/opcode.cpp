@@ -47,5 +47,29 @@ void execute_5XY0(u_short opcode, u_short V[], u_short &pc){
         pc += 2;
     }
 }
+
+void execute_6XKK(u_short opcode, u_short V[]){
+    u_short x = extract_X(opcode);
+    u_short kk = opcode & 0x00FF;
+    V[x] = kk;
+}
+
+void execute_7XKK(u_short opcode, u_short V[]){
+    u_short x = extract_X(opcode);
+    u_short kk = opcode & 0x00FF;
+    V[x] += kk;
+}
+
+void execute_8XY0(u_short opcode, u_short V[]){
+    u_short x = extract_X(opcode);
+    u_short y = extract_Y(opcode);
+    V[x] = V[y];
+}
+
+void execute_8XY1(u_short opcode, u_short V[]){
+    u_short x = extract_X(opcode);
+    u_short y = extract_Y(opcode);
+    V[x] |= V[y];
+}
 }
 
