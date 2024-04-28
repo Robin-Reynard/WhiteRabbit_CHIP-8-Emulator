@@ -6,11 +6,11 @@ u_short extract_NNN(u_short opcode){
     return opcode & 0x0FFF;
 }
 u_short extract_X(u_short opcode){
-    return opcode & 0x0F00;
+    return (opcode & 0x0F00) >> 8;
 }
 
 u_short extract_Y(u_short opcode){
-    return opcode & 0x00F0;
+    return (opcode & 0x00F0) >> 4;
 }
 void execute_0NNN() {}
 void execute_00E0(u_char graphics[]){
