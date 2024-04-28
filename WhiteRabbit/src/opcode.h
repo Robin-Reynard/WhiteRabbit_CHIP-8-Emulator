@@ -15,6 +15,9 @@ namespace Opcode {
     void execute_7XKK(u_short opcode, u_short V[]);
     void execute_8XY0(u_short opcode, u_short V[]);
     void execute_8XY1(u_short opcode, u_short V[]);
+    void execute_8XY2(u_short opcode, u_short V[]);
+    void execute_8XY3(u_short opcode, u_short V[]);
+    void execute_8XY4(u_short opcode, u_short V[]);
 
     u_short extract_NNN(u_short opcode);
     u_short extract_X(u_short opcode);
