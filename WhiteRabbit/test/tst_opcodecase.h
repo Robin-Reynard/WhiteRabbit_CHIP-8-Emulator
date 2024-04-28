@@ -199,4 +199,53 @@ TEST(OpcodeSuite, Execute0x8XY1){
     EXPECT_EQ(V[0], 0xADF6);
 }
 
+TEST(OpcodeSuite, Execute0x8XY2){
+    // Arrange
+    u_short opcode {0x8012};
+    u_short V[16] {0x2580, 0xACF6};
+
+    // Act
+    Opcode::execute_8XY2(opcode, V);
+
+    // Assert
+    EXPECT_EQ(V[0], 0x2480);
+}
+
+TEST(OpcodeSuite, Execute0x8XY3){
+    // Arrange
+    u_short opcode {0x8013};
+    u_short V[16] {0x2580, 0xACF6};
+
+    // Act
+    Opcode::execute_8XY3(opcode, V);
+
+    // Arrange
+    EXPECT_EQ(V[0], 0x8976);
+}
+
+TEST(OpcodeSuite, Execute0x8XY4_NoCarry){
+    // Arrange
+    u_short opcode {0x8014};
+    u_short V[16] {0x0023, 0x0056};
+
+    // Act
+    Opcode::execute_8XY4(opcode, V);
+
+    // Arrange
+    EXPECT_EQ(V[0], 0x79);
+    EXPECT_EQ(V[0xF], 0);
+}
+
+TEST(OpcodeSuite, Execute0x8XY4_Carry){
+    // Arrange
+    u_short opcode {0x8014};
+    u_short V[16] {0x00F3, 0x0056};
+
+    // Act
+    Opcode::execute_8XY4(opcode, V);
+
+    // Arrange
+    EXPECT_EQ(V[0], 0x49);
+    EXPECT_EQ(V[0xF], 1);
+}
 #endif // TST_OPCODECASE_H
