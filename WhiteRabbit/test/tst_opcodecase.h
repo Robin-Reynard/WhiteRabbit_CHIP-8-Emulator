@@ -60,11 +60,11 @@ TEST(OpcodeSuite, Execute0x2NNN) {
     // Arrange
     u_short opcode {0x24B9};
     u_short pc {0xF5C2};
-    u_short sp {3};
+    byte sp {3};
     u_short stack[16] {0x0345, 0x58A6, 0xFFAC, 0x1298};
 
     // Act
-    Opcode::execute_2NNN(opcode, stack, sp, pc);
+    Opcode::execute_2NNN(opcode, pc, stack, sp);
 
     // Assert
     EXPECT_EQ(sp, 4);
@@ -76,10 +76,10 @@ TEST(OpcodeSuite, Execute0x3XKK_Skip) {
     // Arrange
     u_short opcode {0x30A5};
     u_short pc {0xA592};
-    u_short V[16] {0x00A5};
+    byte V[16] {0xA5};
 
     // Act
-    Opcode::execute_3XNN(opcode, V, pc);
+    Opcode::execute_3XNN(opcode, pc, V);
 
     // Assert
     EXPECT_EQ(pc, 0xA596);
@@ -89,10 +89,10 @@ TEST(OpcodeSuite, Execute0x3XKK_NoSkip) {
     // Arrange
     u_short opcode {0x30B3};
     u_short pc {0xA592};
-    u_short V[16] {0x00A5};
+    byte V[16] {0xA5};
 
     // Act
-    Opcode::execute_3XNN(opcode, V, pc);
+    Opcode::execute_3XNN(opcode, pc, V);
 
     // Assert
     EXPECT_EQ(pc, 0xA594);
@@ -102,10 +102,10 @@ TEST(OpcodeSuite, Execute0x4XKK_Skip) {
     // Arrange
     u_short opcode {0x3089};
     u_short pc {0xA592};
-    u_short V[16] {0x00A5};
+    byte V[16] {0xA5};
 
     // Act
-    Opcode::execute_4XNN(opcode, V, pc);
+    Opcode::execute_4XNN(opcode, pc, V);
 
     // Assert
     EXPECT_EQ(pc, 0xA596);
@@ -115,10 +115,10 @@ TEST(OpcodeSuite, Execute0x4XKK_NoSkip) {
     // Arrange
     u_short opcode {0x30A5};
     u_short pc {0xA592};
-    u_short V[16] {0x00A5};
+    byte V[16] {0xA5};
 
     // Act
-    Opcode::execute_4XNN(opcode, V, pc);
+    Opcode::execute_4XNN(opcode, pc, V);
 
     // Assert
     EXPECT_EQ(pc, 0xA594);
@@ -127,11 +127,11 @@ TEST(OpcodeSuite, Execute0x4XKK_NoSkip) {
 TEST(OpcodeSuite, Execute0x5XY0_Skip) {
     // Arrange
     u_short opcode {0x5100};
-    u_short V[16] {0x3289, 0x3289};
+    byte V[16] {0x89, 0x89};
     u_short pc {0xAAB2};
 
     // Act
-    Opcode::execute_5XY0(opcode, V, pc);
+    Opcode::execute_5XY0(opcode, pc, V);
 
     // Assert
     EXPECT_EQ(pc, 0xAAB6);
@@ -140,11 +140,11 @@ TEST(OpcodeSuite, Execute0x5XY0_Skip) {
 TEST(OpcodeSuite, Execute0x5XY0_NoSkip) {
     // Arrange
     u_short opcode {0x5100};
-    u_short V[16] {0x3AC9, 0x3289};
+    byte V[16] {0xC9, 0x89};
     u_short pc {0xAAB2};
 
     // Act
-    Opcode::execute_5XY0(opcode, V, pc);
+    Opcode::execute_5XY0(opcode, pc, V);
 
     // Assert
     EXPECT_EQ(pc, 0xAAB4);
@@ -153,42 +153,42 @@ TEST(OpcodeSuite, Execute0x5XY0_NoSkip) {
 TEST(OpcodeSuite, Execute0x6XKK){
     // Arrange
     u_short opcode {0x609A};
-    u_short V[16] {0x0082};
+    byte V[16] {0x82};
     u_short pc {0xA349};
 
     // Act
-    Opcode::execute_6XKK(opcode, V, pc);
+    Opcode::execute_6XKK(opcode, pc, V);
 
     // Assert
-    EXPECT_EQ(V[0], 0x009A);
+    EXPECT_EQ(V[0], 0x9A);
     EXPECT_EQ(pc, 0xA34B);
 }
 
 TEST(OpcodeSuite, Execute0x7XKK) {
     // Arrange
     u_short opcode {0x7065};
-    u_short V[16] {0x0235};
+    byte V[16] {0x35};
     u_short pc {0xA349};
 
     // Act
-    Opcode::execute_7XKK(opcode, V, pc);
+    Opcode::execute_7XKK(opcode, pc, V);
 
     // Assert
-    EXPECT_EQ(V[0], 0x029A);
+    EXPECT_EQ(V[0], 0x9A);
     EXPECT_EQ(pc, 0xA34B);
 }
 
 TEST(OpcodeSuite, Execute0x8XY0){
     // Arrange
     u_short opcode {0x8100};
-    u_short V[16] {0x2359, 0x8510};
+    byte V[16] {0x59, 0x10};
     u_short pc {0xA349};
 
     // Act
-    Opcode::execute_8XY0(opcode, V, pc);
+    Opcode::execute_8XY0(opcode, pc, V);
 
     // Assert
-    EXPECT_EQ(V[0], 0x2359);
+    EXPECT_EQ(V[0], 0x59);
     EXPECT_EQ(V[0], V[1]);
     EXPECT_EQ(pc, 0xA34B);
 }
@@ -196,53 +196,53 @@ TEST(OpcodeSuite, Execute0x8XY0){
 TEST(OpcodeSuite, Execute0x8XY1){
     // Arrange
     u_short opcode {0x8011};
-    u_short V[16] {0x2580, 0xACF6};
+    byte V[16] {0x80, 0xF6};
     u_short pc {0xA349};
 
     // Act
-    Opcode::execute_8XY1(opcode, V, pc);
+    Opcode::execute_8XY1(opcode, pc, V);
 
     // Assert
-    EXPECT_EQ(V[0], 0xADF6);
+    EXPECT_EQ(V[0], 0xF6);
     EXPECT_EQ(pc, 0xA34B);
 }
 
 TEST(OpcodeSuite, Execute0x8XY2){
     // Arrange
     u_short opcode {0x8012};
-    u_short V[16] {0x2580, 0xACF6};
+    byte V[16] {0x80, 0xF6};
     u_short pc {0xA349};
 
     // Act
-    Opcode::execute_8XY2(opcode, V, pc);
+    Opcode::execute_8XY2(opcode, pc, V);
 
     // Assert
-    EXPECT_EQ(V[0], 0x2480);
+    EXPECT_EQ(V[0], 0x80);
     EXPECT_EQ(pc, 0xA34B);
 }
 
 TEST(OpcodeSuite, Execute0x8XY3){
     // Arrange
     u_short opcode {0x8013};
-    u_short V[16] {0x2580, 0xACF6};
+    byte V[16] {0x80, 0xF6};
     u_short pc {0xA349};
 
     // Act
-    Opcode::execute_8XY3(opcode, V, pc);
+    Opcode::execute_8XY3(opcode, pc, V);
 
     // Arrange
-    EXPECT_EQ(V[0], 0x8976);
+    EXPECT_EQ(V[0], 0x76);
     EXPECT_EQ(pc, 0xA34B);
 }
 
 TEST(OpcodeSuite, Execute0x8XY4_NoCarry){
     // Arrange
     u_short opcode {0x8014};
-    u_short V[16] {0x0023, 0x0056};
+    byte V[16] {0x23, 0x56};
     u_short pc {0xA349};
 
     // Act
-    Opcode::execute_8XY4(opcode, V, pc);
+    Opcode::execute_8XY4(opcode, pc, V);
 
     // Arrange
     EXPECT_EQ(V[0], 0x79);
@@ -253,15 +253,45 @@ TEST(OpcodeSuite, Execute0x8XY4_NoCarry){
 TEST(OpcodeSuite, Execute0x8XY4_Carry){
     // Arrange
     u_short opcode {0x8014};
-    u_short V[16] {0x00F3, 0x0056};
+    byte V[16] {0xF3, 0x56};
     u_short pc {0xA349};
 
     // Act
-    Opcode::execute_8XY4(opcode, V, pc);
+    Opcode::execute_8XY4(opcode, pc, V);
 
     // Arrange
     EXPECT_EQ(V[0], 0x49);
     EXPECT_EQ(V[0xF], 1);
+    EXPECT_EQ(pc, 0xA34B);
+}
+
+TEST(OpcodeSuite, Execute0x8XY5_NoBorrow) {
+    // Arrange
+    u_short opcode {0x8015};
+    byte V[16] {0xF3, 0x56};
+    u_short pc {0xA349};
+
+    // Act
+    Opcode::execute_8XY5(opcode, pc, V);
+
+    // Assert
+    EXPECT_EQ(V[0], 0x9D);
+    EXPECT_EQ(V[0xF], 1);
+    EXPECT_EQ(pc, 0xA34B);
+}
+
+TEST(OpcodeSuite, Execute0x8XY5_Borrow) {
+    // Arrange
+    u_short opcode {0x8015};
+    byte V[16] {0x56, 0xF6};
+    u_short pc {0xA349};
+
+    // Act
+    Opcode::execute_8XY5(opcode, pc, V);
+
+    // Assert
+    EXPECT_EQ(V[0], 0x5F);
+    EXPECT_EQ(V[0xF], 0);
     EXPECT_EQ(pc, 0xA34B);
 }
 #endif // TST_OPCODECASE_H
