@@ -3,6 +3,9 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include "opcode.h"
+using namespace Opcode;
+
 class CHIP8
 {
 public:
@@ -14,30 +17,30 @@ public:
 
 private:
     //--- MEMORY
-    unsigned char memory[4096];
+    byte memory[4096];
     //--- OPCODES
     // 35 opcodes possible, all 2bytes long and stored big-endian
-    unsigned short opcode;
-    unsigned short program_counter;
+    u_short opcode;
+    u_short program_counter;
     //--- REGISTERS
     //16 8-bit registers V0 to VF
-    unsigned char V[16];
+    byte V[16];
     //Address register, 12 bits wide.
-    unsigned short I;
+    u_short I;
     //---STACK
-    unsigned short stack[16];
-    unsigned short stack_pointer;
+    u_short stack[16];
+    byte stack_pointer;
     //--- TIMERS
     //Counts down from 60Hz to 0
-    unsigned short delay_timer;
+    byte delay_timer;
     //Counts down from 60Hz to 0; beeping when value is non-zero
-    unsigned short sound_timer;
+    byte sound_timer;
     //--- INPUT
     //Done via hex keyboard (16 keys from 0 to F).
-    unsigned char keys[16];
+    byte keys[16];
     //--- GRAPICS
     //Display resolution of 64*32 pixels, monochrome; XOR sprites
-    unsigned char graphics[64*32];
+    byte graphics[64*32];
 };
 
 #endif // CHIP8_H

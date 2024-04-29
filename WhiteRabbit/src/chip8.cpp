@@ -1,8 +1,5 @@
 #include "chip8.h"
-#include "opcode.h"
-
 using namespace std;
-//using namespace Opcode;
 
 CHIP8::CHIP8()
     : memory {
@@ -38,7 +35,7 @@ void CHIP8::emulate_cycle(){
     cout << stack_pointer << endl;
     cout << program_counter << endl;
     cout << "Executing" << endl;
-    Opcode::execute_2NNN(opcode, stack, stack_pointer, program_counter);
+    Opcode::execute_2NNN(opcode, program_counter, stack, stack_pointer);
 
     cout << stack[stack_pointer] << endl;
     cout << stack_pointer << endl;
