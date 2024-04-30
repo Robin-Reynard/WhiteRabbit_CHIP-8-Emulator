@@ -90,33 +90,39 @@ namespace Opcode {
     void execute_8XY4(u_short opcode, u_short& pc, byte V[]){
         u_short x = extract_X(opcode);
         u_short y = extract_Y(opcode);
-        u_short sum = V[x] + V[y];
-
-        V[0xF] = sum > 255 ? 1 : 0;
-        V[x] = sum & 0xFF;
+        V[0xF] = V[x] + V[y] > 255 ? 1 : 0;
+        V[x] += V[y];
         pc += 2;
     }
 
     void execute_8XY5(u_short opcode, u_short& pc, byte V[]){
         u_short x = extract_X(opcode);
         u_short y = extract_Y(opcode);
-        if(V[x] > V[y]){
-            V[0xF] = 1;
-            short difference = V[x] - V[y];
-            V[x] = 0xFF - difference;
-        }
-        else {
-            V[0xF] = 0;
-            V[x] -= V[y];
-        }
+        V[0xF] = V[x] > V[y] ? 1 : 0;
+        V[x] -= V[y];
         pc += 2;
     }
 
-    /*if(V[(opcode & 0x00F0) >> 4] > V[(opcode & 0x0F00) >> 8])
-                        V[0xF] = 0; // there is a borrow
-                    else
-                        V[0xF] = 1;
-                    V[(opcode & 0x0F00) >> 8] -= V[(opcode & 0x00F0) >> 4];
-                    pc += 2;*/
+    void execute_8XY6(u_short opcode, u_short &pc, byte V[]){
+        u_short x = extract_X(opcode);
+        V[0xF] = V[x] & 0x1;
+        V[x] >>= 1;
+        pc += 2;
+    }
+
+    void execute_8XY7(u_short opcode, u_short &pc, byte V[]) {
+        u_short x = extract_X(opcode);
+        u_short y = extract_Y(opcode);
+        V[0xF] = V[y] > V[x] ? 1 : 0;
+        V[x] = V[y] - V[x];
+        pc += 2;
+    }
+
+    void execute_8XYE(u_short opcode, u_short &pc, byte V[]){
+        u_short x = extract_X(opcode);
+        V[0xF] = V[x] & 0x1;
+        V[x] <<= 1;
+        pc += 2;
+    }
 }
 
