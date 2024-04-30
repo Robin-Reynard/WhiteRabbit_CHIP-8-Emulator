@@ -1,9 +1,13 @@
 #include "opcode.h"
 #include <iostream>
+#include <cstdlib>
 
 namespace Opcode {
     u_short extract_NNN(u_short opcode){
         return opcode & 0x0FFF;
+    }
+    u_short extract_KK(u_short opcode){
+        return opcode & 0x00FF;
     }
     u_short extract_X(u_short opcode){
         return (opcode & 0x0F00) >> 8;
@@ -122,6 +126,46 @@ namespace Opcode {
         u_short x = extract_X(opcode);
         V[0xF] = V[x] & 0x1;
         V[x] <<= 1;
+        pc += 2;
+    }
+
+    void execute_9XY0(u_short opcode, u_short &pc, byte V[]){
+        u_short x = extract_X(opcode);
+        u_short y = extract_Y(opcode);
+        pc += V[x] != V[y] ? 4 : 2;
+    }
+
+    void execute_ANNN(u_short opcode, u_short &pc, u_short &I){
+        I = extract_NNN(opcode);
+        pc += 2;
+    }
+
+    void execute_BNNN(u_short opcode, u_short &pc, byte& V0){
+        pc = extract_NNN(opcode) + V0;
+    }
+
+    void execute_CXKK(u_short opcode, u_short& pc, byte V[]){
+        u_short x = extract_X(opcode);
+        u_short kk = extract_KK(opcode);
+        byte random_byte = byte (std::rand() % 0xFF);
+
+        V[x] = random_byte & kk;
+        pc += 2;
+    }
+
+    void execute_DXYN(u_short opcode, u_short &pc, byte memory[], byte V[], u_short &I, byte graphics[]){
+        byte x_pos = V[extract_X(opcode)];
+        byte y_pos = V[extract_Y(opcode)];
+        byte height = opcode & 0x000F;
+        V[0xF] = 0;
+
+        for(byte y {0}; y < height; y++){
+            byte pixel = memory[I + y];
+            for(byte x {0}; x < 8; x++){
+                if()
+            }
+        }
+
         pc += 2;
     }
 }

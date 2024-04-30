@@ -22,8 +22,14 @@ namespace Opcode {
     void execute_8XY6(u_short opcode, u_short& pc, byte V[]);
     void execute_8XY7(u_short opcode, u_short& pc, byte V[]);
     void execute_8XYE(u_short opcode, u_short& pc, byte V[]);
+    void execute_9XY0(u_short opcode, u_short& pc, byte V[]);
+    void execute_ANNN(u_short opcode, u_short& pc, u_short& I);
+    void execute_BNNN(u_short opcode, u_short& pc, byte& V0);
+    void execute_CXKK(u_short opcode, u_short& pc, byte V[]);
+    void execute_DXYN(u_short opcode, u_short& pc, byte memory[], byte V[], u_short& I, byte graphics[]);
 
     u_short extract_NNN(u_short opcode);
+    u_short extract_KK(u_short opcode);
     u_short extract_X(u_short opcode);
     u_short extract_Y(u_short opcode);
 }
