@@ -290,7 +290,97 @@ TEST(OpcodeSuite, Execute0x8XY5_Borrow) {
     Opcode::execute_8XY5(opcode, pc, V);
 
     // Assert
-    EXPECT_EQ(V[0], 0x5F);
+    EXPECT_EQ(V[0], 0x60);
+    EXPECT_EQ(V[0xF], 0);
+    EXPECT_EQ(pc, 0xA34B);
+}
+
+TEST(OpcodeSuite, Execute0x8XY6_LsbIsOne) {
+    // Arrange
+    u_short opcode {0x8016};
+    byte V[16] {0x57};
+    u_short pc {0xA349};
+
+    // Act
+    Opcode::execute_8XY6(opcode, pc, V);
+
+    // Assert
+    EXPECT_EQ(V[0], 0x2B);
+    EXPECT_EQ(V[0xF], 1);
+    EXPECT_EQ(pc, 0xA34B);
+}
+
+TEST(OpcodeSuite, Execute0x8XY6_LsbIsZero) {
+    // Arrange
+    u_short opcode {0x8016};
+    byte V[16] {0x56};
+    u_short pc {0xA349};
+
+    // Act
+    Opcode::execute_8XY6(opcode, pc, V);
+
+    // Assert
+    EXPECT_EQ(V[0], 0x2B);
+    EXPECT_EQ(V[0xF], 0);
+    EXPECT_EQ(pc, 0xA34B);
+}
+
+TEST(OpcodeSuite, Execute0x8XY7_NoBorrow) {
+    // Arrange
+    u_short opcode {0x8015};
+    byte V[16] {0x56, 0xF6};
+    u_short pc {0xA349};
+
+    // Act
+    Opcode::execute_8XY7(opcode, pc, V);
+
+    // Assert
+    EXPECT_EQ(V[0], 0xA0);
+    EXPECT_EQ(V[0xF], 1);
+    EXPECT_EQ(pc, 0xA34B);
+}
+
+TEST(OpcodeSuite, Execute0x8XY7_Borrow) {
+    // Arrange
+    u_short opcode {0x8015};
+    byte V[16] {0xF6, 0x56};
+    u_short pc {0xA349};
+
+    // Act
+    Opcode::execute_8XY7(opcode, pc, V);
+
+    // Assert
+    EXPECT_EQ(V[0], 0x60);
+    EXPECT_EQ(V[0xF], 0);
+    EXPECT_EQ(pc, 0xA34B);
+}
+
+TEST(OpcodeSuite, Execute0x8XYE_LsbIsOne) {
+    // Arrange
+    u_short opcode {0x8016};
+    byte V[16] {0x57};
+    u_short pc {0xA349};
+
+    // Act
+    Opcode::execute_8XYE(opcode, pc, V);
+
+    // Assert
+    EXPECT_EQ(V[0], 0xAE);
+    EXPECT_EQ(V[0xF], 1);
+    EXPECT_EQ(pc, 0xA34B);
+}
+
+TEST(OpcodeSuite, Execute0x8XYE_LsbIsZero) {
+    // Arrange
+    u_short opcode {0x8016};
+    byte V[16] {0x56};
+    u_short pc {0xA349};
+
+    // Act
+    Opcode::execute_8XYE(opcode, pc, V);
+
+    // Assert
+    EXPECT_EQ(V[0], 0xAC);
     EXPECT_EQ(V[0xF], 0);
     EXPECT_EQ(pc, 0xA34B);
 }
