@@ -9,12 +9,16 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     
-    ui->label->setText("Hello World\n");
 
 
     CHIP8 mychip = CHIP8();
     mychip.load_program({"/home/robin/Desktop/Chip8 Games/INVADERS"});
-    mychip.emulate_cycle();
+    for(int i {0}; i < 200; i++){
+        std::cout << i << std::endl;
+        mychip.emulate_cycle();
+    }
+
+    ui->label->setText("Hello World\n");
 }
 
 MainWindow::~MainWindow()

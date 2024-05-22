@@ -14,6 +14,7 @@ public:
     static void print_as_byte(int number);
     void load_program(const std::string file_path);
     void emulate_cycle();
+    void display_graphics_ascii();
 
 private:
     //--- MEMORY

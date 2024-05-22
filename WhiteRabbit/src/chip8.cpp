@@ -137,6 +137,8 @@ void CHIP8::emulate_cycle(){
             printf("BEEP!\n");}
         --sound_timer;
     }
+
+    display_graphics_ascii();
 }
 
 void CHIP8::load_program(const string file_path){
@@ -166,4 +168,19 @@ void CHIP8::print_as_byte(int number){
 
 void CHIP8:: hello(){
     cout << "Hello from CHIP8" << endl;
+}
+
+void CHIP8::display_graphics_ascii(){
+    for(int i {0}; i < 2048; i++){
+        if(graphics[i] == 0){
+            cout << " ";
+        }
+        else{
+            cout << "*";
+        }
+        if(i % 64 == 0){
+            cout << endl;
+        }
+    }
+    cout << endl;
 }
