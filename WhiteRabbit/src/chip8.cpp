@@ -35,12 +35,13 @@ void CHIP8::emulate_cycle(){
     print_as_byte(opcode);
 
     //Decode opcode
-
     switch(opcode & 0xF000) {
         case 0x0000:
             switch(opcode & 0x0FFF){
                 case 0x0E0:
                     Opcode::execute_00E0(program_counter, graphics); break;
+                case 0x0EE:
+                    Opcode::execute_00EE(program_counter, stack_pointer, stack); break;
                 default:
                     Opcode::execute_0NNN(program_counter); break;
             } break;

@@ -1,11 +1,14 @@
 #ifndef OPCODE_H
 #define OPCODE_H
+#include <iostream>
+#include <cstdlib>
 
 namespace Opcode {
     typedef unsigned short u_short;
     typedef unsigned char byte;
     void execute_0NNN(u_short& pc);
     void execute_00E0(u_short& pc, byte graphics[]);
+    void execute_00EE(u_short& pc, byte& sp, u_short stack[]);
     void execute_1NNN(u_short opcode, u_short& pc);
     void execute_2NNN(u_short opcode, u_short& pc, u_short stack[], byte& sp);
     void execute_3XNN(u_short opcode, u_short& pc, byte V[]);

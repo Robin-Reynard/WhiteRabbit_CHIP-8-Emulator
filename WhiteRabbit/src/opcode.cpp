@@ -1,6 +1,4 @@
 #include "opcode.h"
-#include <iostream>
-#include <cstdlib>
 
 namespace Opcode {
     u_short extract_NNN(u_short opcode){
@@ -24,6 +22,10 @@ namespace Opcode {
             graphics[i] = '\0';
         }
         pc += 2;
+    }
+    void execute_00EE(u_short &pc, byte &sp, u_short stack[]){
+        pc = stack[sp];
+        sp--;
     }
     void execute_1NNN(u_short opcode, u_short& pc){
         pc = extract_NNN(opcode);
