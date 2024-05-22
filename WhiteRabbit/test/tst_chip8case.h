@@ -1,0 +1,4 @@
+#ifndef TST_CHIP8CASE_H
+#define TST_CHIP8CASE_H
+
+#endif // TST_CHIP8CASE_H
