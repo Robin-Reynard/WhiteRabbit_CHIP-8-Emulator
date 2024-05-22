@@ -6,7 +6,7 @@
 #include <gmock/gmock-matchers.h>
 #include <ctime>
 #include <cstdlib>
-#include<tuple>
+#include <tuple>
 
 using namespace testing;
 using namespace Opcode;
@@ -460,6 +460,294 @@ TEST(OpcodeSuite, Execute0xCXKK){
 
     // Assert
     EXPECT_EQ(pc, 0x8455);
+}
+
+TEST(OpcodeSuite, Execute_DXYN_NoCollision){
+    // Arrange
+    u_short opcode {0xD003};
+    u_short pc {0x8543};
+    byte memory[4096] {0x3C, 0xC3, 0xFF};
+    byte V[16] {0x0, 0x1};
+    u_short I {0};
+    byte graphics [64*32] {};
+
+    // Act
+    Opcode::execute_DXYN(opcode, pc, memory, V, I, graphics);
+
+    // Assert
+    byte first_row[] {0,0,1,1,1,1,0,0};
+    byte second_row[] {1,1,0,0,0,0,1,1};
+    byte third_row[] {1,1,1,1,1,1,1,1};
+
+    EXPECT_EQ(pc, 0x8545);
+    EXPECT_EQ(V[0xF], 0);
+    for(int i {0}; i < 8; i++) {
+        EXPECT_EQ(graphics[i], first_row[i]);
+    }
+    for(int i {0}; i < 8; i++) {
+        EXPECT_EQ(graphics[i + 64], second_row[i]);
+    }
+    for(int i {0}; i < 8; i++) {
+        EXPECT_EQ(graphics[i + 128], third_row[i]);
+    }
+}
+
+TEST(OpcodeSuite, Execute_DXYN_Collision){
+    // Arrange
+    u_short opcode {0xD003};
+    u_short pc {0x8543};
+    byte memory[4096] {0x3C, 0xC3, 0xFF};
+    byte V[16] {0x0, 0x1};
+    u_short I {0};
+    byte graphics [64*32] {1,1,1,1,1,1,1,1};
+
+    // Act
+    Opcode::execute_DXYN(opcode, pc, memory, V, I, graphics);
+
+    // Assert
+    byte first_row[] {1,1,0,0,0,0,1,1};
+    byte second_row[] {1,1,0,0,0,0,1,1};
+    byte third_row[] {1,1,1,1,1,1,1,1};
+
+    EXPECT_EQ(pc, 0x8545);
+    EXPECT_EQ(V[0xF], 1);
+    for(int i {0}; i < 8; i++) {
+        EXPECT_EQ(graphics[i], first_row[i]);
+    }
+    for(int i {0}; i < 8; i++) {
+        EXPECT_EQ(graphics[i + 64], second_row[i]);
+    }
+    for(int i {0}; i < 8; i++) {
+        EXPECT_EQ(graphics[i + 128], third_row[i]);
+    }
+}
+
+TEST(OpcodeSuite, Execute_EX9E_NoKeyPressed){
+    // Arrange
+    u_short opcode {0xE09E};
+    u_short pc {0x5128};
+    byte V[16] {0};
+    byte keys[16] {0};
+
+    // Act
+    Opcode::execute_EX9E(opcode, pc, V, keys);
+
+    // Assert
+    EXPECT_EQ(pc, 0x512A);
+}
+
+TEST(OpcodeSuite, Execute_EX9E_KeyPressed){
+    // Arrange
+    u_short opcode {0xE09E};
+    u_short pc {0x5128};
+    byte V[16] {1};
+    byte keys[16] {0, 1};
+
+    // Act
+    Opcode::execute_EX9E(opcode, pc, V, keys);
+
+    // Assert
+    EXPECT_EQ(pc, 0x512C);
+}
+
+TEST(OpcodeSuite, Execute_EXA1_NoKeyPressed){
+    // Arrange
+    u_short opcode {0xE0A1};
+    u_short pc {0x5128};
+    byte V[16] {0};
+    byte keys[16] {0, 1};
+
+    // Act
+    Opcode::execute_EXA1(opcode, pc, V, keys);
+
+    // Assert
+    EXPECT_EQ(pc, 0x512C);
+}
+
+TEST(OpcodeSuite, Execute_EXA1_KeyPressed){
+    // Arrange
+    u_short opcode {0xE0A1};
+    u_short pc {0x5128};
+    byte V[16] {1};
+    byte keys[16] {0, 1};
+
+    // Act
+    Opcode::execute_EXA1(opcode, pc, V, keys);
+
+    // Assert
+    EXPECT_EQ(pc, 0x512A);
+}
+
+TEST(OpcodeSuite, Execute_FX07){
+    // Arrange
+    u_short opcode {0xF107};
+    u_short pc {0x3251};
+    byte V[16] {};
+    byte delay_timer {0xAC};
+
+    // Act
+    Opcode::execute_FX07(opcode, pc, V, delay_timer);
+
+    // Assert
+    EXPECT_EQ(pc, 0x3253);
+    EXPECT_EQ(V[1], 0xAC);
+}
+
+TEST(OpcodeSuite, Execute_FX0A){
+    // Arrange
+    u_short opcode {0xF10A};
+    u_short pc {0x2135};
+    byte V[16] {};
+    byte keys[16] {};
+
+    // Act - No key pressed
+    Opcode::execute_FX0A(opcode, pc, V, keys);
+
+    // Assert
+    EXPECT_EQ(pc, 0x2135);
+
+    // Act
+    keys[14] = 1;
+    Opcode::execute_FX0A(opcode, pc, V, keys);
+
+    // Assert
+    EXPECT_EQ(pc, 0x2137);
+    EXPECT_EQ(V[1], 14);
+}
+
+TEST(OpcodeSuite, Execute_FX15){
+    // Arrange
+    u_short opcode {0xF015};
+    u_short pc {0x1258};
+    byte V[16] {0xA1};
+    byte delay_timer {0xFF};
+
+    // Act
+    Opcode::execute_FX15(opcode, pc, V, delay_timer);
+
+    // Assert
+    EXPECT_EQ(pc, 0x125A);
+    EXPECT_EQ(delay_timer, 0xA1);
+}
+
+TEST(OpcodeSuite, Execute_FX18){
+    // Arrange
+    u_short opcode {0xF118};
+    u_short pc {0x1112};
+    byte V[16] {0x12, 0xFF};
+    byte sound_timer {};
+
+    // Act
+    Opcode::execute_FX18(opcode, pc, V, sound_timer);
+
+    // Assert
+    EXPECT_EQ(pc, 0x1114);
+    EXPECT_EQ(sound_timer, 0xFF);
+}
+
+TEST(OpcodeSuite, Execute_FX1E_NoOverflow){
+    // Arrange
+    u_short opcode {0xF11E};
+    u_short pc {0x5423};
+    byte V[16] {0x15, 0x10};
+    byte I {0x85};
+
+    // Act
+    Opcode::execute_FX1E(opcode, pc, V, I);
+
+    // Assert
+    EXPECT_EQ(pc, 0x5425);
+    EXPECT_EQ(I, 0x95);
+    EXPECT_EQ(V[0xF], 0);
+}
+
+TEST(OpcodeSuite, Execute_FX1E_Overflow){
+    // Arrange
+    u_short opcode {0xF11E};
+    u_short pc {0x5423};
+    byte V[16] {0x00, 0x01};
+    byte I {0xFF};
+
+    // Act
+    Opcode::execute_FX1E(opcode, pc, V, I);
+
+    // Assert
+    EXPECT_EQ(pc, 0x5425);
+    EXPECT_EQ(I, 0x00);
+    EXPECT_EQ(V[0xF], 1);
+}
+
+TEST(OpcodeSuite, Execute_FX29){
+    // Arrange
+    u_short opcode {0xF029};
+    u_short pc {0x1240};
+    byte V[16] {0x20};
+    byte I {};
+
+    // Act
+    Opcode::execute_FX29(opcode, pc, V, I);
+
+    // Assert
+    EXPECT_EQ(pc, 0x1242);
+    EXPECT_EQ(I, 0xA0);
+}
+
+TEST(OpcodeSuite, Execute_FX33){
+    // Arrange
+    u_short opcode {0xF033};
+    u_short pc {0x2222};
+    byte V[16] {0xFE};
+    byte I {0};
+    byte memory[4096] {};
+
+    // Act
+    Opcode::execute_FX33(opcode, pc, V, I, memory);
+
+    // Assert
+    EXPECT_EQ(pc, 0x2224);
+    EXPECT_EQ(memory[I], 2);
+    EXPECT_EQ(memory[I+1], 5);
+    EXPECT_EQ(memory[I+2], 4);
+}
+
+TEST(OpcodeSuite, Execute_FX55){
+    // Arrange
+    u_short opcode {0xF355};
+    u_short pc {0x2174};
+    byte V[16] {0x1A, 0x2B, 0x3C, 0x4D, 0x5E};
+    byte memory[4096] {};
+    byte I {0};
+
+    // Act
+    Opcode::execute_FX55(opcode, pc, V, I, memory);
+
+    // Assert
+    EXPECT_EQ(pc, 0x2176);
+    EXPECT_EQ(memory[I], 0x1A);
+    EXPECT_EQ(memory[I+1], 0x2B);
+    EXPECT_EQ(memory[I+2], 0x3C);
+    EXPECT_EQ(memory[I+3], 0x4D);
+    EXPECT_EQ(memory[I+4], 0x00);
+}
+
+TEST(OpcodeSuite, Execute_FX65){
+    // Arrange
+    u_short opcode {0xF365};
+    u_short pc {0x2174};
+    byte V[16] {};
+    byte memory[4096] {0x1A, 0x2B, 0x3C, 0x4D, 0x5E};
+    byte I {0};
+
+    // Act
+    Opcode::execute_FX65(opcode, pc, V, I, memory);
+
+    // Assert
+    EXPECT_EQ(pc, 0x2176);
+    EXPECT_EQ(V[0], 0x1A);
+    EXPECT_EQ(V[1], 0x2B);
+    EXPECT_EQ(V[2], 0x3C);
+    EXPECT_EQ(V[3], 0x4D);
+    EXPECT_EQ(V[4], 0x00);
 }
 
 #endif // TST_OPCODECASE_H
