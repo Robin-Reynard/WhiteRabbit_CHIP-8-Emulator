@@ -9,6 +9,8 @@ INCLUDEPATH += "../../src"
 
 
 HEADERS += \
+        MockOpcode.h \
+        tst_chip8case.h \
         tst_opcodecase.h \
         tst_whiterabbitcase.h \
         ../../src/opcode.h
