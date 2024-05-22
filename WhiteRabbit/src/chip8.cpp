@@ -60,23 +60,23 @@ void CHIP8::emulate_cycle(){
             Opcode::execute_7XKK(opcode, program_counter, V); break;
         case 0x8000:
             switch (opcode & 0x000F){
-                case 0:
+                case 0x0:
                     Opcode::execute_8XY0(opcode, program_counter, V); break;
-                case 1:
+                case 0x1:
                     Opcode::execute_8XY1(opcode, program_counter, V); break;
-                case 2:
+                case 0x2:
                     Opcode::execute_8XY2(opcode, program_counter, V); break;
-                case 3:
+                case 0x3:
                     Opcode::execute_8XY3(opcode, program_counter, V); break;
-                case 4:
+                case 0x4:
                     Opcode::execute_8XY4(opcode, program_counter, V); break;
-                case 5:
+                case 0x5:
                     Opcode::execute_8XY5(opcode, program_counter, V); break;
-                case 6:
+                case 0x6:
                     Opcode::execute_8XY6(opcode, program_counter, V); break;
-                case 7:
+                case 0x7:
                     Opcode::execute_8XY7(opcode, program_counter, V); break;
-                case E:
+                case 0xE:
                     Opcode::execute_8XYE(opcode, program_counter, V); break;
                 default:
                     cerr << "No such opcode " + opcode << endl;
