@@ -650,7 +650,7 @@ TEST(OpcodeSuite, Execute_FX1E_NoOverflow){
     u_short opcode {0xF11E};
     u_short pc {0x5423};
     byte V[16] {0x15, 0x10};
-    byte I {0x85};
+    u_short I {0x85};
 
     // Act
     Opcode::execute_FX1E(opcode, pc, V, I);
@@ -666,14 +666,14 @@ TEST(OpcodeSuite, Execute_FX1E_Overflow){
     u_short opcode {0xF11E};
     u_short pc {0x5423};
     byte V[16] {0x00, 0x01};
-    byte I {0xFF};
+    u_short I {0x0FFF};
 
     // Act
     Opcode::execute_FX1E(opcode, pc, V, I);
 
     // Assert
     EXPECT_EQ(pc, 0x5425);
-    EXPECT_EQ(I, 0x00);
+    EXPECT_EQ(I, 0x1000);
     EXPECT_EQ(V[0xF], 1);
 }
 
@@ -682,7 +682,7 @@ TEST(OpcodeSuite, Execute_FX29){
     u_short opcode {0xF029};
     u_short pc {0x1240};
     byte V[16] {0x20};
-    byte I {};
+    u_short I {};
 
     // Act
     Opcode::execute_FX29(opcode, pc, V, I);
@@ -697,7 +697,7 @@ TEST(OpcodeSuite, Execute_FX33){
     u_short opcode {0xF033};
     u_short pc {0x2222};
     byte V[16] {0xFE};
-    byte I {0};
+    u_short I {0};
     byte memory[4096] {};
 
     // Act
@@ -716,7 +716,7 @@ TEST(OpcodeSuite, Execute_FX55){
     u_short pc {0x2174};
     byte V[16] {0x1A, 0x2B, 0x3C, 0x4D, 0x5E};
     byte memory[4096] {};
-    byte I {0};
+    u_short I {0};
 
     // Act
     Opcode::execute_FX55(opcode, pc, V, I, memory);
@@ -736,7 +736,7 @@ TEST(OpcodeSuite, Execute_FX65){
     u_short pc {0x2174};
     byte V[16] {};
     byte memory[4096] {0x1A, 0x2B, 0x3C, 0x4D, 0x5E};
-    byte I {0};
+    u_short I {0};
 
     // Act
     Opcode::execute_FX65(opcode, pc, V, I, memory);
