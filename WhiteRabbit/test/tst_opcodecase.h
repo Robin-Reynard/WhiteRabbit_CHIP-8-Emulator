@@ -55,6 +55,20 @@ TEST(OpcodeSuite, ExtractY) {
     EXPECT_EQ(y, 0x0009);
 }
 
+TEST(OpcodeSuite, Execute00EE){
+    // Arrange
+    u_short pc {0x2153};
+    byte sp {0x01};
+    u_short stack[16] {0x1850, 0xAD56};
+
+    // Act
+    Opcode::execute_00EE(pc, sp, stack);
+
+    // Assert
+    EXPECT_EQ(sp, 0x00);
+    EXPECT_EQ(pc, 0xAD56);
+}
+
 TEST(OpcodeSuite, Execute0x1NNN){
     // Arrange
     u_short opcode {0x1ABC};
