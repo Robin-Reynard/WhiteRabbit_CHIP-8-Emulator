@@ -1,5 +1,6 @@
 #include "tst_whiterabbitcase.h"
 #include "tst_opcodecase.h"
+#include "tst_chip8case.h"
 
 #include <gtest/gtest.h>
 
