@@ -213,19 +213,19 @@ namespace Opcode {
         pc += 2;
     }
 
-    void execute_FX1E(u_short opcode, u_short &pc, byte V[], byte &I){
+    void execute_FX1E(u_short opcode, u_short &pc, byte V[], u_short &I){
         byte Vx = V[extract_X(opcode)];
-        V[0xF] = I + Vx > 0xFF ? 1 : 0;
         I += Vx;
+        V[0xF] = I > 0xFFF ? 1 : 0;
         pc += 2;
     }
 
-    void execute_FX29(u_short opcode, u_short &pc, byte V[], byte &I){
+    void execute_FX29(u_short opcode, u_short &pc, byte V[], u_short &I){
         I = V[extract_X(opcode)] * 0x5;
         pc += 2;
     }
 
-    void execute_FX33(u_short opcode, u_short &pc, byte V[], byte &I, byte memory[]){
+    void execute_FX33(u_short opcode, u_short &pc, byte V[], u_short &I, byte memory[]){
         byte Vx = V[extract_X(opcode)];
         memory[I] = Vx / 100;
         memory[I+1] = (Vx % 100) / 10;
@@ -233,14 +233,14 @@ namespace Opcode {
         pc += 2;
     }
 
-    void execute_FX55(u_short opcode, u_short &pc, byte V[], byte &I, byte memory[]){
+    void execute_FX55(u_short opcode, u_short &pc, byte V[], u_short &I, byte memory[]){
         for(int i {0}; i <= extract_X(opcode); i++){
             memory[I + i] = V[i];
         }
         pc += 2;
     }
 
-    void execute_FX65(u_short opcode, u_short &pc, byte V[], byte &I, byte memory[]){
+    void execute_FX65(u_short opcode, u_short &pc, byte V[], u_short &I, byte memory[]){
         for(int i {0}; i <= extract_X(opcode); i++){
             V[i] = memory[I + i];
         }

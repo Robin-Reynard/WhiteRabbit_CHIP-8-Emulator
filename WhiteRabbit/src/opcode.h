@@ -33,11 +33,11 @@ namespace Opcode {
     void execute_FX0A(u_short opcode, u_short& pc, byte V[], byte keys[]);
     void execute_FX15(u_short opcode, u_short& pc, byte V[], byte& delay_timer);
     void execute_FX18(u_short opcode, u_short& pc, byte V[], byte& sound_timer);
-    void execute_FX1E(u_short opcode, u_short& pc, byte V[], byte& I);
-    void execute_FX29(u_short opcode, u_short& pc, byte V[], byte& I);
-    void execute_FX33(u_short opcode, u_short& pc, byte V[], byte& I, byte memory[]);
-    void execute_FX55(u_short opcode, u_short& pc, byte V[], byte& I, byte memory[]);
-    void execute_FX65(u_short opcode, u_short& pc, byte V[], byte& I, byte memory[]);
+    void execute_FX1E(u_short opcode, u_short& pc, byte V[], u_short& I);
+    void execute_FX29(u_short opcode, u_short& pc, byte V[], u_short& I);
+    void execute_FX33(u_short opcode, u_short& pc, byte V[], u_short& I, byte memory[]);
+    void execute_FX55(u_short opcode, u_short& pc, byte V[], u_short& I, byte memory[]);
+    void execute_FX65(u_short opcode, u_short& pc, byte V[], u_short& I, byte memory[]);
 
     u_short extract_NNN(u_short opcode);
     u_short extract_KK(u_short opcode);
