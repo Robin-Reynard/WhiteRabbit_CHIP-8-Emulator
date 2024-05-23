@@ -15,6 +15,7 @@ public:
     void load_program(const std::string file_path);
     void emulate_cycle();
     void display_graphics_ascii();
+    byte* get_display();
 
 private:
     //--- MEMORY

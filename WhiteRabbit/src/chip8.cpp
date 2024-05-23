@@ -39,7 +39,9 @@ void CHIP8::emulate_cycle(){
         case 0x0000:
             switch(opcode & 0x0FFF){
                 case 0x0E0:
-                    Opcode::execute_00E0(program_counter, graphics); break;
+                    Opcode::execute_00E0(program_counter, graphics);
+                    display_graphics_ascii();
+                    break;
                 case 0x0EE:
                     Opcode::execute_00EE(program_counter, stack_pointer, stack); break;
                 default:
@@ -91,7 +93,9 @@ void CHIP8::emulate_cycle(){
         case 0xC000:
             Opcode::execute_CXKK(opcode, program_counter, V); break;
         case 0xD000:
-            Opcode::execute_DXYN(opcode, program_counter, memory, V, I, graphics); break;
+            Opcode::execute_DXYN(opcode, program_counter, memory, V, I, graphics);
+            display_graphics_ascii();
+            break;
         case 0xE000:
             switch(opcode & 0x00FF){
                 case 0x9E:
@@ -138,8 +142,6 @@ void CHIP8::emulate_cycle(){
             printf("BEEP!\n");}
         --sound_timer;
     }
-
-    display_graphics_ascii();
 }
 
 void CHIP8::load_program(const string file_path){
@@ -184,4 +186,8 @@ void CHIP8::display_graphics_ascii(){
         }
     }
     cout << endl;
+}
+
+byte* CHIP8::get_display(){
+    return graphics;
 }

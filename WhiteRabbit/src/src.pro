@@ -17,14 +17,17 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     chip8.cpp \
+    gamedisplay.cpp \
     main.cpp \
     mainwindow.cpp \
-    opcode.cpp
+    opcode.cpp \
+    screendisplay.cpp
 
 HEADERS += \
     chip8.h \
     mainwindow.h \
-    opcode.h
+    opcode.h \
+    screendisplay.h
 
 FORMS += \
     mainwindow.ui
