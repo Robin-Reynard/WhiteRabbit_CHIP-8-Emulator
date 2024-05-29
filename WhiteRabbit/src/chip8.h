@@ -10,12 +10,19 @@ class CHIP8
 {
 public:
     CHIP8();
+    enum KeyStrokes {num_1, num_2, num_3, C,
+                     num_4, num_5, num_6, D,
+                     num_7, num_8, num_9, E,
+                     A, num_0, B, F};
+
     static void hello();
     static void print_as_byte(int number);
     void load_program(const std::string file_path);
     void emulate_cycle();
     void display_graphics_ascii();
-    byte* get_display();
+    bool* get_display();
+    void press_key(KeyStrokes keystroke);
+
 
 private:
     //--- MEMORY
@@ -39,10 +46,10 @@ private:
     byte sound_timer;
     //--- INPUT
     //Done via hex keyboard (16 keys from 0 to F).
-    byte keys[16];
+    bool keys[16];
     //--- GRAPICS
     //Display resolution of 64*32 pixels, monochrome; XOR sprites
-    byte graphics[64*32];
+    bool graphics[64*32];
 };
 
 #endif // CHIP8_H
