@@ -1,6 +1,6 @@
 #include "screendisplay.h"
 
-ScreenDisplay::ScreenDisplay(QWidget* parent) : QGraphicsView(parent)
+ScreenDisplay::ScreenDisplay(CHIP8* chip8, QWidget* parent) : QGraphicsView(parent)
 {
     scene = new QGraphicsScene(this);
     setScene(scene);
@@ -19,9 +19,11 @@ ScreenDisplay::ScreenDisplay(QWidget* parent) : QGraphicsView(parent)
     setFixedSize(pixel_size * board_columns + 2, pixel_size * board_rows + 2);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
+    this->chip8 = chip8;
 }
 
-void ScreenDisplay::updateDisplay(unsigned char chip8_graphics[]){
+void ScreenDisplay::updateDisplay(bool chip8_graphics[]){
     for(int i {0}; i < 2048; i++){
         if(chip8_graphics[i] == 0){
             pixels[i]->setBrush(Qt::black);
@@ -30,4 +32,14 @@ void ScreenDisplay::updateDisplay(unsigned char chip8_graphics[]){
             pixels[i]->setBrush(Qt::white);
         }
     }
+}
+
+void ScreenDisplay::keyPressEvent(QKeyEvent *event){
+    std::cout << event->key() << std::endl;
+    switch(event->key()){
+        case Qt::Key_1:
+            chip8->press_key(CHIP8::KeyStrokes::num_1);
+            break;
+    }
+    QGraphicsView::keyPressEvent(event);
 }
