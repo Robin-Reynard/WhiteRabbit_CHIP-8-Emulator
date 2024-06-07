@@ -12,7 +12,7 @@
 int main()
 {
     CHIP8 *mychip = new CHIP8();
-    mychip->load_program({"/home/robin/Desktop/Chip8 Games/test_opcode.ch8"});
+    mychip->load_program({"/home/robin/Desktop/Chip8 Games/INVADERS"});
 
     DebugDisplay* display = new DebugDisplay(mychip);
     /*QApplication a(argc, argv);

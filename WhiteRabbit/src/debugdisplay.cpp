@@ -29,22 +29,9 @@ DebugDisplay::DebugDisplay(CHIP8* chip8)
     //Clear screen
     SDL_SetRenderDrawColor( renderer, 0xFF, 0xFF, 0xFF, 0xFF );
     SDL_RenderClear( renderer );
+    setup_pixels();
 
     this->chip8 = chip8;
-
-    /*int startPos = 0;
-            for (int y = 0; y < 8; y++) {
-                for (int x = startPos; x < 3; x+=2) {
-                        SDL_Rect rect;
-                        rect.x = x * 129;
-                        rect.y = y * 129;
-                        rect.w = 128;
-                        rect.h = 128;
-                        SDL_SetRenderDrawColor(render, 159, 84, 8, 255);
-                        SDL_RenderFillRect(render, &rect);
-                }
-                startPos = 1 - startPos;
-            }*/
 
     while( !quit )
     {
@@ -61,22 +48,18 @@ DebugDisplay::DebugDisplay(CHIP8* chip8)
             //something.handleEvent( e );
         }
 
-        //Run 1 chip8 instruction
+        //Run chip8 instruction
         chip8->emulate_cycle();
 
-        //Render display
-        for(int i {0}; i < BOARD_ROWS; i++){
-            for(int j {0}; j < BOARD_COLUMNS; j++){
-                SDL_Rect pixel;
-                pixel.x = j * PIXEL_SIZE;
-                pixel.y = i * PIXEL_SIZE;
-                pixel.w = PIXEL_SIZE;
-                pixel.h = PIXEL_SIZE;
-                chip8->get_display()[i*32 + j] ? SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255) : SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-                SDL_RenderFillRect(renderer, &pixel);
-            }
-        }
+        //Clear screen
+        //SDL_SetRenderDrawColor( renderer, 0xFF, 0xFF, 0xFF, 0xFF );
+        //SDL_RenderClear( renderer );
 
+        // Update display
+        for(int i {0}; i < 32*64; i++){
+            chip8->get_display()[i] ? SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255) : SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+            SDL_RenderFillRect(renderer, pixels[i]);
+        }
 
         //Update screen
         SDL_RenderPresent( renderer );
@@ -89,8 +72,27 @@ DebugDisplay::DebugDisplay(CHIP8* chip8)
     SDL_DestroyWindow( window );
     window = NULL;
     renderer = NULL;
+    for(int i {0}; i < 32*64; i++){
+        delete pixels[i];
+    }
 
     //Quit SDL subsystems
     SDL_Quit();
+}
+
+void DebugDisplay::setup_pixels(){
+    for(int row{0}; row < BOARD_ROWS; row++){
+        for(int column {0}; column < BOARD_COLUMNS; column++){
+            SDL_Rect* pixel = new SDL_Rect();
+            pixel->h = PIXEL_SIZE;
+            pixel->w = PIXEL_SIZE;
+            pixel->x = PIXEL_SIZE * column;
+            pixel->y = PIXEL_SIZE * row;
+            SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+            SDL_RenderFillRect(renderer, pixel);
+            pixels[row * 64 + column] = pixel;
+        }
+    }
+    SDL_RenderPresent(renderer);
 }
 

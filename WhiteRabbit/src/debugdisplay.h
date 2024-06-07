@@ -15,11 +15,15 @@ public:
     DebugDisplay(CHIP8* chip8);
 private:
     CHIP8* chip8;
-    SDL_Window* window {NULL};
-    SDL_Renderer* renderer {NULL};
-    bool quit {false};
+    SDL_Window* window;
+    SDL_Renderer* renderer;
+    SDL_Rect* pixels [32*64];
     SDL_Event e;
-    SDL_Rect pixels [32*64] {};
+
+    void setup_pixels();
+
+    //TODO remove
+    bool quit {false};
 };
 
 #endif // DEBUGDISPLAY_H
