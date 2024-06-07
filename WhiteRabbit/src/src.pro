@@ -17,6 +17,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     chip8.cpp \
+    debugdisplay.cpp \
     main.cpp \
     mainwindow.cpp \
     opcode.cpp \
@@ -24,6 +25,7 @@ SOURCES += \
 
 HEADERS += \
     chip8.h \
+    debugdisplay.h \
     mainwindow.h \
     opcode.h \
     screendisplay.h
