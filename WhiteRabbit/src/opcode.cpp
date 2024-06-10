@@ -184,7 +184,6 @@ namespace Opcode {
     void execute_EX9E(u_short opcode, u_short &pc, byte V[], bool keys[]){
         byte x = extract_X(opcode);
         if(keys[V[x]] == true){
-            keys[V[x]] = false;
             pc += 2;
         }
     }
@@ -207,7 +206,6 @@ namespace Opcode {
         for(int i {0}; i < 16; i++){
             if (keys[i] == true){
                 V[x] = i;
-                keys[i] = false;
                 return;
             }
         }

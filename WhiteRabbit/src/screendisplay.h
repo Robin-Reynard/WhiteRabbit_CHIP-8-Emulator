@@ -15,6 +15,7 @@ public:
     ScreenDisplay(CHIP8* chip8, QWidget* parent = nullptr);
     void updateDisplay(bool chip8_graphics[]);
     void keyPressEvent(QKeyEvent* event) override;
+    void keyReleaseEvent(QKeyEvent *event) override;
 private:
     QGraphicsScene *scene {};
     QGraphicsRectItem *pixels [32*64] {};

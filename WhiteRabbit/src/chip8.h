@@ -21,7 +21,8 @@ public:
     void emulate_cycle();
     void display_graphics_ascii();
     bool* get_display();
-    void press_key(KeyStrokes keystroke);
+    void key_pressed(KeyStrokes keystroke);
+    void key_lifted(KeyStrokes keystroke);
 
 
 private:

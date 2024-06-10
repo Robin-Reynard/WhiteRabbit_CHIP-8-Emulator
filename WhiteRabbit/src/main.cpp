@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
     while(display->isVisible())
     {
         a.processEvents();
-        std::this_thread::sleep_for(std::chrono::nanoseconds(500000));
+        std::this_thread::sleep_for(std::chrono::milliseconds(3));
         mychip->emulate_cycle();
         display->updateDisplay(mychip->get_display());
     }

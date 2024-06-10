@@ -195,6 +195,10 @@ bool* CHIP8::get_display(){
     return graphics;
 }
 
-void CHIP8::press_key(KeyStrokes keystroke){
+void CHIP8::key_pressed(KeyStrokes keystroke){
     keys[static_cast<int>(keystroke)] = 1;
+}
+
+void CHIP8::key_lifted(KeyStrokes keystroke){
+    keys[static_cast<int>(keystroke)] = 0;
 }
