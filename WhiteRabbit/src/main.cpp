@@ -9,29 +9,30 @@
 
 #include <SDL2/SDL.h>
 
-int main()
+int main(int argc, char *argv[])
 {
     CHIP8 *mychip = new CHIP8();
     mychip->load_program({"/home/robin/Desktop/Chip8 Games/INVADERS"});
 
-    DebugDisplay* display = new DebugDisplay(mychip);
-    /*QApplication a(argc, argv);
+    //Display using SDL2 library
+    //DebugDisplay* display = new DebugDisplay(mychip);
 
-
+    //Display using QApplication
+    QApplication a(argc, argv);
     ScreenDisplay *display = new ScreenDisplay(mychip);
     display->show();
 
-    for(int i {0}; i < 100; i++){
-        std::this_thread::sleep_for(std::chrono::milliseconds(70));
+    while(display->isVisible())
+    {
+        a.processEvents();
+        std::this_thread::sleep_for(std::chrono::nanoseconds(500000));
         mychip->emulate_cycle();
         display->updateDisplay(mychip->get_display());
-        display->update();
-
     }
 
     //GameDisplay display;
     //display.show();
     //MainWindow w;
     //w.show();
-    return a.exec();*/
+
 }

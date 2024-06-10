@@ -11,11 +11,11 @@ ScreenDisplay::ScreenDisplay(CHIP8* chip8, QWidget* parent) : QGraphicsView(pare
 
     for(int i {0}; i < board_rows; i++){
         for(int j {0}; j < board_columns; j++){
-            pixels[i * 64 + j] = scene ->addRect(j * pixel_size, i * pixel_size, board_columns, board_rows, QPen(), QBrush(Qt::yellow));
+            pixels[i * 64 + j] = scene ->addRect(j * pixel_size, i * pixel_size, pixel_size, pixel_size, QPen(), QBrush(Qt::yellow));
         }
     }
 
-    scene -> setSceneRect(0,0,pixel_size * board_columns, pixel_size * board_rows);
+    //scene -> setSceneRect(0,0,pixel_size * board_columns, pixel_size * board_rows);
     setFixedSize(pixel_size * board_columns + 2, pixel_size * board_rows + 2);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
