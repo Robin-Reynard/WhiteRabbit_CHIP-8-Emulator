@@ -37,37 +37,37 @@ void ScreenDisplay::keyPressEvent(QKeyEvent *event){
     std::cout << event->key() << std::endl;
     switch(event->key()){
     case Qt::Key_1:
-        chip8->key_pressed(CHIP8::KeyStrokes::num_1); break;
+        chip8->key_pressed(CHIP8::KeyStrokes::key_1); break;
     case Qt::Key_2:
-        chip8->key_pressed(CHIP8::KeyStrokes::num_2); break;
+        chip8->key_pressed(CHIP8::KeyStrokes::key_2); break;
     case Qt::Key_3:
-        chip8->key_pressed(CHIP8::KeyStrokes::num_3); break;
+        chip8->key_pressed(CHIP8::KeyStrokes::key_3); break;
     case Qt::Key_4:
-        chip8->key_pressed(CHIP8::KeyStrokes::C); break;
+        chip8->key_pressed(CHIP8::KeyStrokes::key_C); break;
     case Qt::Key_Q:
-        chip8->key_pressed(CHIP8::KeyStrokes::num_4); break;
+        chip8->key_pressed(CHIP8::KeyStrokes::key_4); break;
     case Qt::Key_W:
-        chip8->key_pressed(CHIP8::KeyStrokes::num_5); break;
+        chip8->key_pressed(CHIP8::KeyStrokes::key_5); break;
     case Qt::Key_E:
-        chip8->key_pressed(CHIP8::KeyStrokes::num_6); break;
+        chip8->key_pressed(CHIP8::KeyStrokes::key_6); break;
     case Qt::Key_R:
-        chip8->key_pressed(CHIP8::KeyStrokes::D); break;
+        chip8->key_pressed(CHIP8::KeyStrokes::key_D); break;
     case Qt::Key_A:
-        chip8->key_pressed(CHIP8::KeyStrokes::num_7); break;
+        chip8->key_pressed(CHIP8::KeyStrokes::key_7); break;
     case Qt::Key_S:
-        chip8->key_pressed(CHIP8::KeyStrokes::num_8); break;
+        chip8->key_pressed(CHIP8::KeyStrokes::key_8); break;
     case Qt::Key_D:
-        chip8->key_pressed(CHIP8::KeyStrokes::num_9); break;
+        chip8->key_pressed(CHIP8::KeyStrokes::key_9); break;
     case Qt::Key_F:
-        chip8->key_pressed(CHIP8::KeyStrokes::E); break;
+        chip8->key_pressed(CHIP8::KeyStrokes::key_E); break;
     case Qt::Key_Z:
-        chip8->key_pressed(CHIP8::KeyStrokes::A); break;
+        chip8->key_pressed(CHIP8::KeyStrokes::key_A); break;
     case Qt::Key_X:
-        chip8->key_pressed(CHIP8::KeyStrokes::num_0); break;
+        chip8->key_pressed(CHIP8::KeyStrokes::key_0); break;
     case Qt::Key_C:
-        chip8->key_pressed(CHIP8::KeyStrokes::B); break;
+        chip8->key_pressed(CHIP8::KeyStrokes::key_B); break;
     case Qt::Key_V:
-        chip8->key_pressed(CHIP8::KeyStrokes::F); break;
+        chip8->key_pressed(CHIP8::KeyStrokes::key_F); break;
     }
     QGraphicsView::keyPressEvent(event);
 }
@@ -76,37 +76,37 @@ void ScreenDisplay::keyReleaseEvent(QKeyEvent *event){
     std::cout << event->key() << std::endl;
     switch(event->key()){
     case Qt::Key_1:
-        chip8->key_lifted(CHIP8::KeyStrokes::num_1); break;
+        chip8->key_lifted(CHIP8::KeyStrokes::key_1); break;
     case Qt::Key_2:
-        chip8->key_lifted(CHIP8::KeyStrokes::num_2); break;
+        chip8->key_lifted(CHIP8::KeyStrokes::key_2); break;
     case Qt::Key_3:
-        chip8->key_lifted(CHIP8::KeyStrokes::num_3); break;
+        chip8->key_lifted(CHIP8::KeyStrokes::key_3); break;
     case Qt::Key_4:
-        chip8->key_lifted(CHIP8::KeyStrokes::C); break;
+        chip8->key_lifted(CHIP8::KeyStrokes::key_C); break;
     case Qt::Key_Q:
-        chip8->key_lifted(CHIP8::KeyStrokes::num_4); break;
+        chip8->key_lifted(CHIP8::KeyStrokes::key_4); break;
     case Qt::Key_W:
-        chip8->key_lifted(CHIP8::KeyStrokes::num_5); break;
+        chip8->key_lifted(CHIP8::KeyStrokes::key_5); break;
     case Qt::Key_E:
-        chip8->key_lifted(CHIP8::KeyStrokes::num_6); break;
+        chip8->key_lifted(CHIP8::KeyStrokes::key_6); break;
     case Qt::Key_R:
-        chip8->key_lifted(CHIP8::KeyStrokes::D); break;
+        chip8->key_lifted(CHIP8::KeyStrokes::key_D); break;
     case Qt::Key_A:
-        chip8->key_lifted(CHIP8::KeyStrokes::num_7); break;
+        chip8->key_lifted(CHIP8::KeyStrokes::key_7); break;
     case Qt::Key_S:
-        chip8->key_lifted(CHIP8::KeyStrokes::num_8); break;
+        chip8->key_lifted(CHIP8::KeyStrokes::key_8); break;
     case Qt::Key_D:
-        chip8->key_lifted(CHIP8::KeyStrokes::num_9); break;
+        chip8->key_lifted(CHIP8::KeyStrokes::key_9); break;
     case Qt::Key_F:
-        chip8->key_lifted(CHIP8::KeyStrokes::E); break;
+        chip8->key_lifted(CHIP8::KeyStrokes::key_E); break;
     case Qt::Key_Z:
-        chip8->key_lifted(CHIP8::KeyStrokes::A); break;
+        chip8->key_lifted(CHIP8::KeyStrokes::key_A); break;
     case Qt::Key_X:
-        chip8->key_lifted(CHIP8::KeyStrokes::num_0); break;
+        chip8->key_lifted(CHIP8::KeyStrokes::key_0); break;
     case Qt::Key_C:
-        chip8->key_lifted(CHIP8::KeyStrokes::B); break;
+        chip8->key_lifted(CHIP8::KeyStrokes::key_B); break;
     case Qt::Key_V:
-        chip8->key_lifted(CHIP8::KeyStrokes::F); break;
+        chip8->key_lifted(CHIP8::KeyStrokes::key_F); break;
     }
     QGraphicsView::keyReleaseEvent(event);
 }

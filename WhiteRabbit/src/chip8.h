@@ -10,10 +10,10 @@ class CHIP8
 {
 public:
     CHIP8();
-    enum KeyStrokes {num_1, num_2, num_3, C,
-                     num_4, num_5, num_6, D,
-                     num_7, num_8, num_9, E,
-                     A, num_0, B, F};
+    enum KeyStrokes {key_1, key_2, key_3, key_C,
+                     key_4, key_5, key_6, key_D,
+                     key_7, key_8, key_9, key_E,
+                     key_A, key_0, key_B, key_F};
 
     static void hello();
     static void print_as_byte(int number);
