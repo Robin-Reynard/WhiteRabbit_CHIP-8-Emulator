@@ -28,6 +28,26 @@ CHIP8::CHIP8()
 {
 }
 
+void CHIP8::load_program(const string file_path){
+    char data {};
+    int index {0};
+
+    ifstream input_file(file_path, ios::binary);
+
+    if(input_file){
+        while(input_file.good() && !input_file.eof()){
+            input_file.read (&data,sizeof(char));
+            memory[0x200 + index] = data;
+            index++;
+        }
+        input_file.close();
+        cout << "Program loaded sucessfully! :D" << endl;
+    }
+    else{
+        cerr << "Could not load program T_T" << endl;
+    }
+}
+
 void CHIP8::emulate_cycle(){
     //Fetch opcode
     opcode = memory[program_counter] << 8 | memory[program_counter + 1];
@@ -143,27 +163,6 @@ void CHIP8::emulate_cycle(){
         if(sound_timer == 1){
             printf("BEEP!\n");}
         --sound_timer;
-    }
-}
-
-void CHIP8::load_program(const string file_path){
-    cout << "Ready to load program " << file_path << endl;
-    char data {};
-    int index {0};
-
-    ifstream input_file(file_path, ios::binary);
-
-    if(input_file){
-        while(input_file.good() && !input_file.eof()){
-            input_file.read (&data,sizeof(char));
-            memory[0x200 + index] = data;
-            index++;
-        }
-        input_file.close();
-        cout << "Program loaded sucessfully! :D" << endl;
-    }
-    else{
-        cerr << "Could not load program T_T" << endl;
     }
 }
 
