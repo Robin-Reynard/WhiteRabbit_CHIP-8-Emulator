@@ -26,7 +26,6 @@ CHIP8::CHIP8()
       delay_timer {}, sound_timer {},
       keys {}, graphics {}
 {
-    cout << "Init CHIP8" << endl;
 }
 
 void CHIP8::emulate_cycle(){
@@ -172,10 +171,6 @@ void CHIP8::print_as_byte(int number){
     cout << "0x" << hex << number << endl;
 }
 
-void CHIP8:: hello(){
-    cout << "Hello from CHIP8" << endl;
-}
-
 void CHIP8::display_graphics_ascii(){
     for(int i {0}; i < 2048; i++){
         if(graphics[i] == 0){
@@ -195,10 +190,10 @@ bool* CHIP8::get_display(){
     return graphics;
 }
 
-void CHIP8::key_pressed(KeyStrokes keystroke){
+void CHIP8::press_key(KeyStrokes keystroke){
     keys[static_cast<int>(keystroke)] = 1;
 }
 
-void CHIP8::key_lifted(KeyStrokes keystroke){
+void CHIP8::release_key(KeyStrokes keystroke){
     keys[static_cast<int>(keystroke)] = 0;
 }

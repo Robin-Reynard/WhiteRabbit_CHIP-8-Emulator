@@ -15,15 +15,13 @@ public:
                      key_7, key_8, key_9, key_E,
                      key_A, key_0, key_B, key_F};
 
-    static void hello();
-    static void print_as_byte(int number);
     void load_program(const std::string file_path);
+    void press_key(KeyStrokes keystroke);
+    void release_key(KeyStrokes keystroke);
+
     void emulate_cycle();
     void display_graphics_ascii();
     bool* get_display();
-    void key_pressed(KeyStrokes keystroke);
-    void key_lifted(KeyStrokes keystroke);
-
 
 private:
     //--- MEMORY
@@ -51,6 +49,8 @@ private:
     //--- GRAPICS
     //Display resolution of 64*32 pixels, monochrome; XOR sprites
     bool graphics[64*32];
+
+    static void print_as_byte(int number);
 };
 
 #endif // CHIP8_H
