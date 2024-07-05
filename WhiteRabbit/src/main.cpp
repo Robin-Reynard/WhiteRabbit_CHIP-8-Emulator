@@ -12,7 +12,8 @@
 int main(int argc, char *argv[])
 {
     CHIP8 *mychip = new CHIP8();
-    mychip->load_program({"/home/robin/Desktop/Chip8 Games/INVADERS"});
+    mychip->load_program({"/home/robin/Downloads/myfile (10).ch8"});
+    //mychip->load_program({"/home/robin/Desktop/Chip8 Games/WIPEOFF"});
 
     //Display using SDL2 library
     //DebugDisplay* display = new DebugDisplay(mychip);

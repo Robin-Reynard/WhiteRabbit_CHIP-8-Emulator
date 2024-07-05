@@ -44,7 +44,7 @@ void CHIP8::load_program(const string file_path){
         cout << "Program loaded sucessfully! :D" << endl;
     }
     else{
-        cerr << "Could not load program T_T" << endl;
+        throw std::runtime_error("Exception in CHIP8: Can't load file.");
     }
 }
 
