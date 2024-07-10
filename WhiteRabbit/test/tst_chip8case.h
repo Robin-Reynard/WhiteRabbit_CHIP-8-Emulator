@@ -5,21 +5,18 @@
 #include "chip8.h"
 
 using namespace testing;
-/*
-TEST(Chip8Suite, SetOpcode){
+TEST(Chip8Suite, LoadFile_Valid){
     // Arrange
-    CHIP8 mychip = CHIP8();
+    CHIP8 test_chip = CHIP8();
 
-    // Act
-    mychip.set_opcode();
-
-    // Assert
-    EXPECT_TRUE(true);
-    CHIP8 mychip = CHIP8();
-    mychip.emulate_cycle();
-
-    std::cout << mychip.opcode << std::endl;
-    EXPECT_TRUE(false);
+    // Act& Assert
+    EXPECT_NO_THROW(test_chip.load_program("../../white_rabbit.ch8"));
 }
-*/
+TEST(Chip8Suite, LoadFile_Invalid){
+    // Arrange
+    CHIP8 test_chip = CHIP8();
+
+    // Act& Assert
+    EXPECT_ANY_THROW(test_chip.load_program("../../not_a_file.ch8"));
+}
 #endif // TST_CHIP8CASE_H
