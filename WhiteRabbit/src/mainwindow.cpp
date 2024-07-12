@@ -9,20 +9,38 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     
-/*    CHIP8 mychip = CHIP8();
-    mychip.load_program({"/home/robin/Desktop/Chip8 Games/INVADERS"});
-    for(int i {0}; i < 200; i++){
-        std::cout << i << std::endl;
-        mychip.emulate_cycle();
-    }*/
+    CHIP8 *mychip = new CHIP8();
+    mychip->load_program({"../../white_rabbit.ch8"});
 
-    ui->label->setText("Hello World\n");
+    for(int i {0}; i< 50; i++ )
+    {
+        mychip->emulate_cycle();
+        //display->updateDisplay(mychip->get_display());
+    }
+
+    //ui->label->setText("Hello World\n");
 
 
-//    QGraphicsScene* scene = new QGraphicsScene(0,0,300,300, ui->graphicsView);
-//    ui->graphicsView->setScene(scene);
+    QGraphicsScene* scene = new QGraphicsScene(0,0,300,300, ui->graphicsView);
+    ui->graphicsView->setScene(scene);
 }
-
+/*void Notepad::open()
+{
+    QString fileName = QFileDialog::getOpenFileName(this, "Open the file");
+    if (fileName.isEmpty())
+        return;
+    QFile file(fileName);
+    currentFile = fileName;
+    if (!file.open(QIODevice::ReadOnly | QFile::Text)) {
+        QMessageBox::warning(this, "Warning", "Cannot open file: " + file.errorString());
+        return;
+    }
+    setWindowTitle(fileName);
+    QTextStream in(&file);
+    QString text = in.readAll();
+    ui->textEdit->setText(text);
+    file.close();
+}*/
 MainWindow::~MainWindow()
 {
     delete ui;

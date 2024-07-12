@@ -11,15 +11,15 @@
 
 int main(int argc, char *argv[])
 {
-    CHIP8 *mychip = new CHIP8();
-    mychip->load_program({"/home/robin/Downloads/myfile (10).ch8"});
+    //CHIP8 *mychip = new CHIP8();
+    //mychip->load_program({"../../white_rabbit.ch8"});
     //mychip->load_program({"/home/robin/Desktop/Chip8 Games/WIPEOFF"});
 
     //Display using SDL2 library
     //DebugDisplay* display = new DebugDisplay(mychip);
 
     //Display using QApplication
-    QApplication a(argc, argv);
+    /*QApplication a(argc, argv);
     ScreenDisplay *display = new ScreenDisplay(mychip);
     display->show();
 
@@ -29,11 +29,14 @@ int main(int argc, char *argv[])
         std::this_thread::sleep_for(std::chrono::milliseconds(3));
         mychip->emulate_cycle();
         display->updateDisplay(mychip->get_display());
-    }
+    }*/
 
     //GameDisplay display;
     //display.show();
-    //MainWindow w;
-    //w.show();
+
+    QApplication a(argc, argv);
+    MainWindow w;
+    w.show();
+    a.exec();
 
 }
