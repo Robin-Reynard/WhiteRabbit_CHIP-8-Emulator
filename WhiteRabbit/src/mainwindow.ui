@@ -14,11 +14,11 @@
    <string>White Rabbit Chip8 Emulator</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="label">
+   <widget class="QLabel" name="rabbit_icon">
     <property name="geometry">
      <rect>
       <x>71</x>
-      <y>61</y>
+      <y>81</y>
       <width>113</width>
       <height>21</height>
      </rect>
@@ -27,37 +27,30 @@
      <string>| Rabbit Face |</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_4">
+   <widget class="QGraphicsView" name="display">
     <property name="geometry">
      <rect>
-      <x>80</x>
-      <y>480</y>
-      <width>861</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Error Message</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-   </widget>
-   <widget class="QGraphicsView" name="graphicsView">
-    <property name="geometry">
-     <rect>
-      <x>70</x>
-      <y>100</y>
+      <x>60</x>
+      <y>120</y>
       <width>881</width>
       <height>361</height>
      </rect>
     </property>
+    <property name="verticalScrollBarPolicy">
+     <enum>Qt::ScrollBarAlwaysOff</enum>
+    </property>
+    <property name="horizontalScrollBarPolicy">
+     <enum>Qt::ScrollBarAlwaysOff</enum>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
    </widget>
-   <widget class="QLabel" name="label_5">
+   <widget class="QLabel" name="title_label">
     <property name="geometry">
      <rect>
       <x>70</x>
-      <y>20</y>
+      <y>30</y>
       <width>881</width>
       <height>30</height>
      </rect>
@@ -95,14 +88,14 @@
         </spacer>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_17">
+        <widget class="QPushButton" name="play_pause_button">
          <property name="text">
           <string>Play/Pause</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_18">
+        <widget class="QPushButton" name="select_new_program_button">
          <property name="text">
           <string>Select new program</string>
          </property>
@@ -111,10 +104,10 @@
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_3">
          <item>
-          <widget class="QSpinBox" name="spinBox"/>
+          <widget class="QSpinBox" name="delay_spin"/>
          </item>
          <item>
-          <widget class="QLabel" name="label_2">
+          <widget class="QLabel" name="delay_label">
            <property name="text">
             <string>ms delay between instructions. (? FPS)</string>
            </property>
@@ -163,114 +156,114 @@
         </widget>
        </item>
        <item>
-        <layout class="QGridLayout" name="gridLayout_2">
+        <layout class="QGridLayout" name="keyboard_grid">
          <item row="3" column="3">
-          <widget class="QPushButton" name="pushButton_16">
+          <widget class="QPushButton" name="key_F">
            <property name="text">
             <string>F</string>
            </property>
           </widget>
          </item>
          <item row="0" column="1">
-          <widget class="QPushButton" name="pushButton_2">
+          <widget class="QPushButton" name="key_2">
            <property name="text">
             <string>2</string>
            </property>
           </widget>
          </item>
          <item row="2" column="2">
-          <widget class="QPushButton" name="pushButton_9">
+          <widget class="QPushButton" name="key_9">
            <property name="text">
             <string>9</string>
            </property>
           </widget>
          </item>
          <item row="0" column="2">
-          <widget class="QPushButton" name="pushButton_3">
+          <widget class="QPushButton" name="key_3">
            <property name="text">
             <string>3</string>
            </property>
           </widget>
          </item>
          <item row="1" column="1">
-          <widget class="QPushButton" name="pushButton_5">
+          <widget class="QPushButton" name="key_5">
            <property name="text">
             <string>5</string>
            </property>
           </widget>
          </item>
          <item row="1" column="3">
-          <widget class="QPushButton" name="pushButton_14">
+          <widget class="QPushButton" name="key_D">
            <property name="text">
             <string>D</string>
            </property>
           </widget>
          </item>
          <item row="3" column="0">
-          <widget class="QPushButton" name="pushButton_11">
+          <widget class="QPushButton" name="key_A">
            <property name="text">
             <string>A</string>
            </property>
           </widget>
          </item>
          <item row="3" column="1">
-          <widget class="QPushButton" name="pushButton_10">
+          <widget class="QPushButton" name="key_0">
            <property name="text">
             <string>0</string>
            </property>
           </widget>
          </item>
          <item row="3" column="2">
-          <widget class="QPushButton" name="pushButton_12">
+          <widget class="QPushButton" name="key_B">
            <property name="text">
             <string>B</string>
            </property>
           </widget>
          </item>
          <item row="2" column="1">
-          <widget class="QPushButton" name="pushButton_8">
+          <widget class="QPushButton" name="key_8">
            <property name="text">
             <string>8</string>
            </property>
           </widget>
          </item>
          <item row="2" column="3">
-          <widget class="QPushButton" name="pushButton_15">
+          <widget class="QPushButton" name="key_E">
            <property name="text">
             <string>E</string>
            </property>
           </widget>
          </item>
          <item row="0" column="3">
-          <widget class="QPushButton" name="pushButton_13">
+          <widget class="QPushButton" name="key_C">
            <property name="text">
             <string>C</string>
            </property>
           </widget>
          </item>
          <item row="2" column="0">
-          <widget class="QPushButton" name="pushButton_7">
+          <widget class="QPushButton" name="key_7">
            <property name="text">
             <string>7</string>
            </property>
           </widget>
          </item>
          <item row="1" column="0">
-          <widget class="QPushButton" name="pushButton_4">
+          <widget class="QPushButton" name="key_4">
            <property name="text">
             <string>4</string>
            </property>
           </widget>
          </item>
          <item row="1" column="2">
-          <widget class="QPushButton" name="pushButton_6">
+          <widget class="QPushButton" name="key_6">
            <property name="text">
             <string>6</string>
            </property>
           </widget>
          </item>
          <item row="0" column="0">
-          <widget class="QPushButton" name="pushButton">
+          <widget class="QPushButton" name="key_1">
            <property name="text">
             <string>1</string>
            </property>
@@ -282,11 +275,11 @@
      </item>
     </layout>
    </widget>
-   <widget class="QLabel" name="label_3">
+   <widget class="QLabel" name="rabbit_text_label">
     <property name="geometry">
      <rect>
       <x>190</x>
-      <y>60</y>
+      <y>80</y>
       <width>733</width>
       <height>21</height>
      </rect>

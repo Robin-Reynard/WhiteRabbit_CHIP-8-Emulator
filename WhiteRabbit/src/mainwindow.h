@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QGraphicsRectItem>
+#include <chip8.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -14,8 +16,16 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    void run_next_instruction();
 
 private:
     Ui::MainWindow *ui;
+    QGraphicsRectItem *pixels [32*64];
+    QGraphicsScene* scene;
+    CHIP8 *chip8;
+
+    int board_rows {32};
+    int board_columns {64};
+    int pixel_size {13};
 };
 #endif // MAINWINDOW_H
