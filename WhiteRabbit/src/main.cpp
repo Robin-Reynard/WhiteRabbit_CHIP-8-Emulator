@@ -4,6 +4,8 @@
 #include "debugdisplay.h"
 
 #include <QApplication>
+#include <QFontDatabase>
+#include <QDebug>
 #include <thread>
 #include <chrono>
 
@@ -11,8 +13,8 @@
 
 int main(int argc, char *argv[])
 {
-    //CHIP8 *mychip = new CHIP8();
-    //mychip->load_program({"../../white_rabbit.ch8"});
+    CHIP8 *mychip = new CHIP8();
+    mychip->load_program({"../../white_rabbit.ch8"});
     //mychip->load_program({"/home/robin/Desktop/Chip8 Games/WIPEOFF"});
 
     //Display using SDL2 library
@@ -35,8 +37,20 @@ int main(int argc, char *argv[])
     //display.show();
 
     QApplication a(argc, argv);
-    MainWindow w;
-    w.show();
-    a.exec();
+
+    for(auto name : QFontDatabase().families()){
+        //QFont font("Courier New");
+        qDebug() << name;
+        QFont font(name);
+        font.setStyleHint(QFont::Monospace);
+        QApplication::setFont(font);
+        MainWindow w;
+        w.show();
+        a.exec();
+    }
+
+
+
+
 
 }

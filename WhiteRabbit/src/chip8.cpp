@@ -51,7 +51,7 @@ void CHIP8::load_program(const string file_path){
 void CHIP8::emulate_cycle(){
     //Fetch opcode
     opcode = memory[program_counter] << 8 | memory[program_counter + 1];
-    print_as_byte(opcode);
+    //print_as_byte(opcode);
 
     // Increment program counter here to avoid code duplication
     program_counter += 2;
@@ -62,7 +62,7 @@ void CHIP8::emulate_cycle(){
             switch(opcode & 0x0FFF){
                 case 0x0E0:
                     Opcode::execute_00E0(graphics);
-                    display_graphics_ascii();
+                    //display_graphics_ascii();
                     break;
                 case 0x0EE:
                     Opcode::execute_00EE(program_counter, stack_pointer, stack); break;
@@ -116,7 +116,7 @@ void CHIP8::emulate_cycle(){
             Opcode::execute_CXKK(opcode, V); break;
         case 0xD000:
             Opcode::execute_DXYN(opcode, memory, V, I, graphics);
-            display_graphics_ascii();
+            //display_graphics_ascii();
             break;
         case 0xE000:
             switch(opcode & 0x00FF){
