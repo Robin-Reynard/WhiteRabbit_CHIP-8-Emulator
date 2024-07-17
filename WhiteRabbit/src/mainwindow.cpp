@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "chip8.h"
 #include <string>
+#include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -19,6 +20,7 @@ MainWindow::MainWindow(QWidget *parent)
     }
 
     //ui->label->setText("Hello World\n");
+    QMessageBox::warning(this, "Warning", "Cannot open file: ");
 
 
     QGraphicsScene* scene = new QGraphicsScene(0,0,300,300, ui->graphicsView);
