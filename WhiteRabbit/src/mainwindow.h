@@ -42,5 +42,6 @@ private:
     int pixel_size {13};
 
     void run_next_instruction();
+    void set_current_program_label(QString program_name);
 };
 #endif // MAINWINDOW_H

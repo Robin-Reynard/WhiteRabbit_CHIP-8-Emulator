@@ -61,14 +61,20 @@ void MainWindow::load_new_program(){
     }
 
     try{
+        const QFileInfo info(program_name);
         //TODO REMOVE
         delete chip8;
         chip8 = new CHIP8();
         chip8->load_program(program_name.toStdString());
+        set_current_program_label(QString(info.fileName()));
     }
     catch(const char* error_message){
         QMessageBox::warning(this, "Warning", "WhiteRabbit cannot open file (╥﹏╥): " + *error_message);
     }
+}
+
+void MainWindow::set_current_program_label(QString program_name){
+    ui->title_label->setText("Running " + program_name);
 }
 
 void MainWindow::on_virtual_keyboard_key_pressed(){
