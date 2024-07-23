@@ -3,7 +3,13 @@
 
 #include <QMainWindow>
 #include <QGraphicsRectItem>
-#include <chip8.h>
+#include <QFileDialog>
+#include <QKeyEvent>
+#include <QMessageBox>
+#include <string>
+#include <thread>
+#include <chrono>
+#include "chip8.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -16,7 +22,14 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    void run_next_instruction();
+    void keyPressEvent(QKeyEvent* event) override;
+    void keyReleaseEvent(QKeyEvent *event) override;
+    void run_emulator();
+
+public slots:
+    void load_new_program();
+    void on_virtual_keyboard_key_pressed();
+
 
 private:
     Ui::MainWindow *ui;
@@ -27,5 +40,7 @@ private:
     int board_rows {32};
     int board_columns {64};
     int pixel_size {13};
+
+    void run_next_instruction();
 };
 #endif // MAINWINDOW_H

@@ -35,6 +35,8 @@ int main(int argc, char *argv[])
 
     //GameDisplay display;
     //display.show();
+    //a.exec();
+
 
     QApplication a(argc, argv);
     MainWindow w;
@@ -42,12 +44,6 @@ int main(int argc, char *argv[])
 
     while(w.isVisible()){
         a.processEvents();
-        w.run_next_instruction();
+        w.run_emulator();
     }
-    //a.exec();
-
-
-
-
-
 }
