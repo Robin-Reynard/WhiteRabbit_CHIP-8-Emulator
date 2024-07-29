@@ -10,6 +10,7 @@
 #include <thread>
 #include <chrono>
 #include "chip8.h"
+#include "keyboard.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -22,13 +23,15 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    void keyPressEvent(QKeyEvent* event) override;
-    void keyReleaseEvent(QKeyEvent *event) override;
+    //void keyPressEvent(QKeyEvent* event) override;
+    //void keyReleaseEvent(QKeyEvent *event) override;
     void run_emulator();
 
 public slots:
     void load_new_program();
-    void on_virtual_keyboard_key_pressed();
+    void set_delay(int delay);
+    //void on_virtual_keyboard_key_pressed();
+    //void on_virtual_keyboard_key_released();
 
 
 private:
@@ -43,5 +46,10 @@ private:
 
     void run_next_instruction();
     void set_current_program_label(QString program_name);
+    void set_program_speed_message(int ms_delay);
+    void on_keyboard_key_event(QKeyEvent *event, bool is_key_pressed);
+
+    void set_button_pressed(QPushButton *button);
+    void set_button_released(QPushButton *button);
 };
 #endif // MAINWINDOW_H

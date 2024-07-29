@@ -24,7 +24,7 @@ CHIP8::CHIP8()
       V {}, I {},
       stack {}, stack_pointer {},
       delay_timer {}, sound_timer {},
-      keys {}, graphics {}
+      keys {}, graphics {}, ms_delay_between_instructions{}
 {
 }
 
@@ -164,6 +164,12 @@ void CHIP8::emulate_cycle(){
             printf("BEEP!\n");}
         --sound_timer;
     }
+
+    std::this_thread::sleep_for(std::chrono::milliseconds(ms_delay_between_instructions));
+}
+
+void CHIP8::set_delay_between_instructions(uint ms_delay){
+    ms_delay_between_instructions = ms_delay;
 }
 
 void CHIP8::print_as_byte(int number){

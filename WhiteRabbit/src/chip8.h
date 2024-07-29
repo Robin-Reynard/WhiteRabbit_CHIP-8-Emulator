@@ -3,6 +3,8 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <thread>
+#include <chrono>
 #include "opcode.h"
 using namespace Opcode;
 
@@ -22,6 +24,7 @@ public:
     void emulate_cycle();
     void display_graphics_ascii();
     bool* get_display();
+    void set_delay_between_instructions(uint ms_delay);
 
 private:
     //--- MEMORY
@@ -50,6 +53,7 @@ private:
     //Display resolution of 64*32 pixels, monochrome; XOR sprites
     bool graphics[64*32];
 
+    uint ms_delay_between_instructions;
     static void print_as_byte(int number);
 };
 
