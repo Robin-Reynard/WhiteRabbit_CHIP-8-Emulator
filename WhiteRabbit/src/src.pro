@@ -25,6 +25,7 @@ SOURCES += \
     screendisplay.cpp
 
 HEADERS += \
+    assets.h \
     chip8.h \
     debugdisplay.h \
     keyboard.h \
@@ -41,3 +42,5 @@ LIBS += -lSDL2
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES +=

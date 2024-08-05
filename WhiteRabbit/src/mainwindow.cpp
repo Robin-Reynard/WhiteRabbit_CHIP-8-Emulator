@@ -11,8 +11,12 @@ MainWindow::MainWindow(QWidget *parent)
     scene = new QGraphicsScene(ui->display);
 
     ui->display->setScene(scene);
+
     connect(ui->select_new_program_button, SIGNAL(clicked()), this, SLOT(load_new_program()));
     connect(ui->delay_spin, SIGNAL(valueChanged(int)), this, SLOT(set_delay(int)));
+
+    set_rabbit_quote(Asset::start_quote);
+    set_rabbit_icon(Asset::happy_rabbit);
 
     /*connect(ui->key_0, SIGNAL(pressed()), this, SLOT(on_virtual_keyboard_key_pressed()));
     connect(ui->key_1, SIGNAL(pressed()), this, SLOT(on_virtual_keyboard_key_pressed()));
@@ -284,3 +288,9 @@ void MainWindow::set_button_relased(QPushButton *button){
     button->setCheckable(false);
 }
 */
+void MainWindow::set_rabbit_quote(const QString quote){
+    ui->rabbit_text_label->setText(quote);
+}
+void MainWindow::set_rabbit_icon(const QString icon){
+    ui->rabbit_icon->setText(icon);
+}

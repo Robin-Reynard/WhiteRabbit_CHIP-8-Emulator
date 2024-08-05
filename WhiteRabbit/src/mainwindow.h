@@ -11,7 +11,7 @@
 #include <chrono>
 #include "chip8.h"
 #include "keyboard.h"
-
+#include "assets.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -51,5 +51,8 @@ private:
 
     void set_button_pressed(QPushButton *button);
     void set_button_released(QPushButton *button);
+
+    void set_rabbit_quote(const QString quote);
+    void set_rabbit_icon(const QString icon);
 };
 #endif // MAINWINDOW_H
