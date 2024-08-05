@@ -11,9 +11,9 @@ const QString file_selected_quote {"Oh dear! Oh dear! I shall be too late!"};
 const QString start_quote {"I knew I was late. But when I get to the rabbit hole, I don’t see how I can go in now."};
 const QString cancel_file_select_quote {"No, no, no! You’re doing it all wrong. It’s not about the tea, it’s about the bread and butter."};
 
-const QString scared_rabbit {"   /)_/)\n ( O.O)\nC(\")(\")"};
-const QString existential_crisis_rabbit {"   /)_/)\n ( ._.)\nC(\")(\")"};
-const QString happy_rabbit {"   /)_/)\n ( *.*)\nC(\")(\")"};
-const QString not_chilling_rabbit {"   /)_/)\n ( >~<)\nC(\")(\")"};
-const QString chilling_rabbit{"   /)_/)\n ( '^')\nC(\")(\")"};
+const QString scared_rabbit {"    /)_/)\n   ( O.O)\nC(\")(\")"};
+const QString existential_crisis_rabbit {"    /)_/)\n   ( ._.)\nC(\")(\")"};
+const QString happy_rabbit {"    /)_/)\n   ( *.*)\nC(\")(\")"};
+const QString not_chilling_rabbit {"    /)_/)\n   ( >~<)\nC(\")(\")"};
+const QString chilling_rabbit{"    /)_/)\n   ( '^')\nC(\")(\")"};
 }

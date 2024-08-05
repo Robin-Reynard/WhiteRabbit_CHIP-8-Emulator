@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1006</width>
-    <height>612</height>
+    <width>1005</width>
+    <height>795</height>
    </rect>
   </property>
   <property name="palette">
@@ -465,29 +465,14 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
-    <property name="verticalSpacing">
-     <number>20</number>
-    </property>
-    <item row="2" column="1">
-     <widget class="QLabel" name="rabbit_icon">
-      <property name="font">
-       <font>
-        <family>Ubuntu</family>
-        <weight>50</weight>
-        <italic>false</italic>
-        <bold>false</bold>
-       </font>
-      </property>
-      <property name="text">
-       <string>| Rabbit Face |</string>
-      </property>
-      <property name="wordWrap">
-       <bool>true</bool>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="2" colspan="2">
+    <item row="3" column="2" colspan="3">
      <widget class="QLabel" name="rabbit_text_label">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="font">
        <font>
         <family>Ani</family>
@@ -508,7 +493,47 @@
       </property>
      </widget>
     </item>
-    <item row="5" column="1" colspan="2">
+    <item row="6" column="1" colspan="4">
+     <widget class="Line" name="line">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+    </item>
+    <item row="7" column="3" rowspan="3">
+     <widget class="Line" name="line_2">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="1">
+     <widget class="QLabel" name="rabbit_icon">
+      <property name="font">
+       <font>
+        <family>Ubuntu</family>
+        <pointsize>15</pointsize>
+        <weight>50</weight>
+        <italic>false</italic>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>| Rabbit Face |</string>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="1" colspan="4">
+     <widget class="Line" name="line_3">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+    </item>
+    <item row="7" column="1" colspan="2">
      <widget class="QPushButton" name="select_new_program_button">
       <property name="font">
        <font>
@@ -527,21 +552,40 @@
       </property>
      </widget>
     </item>
-    <item row="4" column="1" colspan="3">
-     <widget class="QGraphicsView" name="display">
-      <property name="verticalScrollBarPolicy">
-       <enum>Qt::ScrollBarAlwaysOff</enum>
+    <item row="5" column="0">
+     <spacer name="horizontalSpacer_3">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
       </property>
-      <property name="horizontalScrollBarPolicy">
-       <enum>Qt::ScrollBarAlwaysOff</enum>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
       </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
+     </spacer>
     </item>
-    <item row="1" column="1" colspan="3">
+    <item row="5" column="5">
+     <spacer name="horizontalSpacer_2">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="1" column="1" colspan="4">
      <widget class="QLabel" name="title_label">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="font">
        <font>
         <family>DejaVu Sans Mono</family>
@@ -559,7 +603,23 @@
       </property>
      </widget>
     </item>
-    <item row="5" column="3" rowspan="3">
+    <item row="8" column="2">
+     <widget class="QLabel" name="delay_label">
+      <property name="font">
+       <font>
+        <family>DejaVu Sans Mono</family>
+        <pointsize>11</pointsize>
+        <weight>50</weight>
+        <italic>true</italic>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>ms delay between instructions</string>
+      </property>
+     </widget>
+    </item>
+    <item row="7" column="4" rowspan="3">
      <layout class="QGridLayout" name="keyboard_layout">
       <property name="horizontalSpacing">
        <number>50</number>
@@ -567,8 +627,8 @@
       <property name="verticalSpacing">
        <number>20</number>
       </property>
-      <item row="3" column="1">
-       <widget class="QLabel" name="key_8">
+      <item row="4" column="0">
+       <widget class="QLabel" name="key_A">
         <property name="font">
          <font>
           <family>DejaVu Sans Mono</family>
@@ -579,7 +639,26 @@
          </font>
         </property>
         <property name="text">
-         <string>8</string>
+         <string>A</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="3">
+       <widget class="QLabel" name="key_E">
+        <property name="font">
+         <font>
+          <family>DejaVu Sans Mono</family>
+          <pointsize>11</pointsize>
+          <weight>75</weight>
+          <italic>true</italic>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>E</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
@@ -605,8 +684,8 @@
         </property>
        </widget>
       </item>
-      <item row="4" column="2">
-       <widget class="QLabel" name="key_B">
+      <item row="2" column="0">
+       <widget class="QLabel" name="key_4">
         <property name="font">
          <font>
           <family>DejaVu Sans Mono</family>
@@ -617,45 +696,7 @@
          </font>
         </property>
         <property name="text">
-         <string>B</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="3">
-       <widget class="QLabel" name="key_C">
-        <property name="font">
-         <font>
-          <family>DejaVu Sans Mono</family>
-          <pointsize>11</pointsize>
-          <weight>75</weight>
-          <italic>true</italic>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>C</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="0">
-       <widget class="QLabel" name="key_7">
-        <property name="font">
-         <font>
-          <family>DejaVu Sans Mono</family>
-          <pointsize>11</pointsize>
-          <weight>75</weight>
-          <italic>true</italic>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>7</string>
+         <string>4</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
@@ -700,6 +741,120 @@
         </property>
        </widget>
       </item>
+      <item row="3" column="2">
+       <widget class="QLabel" name="key_9">
+        <property name="font">
+         <font>
+          <family>DejaVu Sans Mono</family>
+          <pointsize>11</pointsize>
+          <weight>75</weight>
+          <italic>true</italic>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>9</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLabel" name="key_5">
+        <property name="font">
+         <font>
+          <family>DejaVu Sans Mono</family>
+          <pointsize>11</pointsize>
+          <weight>75</weight>
+          <italic>true</italic>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>5</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="3">
+       <widget class="QLabel" name="key_C">
+        <property name="font">
+         <font>
+          <family>DejaVu Sans Mono</family>
+          <pointsize>11</pointsize>
+          <weight>75</weight>
+          <italic>true</italic>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>C</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QLabel" name="key_8">
+        <property name="font">
+         <font>
+          <family>DejaVu Sans Mono</family>
+          <pointsize>11</pointsize>
+          <weight>75</weight>
+          <italic>true</italic>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>8</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="key_7">
+        <property name="font">
+         <font>
+          <family>DejaVu Sans Mono</family>
+          <pointsize>11</pointsize>
+          <weight>75</weight>
+          <italic>true</italic>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>7</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="2">
+       <widget class="QLabel" name="key_B">
+        <property name="font">
+         <font>
+          <family>DejaVu Sans Mono</family>
+          <pointsize>11</pointsize>
+          <weight>75</weight>
+          <italic>true</italic>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>B</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
       <item row="1" column="2">
        <widget class="QLabel" name="key_3">
         <property name="font">
@@ -713,25 +868,6 @@
         </property>
         <property name="text">
          <string>3</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="0">
-       <widget class="QLabel" name="key_A">
-        <property name="font">
-         <font>
-          <family>DejaVu Sans Mono</family>
-          <pointsize>11</pointsize>
-          <weight>75</weight>
-          <italic>true</italic>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>A</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
@@ -757,25 +893,6 @@
         </property>
        </widget>
       </item>
-      <item row="4" column="3">
-       <widget class="QLabel" name="key_F">
-        <property name="font">
-         <font>
-          <family>DejaVu Sans Mono</family>
-          <pointsize>11</pointsize>
-          <weight>75</weight>
-          <italic>true</italic>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>F</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
-      </item>
       <item row="2" column="3">
        <widget class="QLabel" name="key_D">
         <property name="font">
@@ -795,8 +912,8 @@
         </property>
        </widget>
       </item>
-      <item row="3" column="2">
-       <widget class="QLabel" name="key_9">
+      <item row="4" column="3">
+       <widget class="QLabel" name="key_F">
         <property name="font">
          <font>
           <family>DejaVu Sans Mono</family>
@@ -807,64 +924,7 @@
          </font>
         </property>
         <property name="text">
-         <string>9</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="key_4">
-        <property name="font">
-         <font>
-          <family>DejaVu Sans Mono</family>
-          <pointsize>11</pointsize>
-          <weight>75</weight>
-          <italic>true</italic>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>4</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="3">
-       <widget class="QLabel" name="key_E">
-        <property name="font">
-         <font>
-          <family>DejaVu Sans Mono</family>
-          <pointsize>11</pointsize>
-          <weight>75</weight>
-          <italic>true</italic>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>E</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1">
-       <widget class="QLabel" name="key_5">
-        <property name="font">
-         <font>
-          <family>DejaVu Sans Mono</family>
-          <pointsize>11</pointsize>
-          <weight>75</weight>
-          <italic>true</italic>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>5</string>
+         <string>F</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
@@ -898,7 +958,29 @@
       </item>
      </layout>
     </item>
-    <item row="6" column="1">
+    <item row="5" column="1" colspan="4">
+     <widget class="QGraphicsView" name="display">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <property name="verticalScrollBarPolicy">
+       <enum>Qt::ScrollBarAlwaysOff</enum>
+      </property>
+      <property name="horizontalScrollBarPolicy">
+       <enum>Qt::ScrollBarAlwaysOff</enum>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="8" column="1">
      <widget class="QSpinBox" name="delay_spin">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -917,47 +999,12 @@
       </property>
      </widget>
     </item>
-    <item row="4" column="0">
-     <spacer name="horizontalSpacer_3">
+    <item row="2" column="1" colspan="4">
+     <widget class="Line" name="line_4">
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>40</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="6" column="2">
-     <widget class="QLabel" name="delay_label">
-      <property name="font">
-       <font>
-        <family>DejaVu Sans Mono</family>
-        <pointsize>11</pointsize>
-        <weight>50</weight>
-        <italic>true</italic>
-        <bold>false</bold>
-       </font>
-      </property>
-      <property name="text">
-       <string>ms delay between instructions</string>
       </property>
      </widget>
-    </item>
-    <item row="4" column="4">
-     <spacer name="horizontalSpacer_2">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>40</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
     </item>
    </layout>
   </widget>
@@ -966,7 +1013,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1006</width>
+     <width>1005</width>
      <height>27</height>
     </rect>
    </property>
