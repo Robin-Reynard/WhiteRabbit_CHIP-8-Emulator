@@ -12,63 +12,19 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->display->setScene(scene);
 
-    connect(ui->select_new_program_button, SIGNAL(clicked()), this, SLOT(load_new_program()));
-    connect(ui->delay_spin, SIGNAL(valueChanged(int)), this, SLOT(set_delay(int)));
-
-    set_rabbit_quote(Asset::start_quote);
-    set_rabbit_icon(Asset::happy_rabbit);
-
-    /*connect(ui->key_0, SIGNAL(pressed()), this, SLOT(on_virtual_keyboard_key_pressed()));
-    connect(ui->key_1, SIGNAL(pressed()), this, SLOT(on_virtual_keyboard_key_pressed()));
-    connect(ui->key_2, SIGNAL(pressed()), this, SLOT(on_virtual_keyboard_key_pressed()));
-    connect(ui->key_3, SIGNAL(pressed()), this, SLOT(on_virtual_keyboard_key_pressed()));
-    connect(ui->key_4, SIGNAL(pressed()), this, SLOT(on_virtual_keyboard_key_pressed()));
-    connect(ui->key_5, SIGNAL(pressed()), this, SLOT(on_virtual_keyboard_key_pressed()));
-    connect(ui->key_6, SIGNAL(pressed()), this, SLOT(on_virtual_keyboard_key_pressed()));
-    connect(ui->key_7, SIGNAL(pressed()), this, SLOT(on_virtual_keyboard_key_pressed()));
-    connect(ui->key_8, SIGNAL(pressed()), this, SLOT(on_virtual_keyboard_key_pressed()));
-    connect(ui->key_9, SIGNAL(pressed()), this, SLOT(on_virtual_keyboard_key_pressed()));
-    connect(ui->key_A, SIGNAL(pressed()), this, SLOT(on_virtual_keyboard_key_pressed()));
-    connect(ui->key_B, SIGNAL(pressed()), this, SLOT(on_virtual_keyboard_key_pressed()));
-    connect(ui->key_C, SIGNAL(pressed()), this, SLOT(on_virtual_keyboard_key_pressed()));
-    connect(ui->key_D, SIGNAL(pressed()), this, SLOT(on_virtual_keyboard_key_pressed()));
-    connect(ui->key_E, SIGNAL(pressed()), this, SLOT(on_virtual_keyboard_key_pressed()));
-    connect(ui->key_F, SIGNAL(pressed()), this, SLOT(on_virtual_keyboard_key_pressed()));
-
-    connect(ui->key_0, SIGNAL(released()), this, SLOT(on_virtual_keyboard_key_released()));
-    connect(ui->key_1, SIGNAL(released()), this, SLOT(on_virtual_keyboard_key_released()));
-    connect(ui->key_2, SIGNAL(released()), this, SLOT(on_virtual_keyboard_key_released()));
-    connect(ui->key_3, SIGNAL(released()), this, SLOT(on_virtual_keyboard_key_released()));
-    connect(ui->key_4, SIGNAL(released()), this, SLOT(on_virtual_keyboard_key_released()));
-    connect(ui->key_5, SIGNAL(released()), this, SLOT(on_virtual_keyboard_key_released()));
-    connect(ui->key_6, SIGNAL(released()), this, SLOT(on_virtual_keyboard_key_released()));
-    connect(ui->key_7, SIGNAL(released()), this, SLOT(on_virtual_keyboard_key_released()));
-    connect(ui->key_8, SIGNAL(released()), this, SLOT(on_virtual_keyboard_key_released()));
-    connect(ui->key_9, SIGNAL(released()), this, SLOT(on_virtual_keyboard_key_released()));
-    connect(ui->key_A, SIGNAL(released()), this, SLOT(on_virtual_keyboard_key_released()));
-    connect(ui->key_B, SIGNAL(released()), this, SLOT(on_virtual_keyboard_key_released()));
-    connect(ui->key_C, SIGNAL(released()), this, SLOT(on_virtual_keyboard_key_released()));
-    connect(ui->key_D, SIGNAL(released()), this, SLOT(on_virtual_keyboard_key_released()));
-    connect(ui->key_E, SIGNAL(released()), this, SLOT(on_virtual_keyboard_key_released()));
-    connect(ui->key_F, SIGNAL(released()), this, SLOT(on_virtual_keyboard_key_released()));*/
-
-
-
-
-    //QGraphicsScene* scene = new QGraphicsScene(0,0,300,300, ui->display);
-    //scene = new QGraphicsScene(this);
-    //setScene(scene);
-
     for(int i {0}; i < board_rows; i++){
         for(int j {0}; j < board_columns; j++){
             pixels[i * 64 + j] = scene ->addRect(j * pixel_size, i * pixel_size, pixel_size, pixel_size, QPen(), QBrush(Qt::yellow));
         }
     }
 
+    set_rabbit_quote(Asset::start_quote);
+    set_rabbit_icon(Asset::happy_rabbit);
+
     ui->display->setFixedSize(pixel_size * board_columns + 2, pixel_size * board_rows + 2);
 
-    //ui->display->setSceneRect(0, 0, pixel_size * board_columns + 2, pixel_size * board_rows + 2);
-    //ui->display->fitInView(0, 0, pixel_size * board_columns + 2, pixel_size * board_rows + 2, Qt::KeepAspectRatio);
+    connect(ui->select_new_program_button, SIGNAL(clicked()), this, SLOT(load_new_program()));
+    connect(ui->delay_spin, SIGNAL(valueChanged(int)), this, SLOT(set_delay(int)));
 
     chip8->load_program({"../../white_rabbit.ch8"});
 }
@@ -76,6 +32,7 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete chip8;
 }
 
 void MainWindow::run_emulator(){
