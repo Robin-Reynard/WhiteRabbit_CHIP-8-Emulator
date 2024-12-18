@@ -17,23 +17,20 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     chip8.cpp \
-    debugdisplay.cpp \
-    keyboard.cpp \
+    dualwindow.cpp \
     main.cpp \
     mainwindow.cpp \
-    opcode.cpp \
-    screendisplay.cpp
+    opcode.cpp
 
 HEADERS += \
     assets.h \
     chip8.h \
-    debugdisplay.h \
-    keyboard.h \
+    dualwindow.h \
     mainwindow.h \
-    opcode.h \
-    screendisplay.h
+    opcode.h
 
 FORMS += \
+    dualwindow.ui \
     mainwindow.ui
 
 LIBS += -lSDL2
