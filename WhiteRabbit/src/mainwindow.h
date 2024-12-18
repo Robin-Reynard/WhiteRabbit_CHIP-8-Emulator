@@ -10,7 +10,6 @@
 #include <thread>
 #include <chrono>
 #include "chip8.h"
-#include "keyboard.h"
 #include "assets.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }

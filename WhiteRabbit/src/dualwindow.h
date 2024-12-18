@@ -2,7 +2,14 @@
 #define DUALWINDOW_H
 
 #include <QMainWindow>
-
+#include <QGraphicsRectItem>
+#include <QFileDialog>
+#include <QKeyEvent>
+#include <QMessageBox>
+#include <string>
+#include <thread>
+#include <chrono>
+#include "chip8.h"
 namespace Ui {
 class DualWindow;
 }
@@ -14,9 +21,19 @@ class DualWindow : public QMainWindow
 public:
     explicit DualWindow(QWidget *parent = nullptr);
     ~DualWindow();
+    void run_emulator();
 
 private:
     Ui::DualWindow *ui;
+    QGraphicsRectItem *pixels [32*64];
+    QGraphicsScene* scene;
+    CHIP8 *chip8;
+
+    int board_rows {32};
+    int board_columns {64};
+    int pixel_size {6};
+
+    void run_next_instruction();
 };
 
 #endif // DUALWINDOW_H

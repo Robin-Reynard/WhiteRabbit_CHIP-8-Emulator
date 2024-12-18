@@ -1,7 +1,6 @@
 #include "mainwindow.h"
-#include "screendisplay.h"
+#include "dualwindow.h"
 #include "chip8.h"
-#include "debugdisplay.h"
 
 #include <QApplication>
 #include <QFontDatabase>
@@ -39,7 +38,8 @@ int main(int argc, char *argv[])
 
 
     QApplication a(argc, argv);
-    MainWindow w;
+    DualWindow w;
+    //MainWindow w;
     w.show();
 
     while(w.isVisible()){
