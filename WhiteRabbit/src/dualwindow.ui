@@ -116,6 +116,9 @@
       <height>221</height>
      </rect>
     </property>
+    <property name="plainText">
+     <string>Placeholder text</string>
+    </property>
    </widget>
    <widget class="QLabel" name="label">
     <property name="geometry">
