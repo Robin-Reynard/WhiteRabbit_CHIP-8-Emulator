@@ -1,4 +1,5 @@
 QT       += core gui
+QT       += network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -20,14 +21,16 @@ SOURCES += \
     dualwindow.cpp \
     main.cpp \
     mainwindow.cpp \
-    opcode.cpp
+    opcode.cpp \
+    server.cpp
 
 HEADERS += \
     assets.h \
     chip8.h \
     dualwindow.h \
     mainwindow.h \
-    opcode.h
+    opcode.h \
+    server.h
 
 FORMS += \
     dualwindow.ui \
