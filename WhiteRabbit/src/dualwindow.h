@@ -6,14 +6,12 @@
 #include <QFileDialog>
 #include <QKeyEvent>
 #include <QMessageBox>
-#include <QTcpServer>
-#include <QNetworkInterface>
-#include <QString>
-#include <QList>
 #include <string>
 #include <thread>
 #include <chrono>
 #include "chip8.h"
+#include "server.h"
+
 namespace Ui {
 class DualWindow;
 }
@@ -27,23 +25,18 @@ public:
     ~DualWindow();
     void run_emulator();
 
-private slots:
-    void sendFortune();
-
 private:
     Ui::DualWindow *ui;
     QGraphicsRectItem *pixels [32*64];
     QGraphicsScene* scene;
     CHIP8 *chip8;
-    QTcpServer *tcpServer = nullptr;
+    Server *server;
 
     int board_rows {32};
     int board_columns {64};
     int pixel_size {6};
-    QList<QString> fortunes;
 
     void run_next_instruction();
-    void initServer();
 };
 
 #endif // DUALWINDOW_H

@@ -8,6 +8,7 @@ DualWindow::DualWindow(QWidget *parent)
     , ui(new Ui::DualWindow)
     , pixels {}
     , chip8(new CHIP8)
+    , server(new Server)
 {
     ui->setupUi(this);
     scene = new QGraphicsScene(ui->display);
@@ -22,7 +23,9 @@ DualWindow::DualWindow(QWidget *parent)
     ui->display->setFixedSize(pixel_size * board_columns + 2, pixel_size * board_rows + 2);
     chip8->load_program({"../../white_rabbit.ch8"});
 
-    initServer();
+    server->initServer();
+
+    /*initServer();
     fortunes << tr("You've been leading a dog's life. Stay off the furniture.")
                  << tr("You've got to think about tomorrow.")
                  << tr("You will be surprised by a loud noise.")
@@ -30,7 +33,7 @@ DualWindow::DualWindow(QWidget *parent)
                  << tr("You might have mail.")
                  << tr("You cannot kill time without injuring eternity.")
                  << tr("Computers are not intelligent. They only think they are.");
-    connect(tcpServer, &QTcpServer::newConnection, this, &DualWindow::sendFortune);
+    connect(tcpServer, &QTcpServer::newConnection, this, &DualWindow::sendFortune);*/
 }
 
 void DualWindow::run_emulator(){
@@ -48,47 +51,6 @@ void DualWindow::run_next_instruction(){
             pixels[i]->setBrush(Qt::white);
         }
     }
-}
-
-void DualWindow::initServer(){
-    tcpServer = new QTcpServer(this);
-    if (!tcpServer->listen()) {
-        QMessageBox::critical(this, tr("Fortune Server"),
-                              tr("Unable to start the server: %1.")
-                              .arg(tcpServer->errorString()));
-        close();
-        return;
-    }
-    QString ipAddress;
-    const QList<QHostAddress> ipAddressesList = QNetworkInterface::allAddresses();
-    // use the first non-localhost IPv4 address
-    for (const QHostAddress &entry : ipAddressesList) {
-        if (entry != QHostAddress::LocalHost && entry.toIPv4Address()) {
-            ipAddress = entry.toString();
-            break;
-        }
-    }
-    // if we did not find one, use IPv4 localhost
-    if (ipAddress.isEmpty())
-        ipAddress = QHostAddress(QHostAddress::LocalHost).toString();
-    ui->image_output->setText(tr("The server is running on\n\nIP: %1\nport: %2\n\n"
-                            "Run the Fortune Client example now.")
-                         .arg(ipAddress).arg(tcpServer->serverPort()));
-}
-
-void DualWindow::sendFortune(){
-    QByteArray block;
-    QDataStream out(&block, QIODevice::WriteOnly);
-    //out.setVersion(QDataStream::Qt_6_5);
-
-    out << fortunes[QRandomGenerator::global()->bounded(fortunes.size())];
-
-    QTcpSocket *clientConnection = tcpServer->nextPendingConnection();
-    connect(clientConnection, &QAbstractSocket::disconnected,
-            clientConnection, &QObject::deleteLater);
-
-    clientConnection->write(block);
-    clientConnection->disconnectFromHost();
 }
 
 DualWindow::~DualWindow()
