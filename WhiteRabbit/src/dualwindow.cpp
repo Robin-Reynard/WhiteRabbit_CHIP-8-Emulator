@@ -32,8 +32,8 @@ DualWindow::DualWindow(QWidget *parent)
                  << tr("You will feel hungry again in another hour.")
                  << tr("You might have mail.")
                  << tr("You cannot kill time without injuring eternity.")
-                 << tr("Computers are not intelligent. They only think they are.");
-    connect(tcpServer, &QTcpServer::newConnection, this, &DualWindow::sendFortune);*/
+                 << tr("Computers are not intelligent. They only think they are.");*/
+    connect(server->tcpServer, &QTcpServer::newConnection, server, &Server::sendFortune);
 }
 
 void DualWindow::run_emulator(){

@@ -15,12 +15,13 @@ class Server : public QObject
 public:
     explicit Server(QObject *parent = nullptr);
     void initServer();
+    QTcpServer *tcpServer = nullptr;
 
-private slots:
+
+public slots:
     void sendFortune();
 
 private:
-    QTcpServer *tcpServer = nullptr;
     QList<QString> fortunes;
 
 };
