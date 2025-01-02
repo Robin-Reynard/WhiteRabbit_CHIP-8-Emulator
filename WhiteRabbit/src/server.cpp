@@ -34,13 +34,13 @@ void Server::initServer(){
                             "Run the Fortune Client example now.")
                          .arg(ipAddress).arg(tcpServer->serverPort()));*/
 
-    fortunes << tr("You've been leading a dog's life. Stay off the furniture.")
+    /*fortunes << tr("You've been leading a dog's life. Stay off the furniture.")
                  << tr("You've got to think about tomorrow.")
                  << tr("You will be surprised by a loud noise.")
                  << tr("You will feel hungry again in another hour.")
                  << tr("You might have mail.")
                  << tr("You cannot kill time without injuring eternity.")
-                 << tr("Computers are not intelligent. They only think they are.");
+                 << tr("Computers are not intelligent. They only think they are.");*/
 }
 
 void Server::sendFortune(){
@@ -48,12 +48,29 @@ void Server::sendFortune(){
     QDataStream out(&block, QIODevice::WriteOnly);
     //out.setVersion(QDataStream::Qt_6_5);
 
-    out << fortunes[QRandomGenerator::global()->bounded(fortunes.size())];
+    clientConnection = tcpServer->nextPendingConnection();
 
-    QTcpSocket *clientConnection = tcpServer->nextPendingConnection();
-    connect(clientConnection, &QAbstractSocket::disconnected,
-            clientConnection, &QObject::deleteLater);
+    connect(clientConnection, SIGNAL(readyRead()), this, SLOT(readSocket()));
 
-    clientConnection->write(block);
+    //out << clientConnection->readAll();
+           //fortunes[QRandomGenerator::global()->bounded(fortunes.size())];
+    clientConnection->write("Not in the ready read function");
+    //clientConnection->disconnectFromHost();
+
+}
+
+void Server::readyRead(){
+   //qDebug() << "|||||||||||READYREAD SLOT--------";
+   //qDebug() << "||||||||" << clientConnection->readAll();
+    clientConnection->write("Hello there!");
     clientConnection->disconnectFromHost();
+
+}
+
+void Server::readSocket(){
+    QByteArray data = clientConnection->readAll();
+    qDebug() << "|||||||||||READYREAD SOCKET--------";
+    qDebug() << data;
+     clientConnection->write(":3");
+
 }
