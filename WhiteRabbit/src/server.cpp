@@ -6,6 +6,8 @@ Server::Server(QObject *parent) : QObject(parent)
 
 void Server::start_server(Ui::DualWindow* ui, CHIP8* chip8){
     qDebug() << chip8->get_display();
+    this->ui = ui;
+    this->chip8 = chip8;
 
 
     tcp_server = new QTcpServer(this);
@@ -44,11 +46,16 @@ void Server::start_server(Ui::DualWindow* ui, CHIP8* chip8){
                  << tr("You cannot kill time without injuring eternity.")
                  << tr("Computers are not intelligent. They only think they are.");*/
 
-    ui->console->moveCursor(QTextCursor::End);
+    append_message_to_console(tr("The server is running on\n\nIP: %1\nport: %2\n\n"
+                                 "Run the Fortune Client example now.")
+                              .arg(ipAddress).arg(tcp_server->serverPort()));
+    append_message_to_console("READY");
+
+    /*ui->console->moveCursor(QTextCursor::End);
     ui->console->insertPlainText (tr("The server is running on\n\nIP: %1\nport: %2\n\n"
                                      "Run the Fortune Client example now.")
                                   .arg(ipAddress).arg(tcp_server->serverPort()));
-    ui->console->moveCursor (QTextCursor::End);
+    ui->console->moveCursor (QTextCursor::End);*/
 }
 
 void Server::establish_client_connection(){
@@ -73,4 +80,10 @@ void Server::parse_client_request(){
     qDebug() << "|||||||||||READYREAD SOCKET--------";
     qDebug() << data;
     client_connection->write(":3");
+}
+
+void Server::append_message_to_console(QString message){
+    ui->console->moveCursor(QTextCursor::End);
+    ui->console->appendPlainText("[SERVER]:" + message);
+    ui->console->moveCursor (QTextCursor::End);
 }

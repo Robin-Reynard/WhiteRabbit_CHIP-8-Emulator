@@ -28,6 +28,8 @@ private:
     QTcpSocket* client_connection = nullptr;
     Ui::DualWindow *ui = nullptr;
     CHIP8 *chip8 = nullptr;
+
+    void append_message_to_console(QString message);
 };
 
 #endif // SERVER_H
