@@ -8,16 +8,17 @@
 #include <QString>
 #include <QList>
 #include <QtNetwork>
+#include "chip8.h"
+#include "ui_dualwindow.h"
 
 class Server : public QObject
 {
     Q_OBJECT
 public:
     explicit Server(QObject *parent = nullptr);
-    void start_server();
+    void start_server(Ui::DualWindow* ui, CHIP8* chip8);
 
     QTcpServer *tcp_server = nullptr;
-
 
 public slots:
     void establish_client_connection();
@@ -25,6 +26,8 @@ public slots:
 
 private:
     QTcpSocket* client_connection = nullptr;
+    Ui::DualWindow *ui = nullptr;
+    CHIP8 *chip8 = nullptr;
 };
 
 #endif // SERVER_H

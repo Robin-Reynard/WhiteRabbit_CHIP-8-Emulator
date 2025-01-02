@@ -2,10 +2,12 @@
 
 Server::Server(QObject *parent) : QObject(parent)
 {
-
 }
 
-void Server::start_server(){
+void Server::start_server(Ui::DualWindow* ui, CHIP8* chip8){
+    qDebug() << chip8->get_display();
+
+
     tcp_server = new QTcpServer(this);
     if (!tcp_server->listen()) {
         /*QMessageBox::critical(this, tr("Fortune Server"),
@@ -41,6 +43,12 @@ void Server::start_server(){
                  << tr("You might have mail.")
                  << tr("You cannot kill time without injuring eternity.")
                  << tr("Computers are not intelligent. They only think they are.");*/
+
+    ui->console->moveCursor(QTextCursor::End);
+    ui->console->insertPlainText (tr("The server is running on\n\nIP: %1\nport: %2\n\n"
+                                     "Run the Fortune Client example now.")
+                                  .arg(ipAddress).arg(tcp_server->serverPort()));
+    ui->console->moveCursor (QTextCursor::End);
 }
 
 void Server::establish_client_connection(){
@@ -54,7 +62,7 @@ void Server::establish_client_connection(){
 
     //out << clientConnection->readAll();
            //fortunes[QRandomGenerator::global()->bounded(fortunes.size())];
-    client_connection->write("Not in the ready read function");
+    //client_connection->write("Not in the ready read function");
     //clientConnection->disconnectFromHost();
 
 }
@@ -64,6 +72,5 @@ void Server::parse_client_request(){
     QByteArray data = client_connection->readAll();
     qDebug() << "|||||||||||READYREAD SOCKET--------";
     qDebug() << data;
-     client_connection->write(":3");
-
+    client_connection->write(":3");
 }
