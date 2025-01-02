@@ -14,20 +14,17 @@ class Server : public QObject
     Q_OBJECT
 public:
     explicit Server(QObject *parent = nullptr);
-    void initServer();
-    void readyRead();
+    void start_server();
 
-    QTcpServer *tcpServer = nullptr;
+    QTcpServer *tcp_server = nullptr;
 
 
 public slots:
-    void sendFortune();
-    void readSocket();
+    void establish_client_connection();
+    void parse_client_request();
 
 private:
-    QList<QString> fortunes;
-    QTcpSocket* clientConnection = nullptr;
-
+    QTcpSocket* client_connection = nullptr;
 };
 
 #endif // SERVER_H

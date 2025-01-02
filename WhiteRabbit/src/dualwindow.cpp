@@ -23,8 +23,8 @@ DualWindow::DualWindow(QWidget *parent)
     ui->display->setFixedSize(pixel_size * board_columns + 2, pixel_size * board_rows + 2);
     chip8->load_program({"../../white_rabbit.ch8"});
 
-    server->initServer();
-    connect(server->tcpServer, &QTcpServer::newConnection, server, &Server::sendFortune);
+    server->start_server();
+    connect(server->tcp_server, &QTcpServer::newConnection, server, &Server::establish_client_connection);
 }
 
 void DualWindow::run_emulator(){

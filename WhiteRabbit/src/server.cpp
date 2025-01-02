@@ -5,9 +5,9 @@ Server::Server(QObject *parent) : QObject(parent)
 
 }
 
-void Server::initServer(){
-    tcpServer = new QTcpServer(this);
-    if (!tcpServer->listen()) {
+void Server::start_server(){
+    tcp_server = new QTcpServer(this);
+    if (!tcp_server->listen()) {
         /*QMessageBox::critical(this, tr("Fortune Server"),
                               tr("Unable to start the server: %1.")
                               .arg(tcpServer->errorString()));*/
@@ -29,7 +29,7 @@ void Server::initServer(){
         ipAddress = QHostAddress(QHostAddress::LocalHost).toString();
     qDebug() << tr("The server is running on\n\nIP: %1\nport: %2\n\n"
                    "Run the Fortune Client example now.")
-                .arg(ipAddress).arg(tcpServer->serverPort());
+                .arg(ipAddress).arg(tcp_server->serverPort());
     /*ui->image_output->setText(tr("The server is running on\n\nIP: %1\nport: %2\n\n"
                             "Run the Fortune Client example now.")
                          .arg(ipAddress).arg(tcpServer->serverPort()));*/
@@ -43,34 +43,27 @@ void Server::initServer(){
                  << tr("Computers are not intelligent. They only think they are.");*/
 }
 
-void Server::sendFortune(){
+void Server::establish_client_connection(){
     QByteArray block;
     QDataStream out(&block, QIODevice::WriteOnly);
     //out.setVersion(QDataStream::Qt_6_5);
 
-    clientConnection = tcpServer->nextPendingConnection();
+    client_connection = tcp_server->nextPendingConnection();
 
-    connect(clientConnection, SIGNAL(readyRead()), this, SLOT(readSocket()));
+    connect(client_connection, SIGNAL(readyRead()), this, SLOT(parse_client_request()));
 
     //out << clientConnection->readAll();
            //fortunes[QRandomGenerator::global()->bounded(fortunes.size())];
-    clientConnection->write("Not in the ready read function");
+    client_connection->write("Not in the ready read function");
     //clientConnection->disconnectFromHost();
 
 }
 
-void Server::readyRead(){
-   //qDebug() << "|||||||||||READYREAD SLOT--------";
-   //qDebug() << "||||||||" << clientConnection->readAll();
-    clientConnection->write("Hello there!");
-    clientConnection->disconnectFromHost();
 
-}
-
-void Server::readSocket(){
-    QByteArray data = clientConnection->readAll();
+void Server::parse_client_request(){
+    QByteArray data = client_connection->readAll();
     qDebug() << "|||||||||||READYREAD SOCKET--------";
     qDebug() << data;
-     clientConnection->write(":3");
+     client_connection->write(":3");
 
 }
