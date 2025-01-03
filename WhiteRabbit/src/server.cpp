@@ -48,6 +48,75 @@ void Server::parse_client_request(){
     qDebug() << "|||||||||||READYREAD SOCKET--------";
     qDebug() << data;
     client_connection->write(":3");
+
+
+    QJsonParseError parseError;
+    QJsonDocument jsonDoc = QJsonDocument::fromJson(data, &parseError);
+    if(parseError.error != QJsonParseError::NoError){
+        append_message_to_console(tr("REQUEST ERROR: %1 at index %2 in %3").arg(parseError.errorString()).arg(parseError.offset).arg(QString(data)));
+        return;
+    }
+
+    QJsonObject rootObject = itemDoc.object();
+    QString requestType = rootObject.value("request").toString();
+    if(requestType == "PUBLISH_TEXT"){
+        qDebug() << "Publish";
+    }
+    else{
+        qDebug() << "No such request";
+    }
+
+
+    /*QJsonDocument itemDoc = QJsonDocument::fromJson(data);
+    QJsonObject rootObject = itemDoc.object();
+    qDebug() << itemDoc.toJson(QJsonDocument::Compact);
+    qDebug() << rootObject.value("request");
+
+    if(rootObject.value("request").toString() == "PUBLISH_TEXT"){
+        qDebug() << "Publish";
+    }
+    else{
+        qDebug() << "No such request";
+    }*/
+
+
+
+    /*QJsonParseError err;
+
+    auto doc = QJsonDocument::fromJson(QString(client_connection->readAll().toBase64()), &err );
+    auto objects = doc.array();
+    qDebug() << objects[0].toObject();
+
+    if ( err.error != QJsonParseError::NoError )
+    {
+        qDebug() << err.errorString();
+    }
+
+    /*for( auto obj_val : objects )
+    {
+        qDebug() << obj_val.toObject();
+        auto obj = obj_val.toObject();
+
+        auto contacts = obj.value( "contacts" ).toArray();
+
+        for ( auto contact_val : contacts )
+        {
+            auto cotact_str = contact_val.toString();
+
+            qDebug() << cotact_str;
+        }
+    }*/
+
+
+    /*QStringList parts = QString(client_connection->readAll().toBase64()).split("|");
+            /*if (parts.size() < 2) {
+                sendResponse(socket, "ERROR: Invalid request");
+                return;
+            }
+
+            QString command = parts[0];
+            QString data = parts[1];
+    qDebug() << parts[0];*/
 }
 
 void Server::append_message_to_console(QString message){
