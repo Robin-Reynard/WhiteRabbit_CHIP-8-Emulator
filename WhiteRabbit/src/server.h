@@ -8,6 +8,8 @@
 #include <QString>
 #include <QList>
 #include <QtNetwork>
+#include <QtCore>
+#include <QtGui>
 #include "chip8.h"
 #include "ui_dualwindow.h"
 

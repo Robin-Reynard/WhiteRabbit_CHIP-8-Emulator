@@ -86,6 +86,15 @@ void Server::parse_client_request(){
     }
     else if(requestType == "PUBLISH_IMAGE"){
         qDebug() << "publish image";
+        qDebug() << rootObject.value("image").toString();
+
+        QByteArray imageData = QByteArray::fromBase64(rootObject.value("image").toString().toUtf8());
+        QPixmap pixmap;
+        if (pixmap.loadFromData(imageData)) {
+            ui->image_output->setPixmap(pixmap.scaled(ui->image_output->size(), Qt::KeepAspectRatio));
+        } else {
+            qDebug() << "Failed to load image from base64 data!";
+        }
         client_connection->write(":3");
     }
     else{
