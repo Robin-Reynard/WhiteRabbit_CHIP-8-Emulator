@@ -30,6 +30,7 @@ private:
     CHIP8 *chip8 = nullptr;
 
     void append_message_to_console(QString message);
+    void publish_text_to_console(QString message);
 };
 
 #endif // SERVER_H

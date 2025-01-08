@@ -47,7 +47,7 @@ void Server::parse_client_request(){
     QByteArray data = client_connection->readAll();
     qDebug() << "|||||||||||READYREAD SOCKET--------";
     qDebug() << data;
-    client_connection->write(":3");
+    //client_connection->write(":3");
 
 
     QJsonParseError parseError;
@@ -57,70 +57,51 @@ void Server::parse_client_request(){
         return;
     }
 
-    QJsonObject rootObject = itemDoc.object();
+    QJsonObject rootObject = jsonDoc.object();
     QString requestType = rootObject.value("request").toString();
-    if(requestType == "PUBLISH_TEXT"){
-        qDebug() << "Publish";
-    }
-    else{
-        qDebug() << "No such request";
-    }
 
+    if(requestType == "GET_IMAGE"){
+        QByteArray array;
 
-    /*QJsonDocument itemDoc = QJsonDocument::fromJson(data);
-    QJsonObject rootObject = itemDoc.object();
-    qDebug() << itemDoc.toJson(QJsonDocument::Compact);
-    qDebug() << rootObject.value("request");
-
-    if(rootObject.value("request").toString() == "PUBLISH_TEXT"){
-        qDebug() << "Publish";
-    }
-    else{
-        qDebug() << "No such request";
-    }*/
-
-
-
-    /*QJsonParseError err;
-
-    auto doc = QJsonDocument::fromJson(QString(client_connection->readAll().toBase64()), &err );
-    auto objects = doc.array();
-    qDebug() << objects[0].toObject();
-
-    if ( err.error != QJsonParseError::NoError )
-    {
-        qDebug() << err.errorString();
-    }
-
-    /*for( auto obj_val : objects )
-    {
-        qDebug() << obj_val.toObject();
-        auto obj = obj_val.toObject();
-
-        auto contacts = obj.value( "contacts" ).toArray();
-
-        for ( auto contact_val : contacts )
-        {
-            auto cotact_str = contact_val.toString();
-
-            qDebug() << cotact_str;
+        //client_connection->write(QByteArray(chip8->get_display()));
+        for(int i {0}; i < 2048; i++){
+            array.append(chip8->get_display()[i]);
         }
-    }*/
 
+        //array.append(ch);
+        client_connection->write(array);
+        qDebug() << "Get image";
+    }
+    else if(requestType == "GET_CHIP8_INFO"){
+        qDebug() << "Get chip8 info";
+        client_connection->write(":3");
+    }
+    else if(requestType == "PUBLISH_COMMAND"){
+        qDebug() << "publish command";
+        client_connection->write(":3");
+    }
+    else if(requestType == "PUBLISH_TEXT"){
+        publish_text_to_console(rootObject.value("text").toString());
+        client_connection->write(":3");
+    }
+    else if(requestType == "PUBLISH_IMAGE"){
+        qDebug() << "publish image";
+        client_connection->write(":3");
+    }
+    else{
+        append_message_to_console("Invalid request");
+        client_connection->write(":3");
+    }
+}
 
-    /*QStringList parts = QString(client_connection->readAll().toBase64()).split("|");
-            /*if (parts.size() < 2) {
-                sendResponse(socket, "ERROR: Invalid request");
-                return;
-            }
-
-            QString command = parts[0];
-            QString data = parts[1];
-    qDebug() << parts[0];*/
+void Server::publish_text_to_console(QString message){
+    ui->console->moveCursor(QTextCursor::End);
+    ui->console->appendHtml("<div>" + message + "</div>");
+    ui->console->moveCursor (QTextCursor::End);
 }
 
 void Server::append_message_to_console(QString message){
     ui->console->moveCursor(QTextCursor::End);
-    ui->console->appendHtml("<div style='color: #8B8000;'> [SERVER]:" + message + "</div>");
+    ui->console->appendHtml("<div style='color: #8B8000;'> [SERVER] " + message + "</div>");
     ui->console->moveCursor (QTextCursor::End);
 }
