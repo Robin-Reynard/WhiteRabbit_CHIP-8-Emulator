@@ -12,6 +12,7 @@
 #include <QtGui>
 #include <QLabel>
 #include <QPlainTextEdit>
+#include "utils.h"
 #include "chip8.h"
 #include "ui_dualwindow.h"
 
@@ -39,8 +40,10 @@ private:
 
 
     QByteArray handle_get_screen_capture_request();
+    QByteArray handle_get_chip8_info_request();
     QByteArray handle_publish_image_request(QJsonObject request);
     QByteArray handle_publish_text_request(QJsonObject request);
+    QByteArray handle_publish_command_request(QJsonObject request);
 
 
     void append_message_to_console(QString message);

@@ -54,17 +54,17 @@ void Server::parse_client_request(){
         return;
     }
 
-
+    // Handle request based on request type
     QJsonObject request_root = request_json.object();
     QString request_type = request_root.value("request").toString();
     if (request_type == "GET_SCREEN_CAPTURE"){
         response = handle_get_screen_capture_request();
     }
     else if (request_type == "GET_CHIP8_INFO"){
-        response = ":3";
+        response = handle_get_chip8_info_request();
     }
     else if (request_type == "PUBLISH_COMMAND"){
-        response = ":3";
+        response = handle_publish_command_request(request_root);
     }
     else if (request_type == "PUBLISH_TEXT"){
         response = handle_publish_text_request(request_root);
@@ -91,6 +91,29 @@ QByteArray Server::handle_publish_image_request(QJsonObject request){
     }
 }
 
+QByteArray Server::handle_get_chip8_info_request(){
+    QJsonObject jsonObject;
+    jsonObject.insert("is_beeping", chip8->is_beeping());
+    jsonObject.insert("key_1", chip8->get_keyboard()[0]);
+    jsonObject.insert("key_2", chip8->get_keyboard()[1]);
+    jsonObject.insert("key_3", chip8->get_keyboard()[2]);
+    jsonObject.insert("key_C", chip8->get_keyboard()[3]);
+    jsonObject.insert("key_4", chip8->get_keyboard()[4]);
+    jsonObject.insert("key_5", chip8->get_keyboard()[5]);
+    jsonObject.insert("key_6", chip8->get_keyboard()[6]);
+    jsonObject.insert("key_D", chip8->get_keyboard()[7]);
+    jsonObject.insert("key_7", chip8->get_keyboard()[8]);
+    jsonObject.insert("key_8", chip8->get_keyboard()[9]);
+    jsonObject.insert("key_9", chip8->get_keyboard()[10]);
+    jsonObject.insert("key_E", chip8->get_keyboard()[11]);
+    jsonObject.insert("key_A", chip8->get_keyboard()[12]);
+    jsonObject.insert("key_0", chip8->get_keyboard()[13]);
+    jsonObject.insert("key_B", chip8->get_keyboard()[14]);
+    jsonObject.insert("key_F", chip8->get_keyboard()[15]);
+    QJsonDocument doc(jsonObject);
+    return doc.toJson();
+}
+
 QByteArray Server::handle_get_screen_capture_request(){
     QByteArray response;
     for(int i {0}; i < 2048; i++){
@@ -103,6 +126,28 @@ QByteArray Server::handle_publish_text_request(QJsonObject request){
     console->moveCursor(QTextCursor::End);
     console->appendHtml("<div>" + request.value("text").toString() + "</div>");
     console->moveCursor (QTextCursor::End);
+    return SUCCESS_RESPONSE;
+}
+
+QByteArray Server::handle_publish_command_request(QJsonObject request){
+    QString command_key = request.value("command_key").toString();
+    QString command_action = request.value("command_action").toString();
+    CHIP8::KeyStrokes key = Utils::convert_to_keystroke(command_key);
+
+    if(key == CHIP8::key_F && command_key != "F"){
+        return "ERROR: Command key not recognized";
+    }
+
+    if(command_action == "PRESS"){
+        chip8->press_key(key);
+    }
+    else if(command_action == "RELEASE"){
+        chip8->release_key(key);
+    }
+    else{
+        return "ERROR: Command action not recognized";
+    }
+
     return SUCCESS_RESPONSE;
 }
 
