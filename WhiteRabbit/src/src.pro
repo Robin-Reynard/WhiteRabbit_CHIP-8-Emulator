@@ -22,7 +22,8 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     opcode.cpp \
-    server.cpp
+    server.cpp \
+    utils.cpp
 
 HEADERS += \
     assets.h \
@@ -30,7 +31,8 @@ HEADERS += \
     dualwindow.h \
     mainwindow.h \
     opcode.h \
-    server.h
+    server.h \
+    utils.h
 
 FORMS += \
     dualwindow.ui \
