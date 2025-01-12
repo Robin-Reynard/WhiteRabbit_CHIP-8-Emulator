@@ -160,8 +160,6 @@ void CHIP8::emulate_cycle(){
     }
     if(sound_timer > 0)
     {
-        if(sound_timer == 1){
-            printf("BEEP!\n");}
         --sound_timer;
     }
 
@@ -195,10 +193,18 @@ bool* CHIP8::get_display(){
     return graphics;
 }
 
+bool* CHIP8::get_keyboard(){
+    return keys;
+}
+
 void CHIP8::press_key(KeyStrokes keystroke){
     keys[static_cast<int>(keystroke)] = 1;
 }
 
 void CHIP8::release_key(KeyStrokes keystroke){
     keys[static_cast<int>(keystroke)] = 0;
+}
+
+bool CHIP8::is_beeping(){
+    return sound_timer > 0;
 }

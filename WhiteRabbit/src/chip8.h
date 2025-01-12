@@ -24,7 +24,10 @@ public:
     void emulate_cycle();
     void display_graphics_ascii();
     bool* get_display();
+    bool* get_keyboard();
     void set_delay_between_instructions(uint ms_delay);
+    bool is_beeping();
+
 
 private:
     //--- MEMORY
