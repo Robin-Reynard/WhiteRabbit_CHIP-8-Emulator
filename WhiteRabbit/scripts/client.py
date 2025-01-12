@@ -9,8 +9,10 @@ from io import BytesIO
 # Create a TCP/IP socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
+#Qt_5_12
+
 # Connect the socket to the port where the server is listening
-server_address = ('192.168.0.143', 45867)
+server_address = ('127.0.0.1', 3000)
 print(sys.stderr, 'connecting to %s port %s' % server_address)
 sock.connect(server_address)
 data = 'This is the message.  It will be repeated.'
@@ -40,7 +42,7 @@ def try_receive_image():
     return image_data
 
 try:
-    data = '{"request": "GET_IMAGE"}'
+    '''data = '{"request": "GET_SCREEN_CAPTURE"}'
     try_send_data()
     received_image = try_receive_image()
 
@@ -52,13 +54,19 @@ try:
     #pixels2 = np.where(pixels<1,0,255)
     image = Image.fromarray(pixels)
     image = image.resize((640,320))
-    #image.show()
-
-    data = '{"request": "GET_CHIP8_INFO"}'
+    image.show()'''
+    
+    data = '{"request": "PUBLISH_COMMAND","command_key": "B","command_action": "PRESS"}'
     try_send_data()
     try_receive_data()
 
-    data = '{"request": "PUBLISH_COMMAND", "command_keystroke": "A", "command_duration":"5"}'
+
+    data = '{"request": "GET_CHIP8_INFO"}'
+    try_send_data()
+    try_receive_data(1000)
+
+    
+    '''data = '{"request": "PUBLISH_COMMAND","command_key": "A","command_action": "RELEASE"}'
     try_send_data()
     try_receive_data()
 
@@ -72,7 +80,7 @@ try:
     print(img_str)
     data = '{"request": "PUBLISH_IMAGE","image": " ' + img_str + '"}'
     try_send_data()
-    try_receive_data()
+    try_receive_data()'''
     
 
 finally:
