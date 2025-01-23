@@ -21,7 +21,9 @@ DualWindow::DualWindow(QWidget *parent)
       }
     }
     ui->display->setFixedSize(pixel_size * board_columns + 2, pixel_size * board_rows + 2);
-    chip8->load_program({"../../white_rabbit.c8"});
+    chip8->load_program({"../../white_rabbit.ch8"});
+    chip8->set_delay_between_instructions(10);
+    //chip8->load_program({"../../test.ch8"});
 
     server->start_server(ui->image_output, ui->console, chip8);
 }
