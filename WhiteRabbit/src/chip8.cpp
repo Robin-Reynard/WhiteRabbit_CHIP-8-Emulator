@@ -24,8 +24,13 @@ CHIP8::CHIP8()
       V {}, I {},
       stack {}, stack_pointer {},
       delay_timer {}, sound_timer {},
-      keys {}, graphics {}, ms_delay_between_instructions{}
+      keys {}, graphics {}
 {
+
+}
+
+CHIP8::CHIP8(std::string program_path):CHIP8(){
+    load_program(program_path);
 }
 
 void CHIP8::load_program(const string file_path){
@@ -62,7 +67,7 @@ void CHIP8::emulate_cycle(){
             switch(opcode & 0x0FFF){
                 case 0x0E0:
                     Opcode::execute_00E0(graphics);
-                    //display_graphics_ascii();
+                    new_drawing_available = true;
                     break;
                 case 0x0EE:
                     Opcode::execute_00EE(program_counter, stack_pointer, stack); break;
@@ -116,7 +121,7 @@ void CHIP8::emulate_cycle(){
             Opcode::execute_CXKK(opcode, V); break;
         case 0xD000:
             Opcode::execute_DXYN(opcode, memory, V, I, graphics);
-            //display_graphics_ascii();
+            new_drawing_available = true;
             break;
         case 0xE000:
             switch(opcode & 0x00FF){
@@ -163,12 +168,12 @@ void CHIP8::emulate_cycle(){
         --sound_timer;
     }
 
-    std::this_thread::sleep_for(std::chrono::milliseconds(ms_delay_between_instructions));
+//    std::this_thread::sleep_for(std::chrono::milliseconds(ms_delay_between_instructions));
 }
 
-void CHIP8::set_delay_between_instructions(uint ms_delay){
+/*void CHIP8::set_delay_between_instructions(uint ms_delay){
     ms_delay_between_instructions = ms_delay;
-}
+}*/
 
 void CHIP8::print_as_byte(int number){
     cout << "0x" << hex << number << endl;

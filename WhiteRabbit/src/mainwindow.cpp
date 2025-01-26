@@ -77,7 +77,7 @@ void MainWindow::set_current_program_label(QString program_name){
 }
 
 void MainWindow::set_delay(int delay){
-    chip8->set_delay_between_instructions(delay);
+    //chip8->set_delay_between_instructions(delay);
 }
 
 /*

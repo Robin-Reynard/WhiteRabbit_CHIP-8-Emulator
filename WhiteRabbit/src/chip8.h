@@ -12,10 +12,12 @@ class CHIP8
 {
 public:
     CHIP8();
+    CHIP8(std::string program_path);
     enum KeyStrokes {key_1, key_2, key_3, key_C,
                      key_4, key_5, key_6, key_D,
                      key_7, key_8, key_9, key_E,
                      key_A, key_0, key_B, key_F};
+    bool new_drawing_available {false};
 
     void load_program(const std::string file_path);
     void press_key(KeyStrokes keystroke);
@@ -25,7 +27,7 @@ public:
     void display_graphics_ascii();
     bool* get_display();
     bool* get_keyboard();
-    void set_delay_between_instructions(uint ms_delay);
+    //void set_delay_between_instructions(uint ms_delay);
     bool is_beeping();
 
 
@@ -56,7 +58,7 @@ private:
     //Display resolution of 64*32 pixels, monochrome; XOR sprites
     bool graphics[64*32];
 
-    uint ms_delay_between_instructions;
+    //uint ms_delay_between_instructions;
     static void print_as_byte(int number);
 };
 
