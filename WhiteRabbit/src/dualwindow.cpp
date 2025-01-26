@@ -30,6 +30,39 @@ DualWindow::DualWindow(QWidget *parent)
 
     // Start server
     server->start_server(ui->image_output, ui->console, chip8);
+
+    connect(ui->button_0, SIGNAL(pressed()), this, SLOT(on_keyboard_key_pressed()));
+    connect(ui->button_1, SIGNAL(pressed()), this, SLOT(on_keyboard_key_pressed()));
+    connect(ui->button_2, SIGNAL(pressed()), this, SLOT(on_keyboard_key_pressed()));
+    connect(ui->button_3, SIGNAL(pressed()), this, SLOT(on_keyboard_key_pressed()));
+    connect(ui->button_4, SIGNAL(pressed()), this, SLOT(on_keyboard_key_pressed()));
+    connect(ui->button_5, SIGNAL(pressed()), this, SLOT(on_keyboard_key_pressed()));
+    connect(ui->button_6, SIGNAL(pressed()), this, SLOT(on_keyboard_key_pressed()));
+    connect(ui->button_7, SIGNAL(pressed()), this, SLOT(on_keyboard_key_pressed()));
+    connect(ui->button_8, SIGNAL(pressed()), this, SLOT(on_keyboard_key_pressed()));
+    connect(ui->button_9, SIGNAL(pressed()), this, SLOT(on_keyboard_key_pressed()));
+    connect(ui->button_A, SIGNAL(pressed()), this, SLOT(on_keyboard_key_pressed()));
+    connect(ui->button_B, SIGNAL(pressed()), this, SLOT(on_keyboard_key_pressed()));
+    connect(ui->button_C, SIGNAL(pressed()), this, SLOT(on_keyboard_key_pressed()));
+    connect(ui->button_D, SIGNAL(pressed()), this, SLOT(on_keyboard_key_pressed()));
+    connect(ui->button_E, SIGNAL(pressed()), this, SLOT(on_keyboard_key_pressed()));
+    connect(ui->button_F, SIGNAL(pressed()), this, SLOT(on_keyboard_key_pressed()));
+    connect(ui->button_0, SIGNAL(released()), this, SLOT(onl_keyboard_key_released()));
+    connect(ui->button_1, SIGNAL(released()), this, SLOT(onl_keyboard_key_released()));
+    connect(ui->button_2, SIGNAL(released()), this, SLOT(onl_keyboard_key_released()));
+    connect(ui->button_3, SIGNAL(released()), this, SLOT(onl_keyboard_key_released()));
+    connect(ui->button_4, SIGNAL(released()), this, SLOT(onl_keyboard_key_released()));
+    connect(ui->button_5, SIGNAL(released()), this, SLOT(onl_keyboard_key_released()));
+    connect(ui->button_6, SIGNAL(released()), this, SLOT(onl_keyboard_key_released()));
+    connect(ui->button_7, SIGNAL(released()), this, SLOT(onl_keyboard_key_released()));
+    connect(ui->button_8, SIGNAL(released()), this, SLOT(onl_keyboard_key_released()));
+    connect(ui->button_9, SIGNAL(released()), this, SLOT(onl_keyboard_key_released()));
+    connect(ui->button_A, SIGNAL(released()), this, SLOT(onl_keyboard_key_released()));
+    connect(ui->button_B, SIGNAL(released()), this, SLOT(onl_keyboard_key_released()));
+    connect(ui->button_C, SIGNAL(released()), this, SLOT(onl_keyboard_key_released()));
+    connect(ui->button_D, SIGNAL(released()), this, SLOT(onl_keyboard_key_released()));
+    connect(ui->button_E, SIGNAL(released()), this, SLOT(onl_keyboard_key_released()));
+    connect(ui->button_F, SIGNAL(released()), this, SLOT(onl_keyboard_key_released()));
 }
 
 void DualWindow::run_emulator(){
@@ -114,3 +147,82 @@ void DualWindow::on_reset_button_clicked()
 {
     chip8 = new CHIP8({current_chip8_program_path});
 }
+
+void DualWindow::on_keyboard_key_pressed(){
+    QPushButton* buttonSender = qobject_cast<QPushButton*>(sender());
+    auto buttonText = buttonSender->text().toStdString();
+    std::cout << buttonText << std::endl;
+    if(buttonText == "0"){
+        chip8->press_key(CHIP8::KeyStrokes::key_0);}
+    else if (buttonText == "1"){
+        chip8->press_key(CHIP8::KeyStrokes::key_1);}
+    else if (buttonText == "2")        {
+        chip8->press_key(CHIP8::KeyStrokes::key_2);}
+    else if (buttonText == "3"){
+        chip8->press_key(CHIP8::KeyStrokes::key_3);}
+    else if (buttonText == "4"){
+        chip8->press_key(CHIP8::KeyStrokes::key_4);}
+    else if (buttonText == "5"){
+        chip8->press_key(CHIP8::KeyStrokes::key_5);}
+    else if (buttonText == "6"){
+        chip8->press_key(CHIP8::KeyStrokes::key_6);}
+    else if (buttonText == "7"){
+        chip8->press_key(CHIP8::KeyStrokes::key_7);}
+    else if (buttonText == "8"){
+        chip8->press_key(CHIP8::KeyStrokes::key_8);}
+    else if (buttonText == "9"){
+        chip8->press_key(CHIP8::KeyStrokes::key_9);}
+    else if (buttonText == "A"){
+        chip8->press_key(CHIP8::KeyStrokes::key_A); }
+    else if (buttonText == "B"){
+        chip8->press_key(CHIP8::KeyStrokes::key_B);}
+    else if (buttonText == "C"){
+        chip8->press_key(CHIP8::KeyStrokes::key_C); }
+    else if (buttonText == "D"){
+        chip8->press_key(CHIP8::KeyStrokes::key_D);}
+    else if (buttonText == "E"){
+        chip8->press_key(CHIP8::KeyStrokes::key_E);}
+    else if (buttonText == "F"){
+        chip8->press_key(CHIP8::KeyStrokes::key_F); }
+
+    qDebug() << chip8->get_keyboard();
+}
+
+void DualWindow::onl_keyboard_key_released(){
+    QPushButton* buttonSender = qobject_cast<QPushButton*>(sender());
+    auto buttonText = buttonSender->text().toStdString();
+    std::cout << buttonText << std::endl;
+    if(buttonText == "0"){
+        chip8->release_key(CHIP8::KeyStrokes::key_0);}
+    else if (buttonText == "1"){
+        chip8->release_key(CHIP8::KeyStrokes::key_1);}
+    else if (buttonText == "2"){
+        chip8->release_key(CHIP8::KeyStrokes::key_2);}
+    else if (buttonText == "3"){
+        chip8->release_key(CHIP8::KeyStrokes::key_3);}
+    else if (buttonText == "4"){
+        chip8->release_key(CHIP8::KeyStrokes::key_4);}
+    else if (buttonText == "5"){
+        chip8->release_key(CHIP8::KeyStrokes::key_5);}
+    else if (buttonText == "6"){
+        chip8->release_key(CHIP8::KeyStrokes::key_6);}
+    else if (buttonText == "7"){
+        chip8->release_key(CHIP8::KeyStrokes::key_7);}
+    else if (buttonText == "8"){
+        chip8->release_key(CHIP8::KeyStrokes::key_8);}
+    else if (buttonText == "9"){
+        chip8->release_key(CHIP8::KeyStrokes::key_9);}
+    else if (buttonText == "A"){
+        chip8->release_key(CHIP8::KeyStrokes::key_A); }
+    else if (buttonText == "B"){
+        chip8->release_key(CHIP8::KeyStrokes::key_B);}
+    else if (buttonText == "C"){
+        chip8->release_key(CHIP8::KeyStrokes::key_C); }
+    else if (buttonText == "D"){
+        chip8->release_key(CHIP8::KeyStrokes::key_D);}
+    else if (buttonText == "E"){
+        chip8->release_key(CHIP8::KeyStrokes::key_E);}
+    else if (buttonText == "F"){
+        chip8->release_key(CHIP8::KeyStrokes::key_F); }
+}
+

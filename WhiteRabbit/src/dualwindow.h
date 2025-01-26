@@ -31,12 +31,11 @@ public:
 
 private slots:
     void on_load_button_clicked();
-
     void on_play_pause_button_clicked();
-
     void on_delay_spin_valueChanged(int arg1);
-
     void on_reset_button_clicked();
+    void on_keyboard_key_pressed();
+    void onl_keyboard_key_released();
 
 private:
     Ui::DualWindow *ui;
