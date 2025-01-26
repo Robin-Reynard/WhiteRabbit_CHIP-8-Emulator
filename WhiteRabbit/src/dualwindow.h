@@ -34,7 +34,7 @@ private:
 
     int board_rows {32};
     int board_columns {64};
-    int pixel_size {6};
+    int pixel_size {8};
 
     void run_next_instruction();
 };
