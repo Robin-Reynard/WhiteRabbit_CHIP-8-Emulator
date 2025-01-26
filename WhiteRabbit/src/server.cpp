@@ -44,6 +44,8 @@ void Server::parse_client_request(){
     // Get client request
     QByteArray request_raw = client_connection->readAll();
 
+    qDebug() << request_raw;
+
     // Convert request to JSON
     QJsonParseError parse_error;
     QJsonDocument request_json = QJsonDocument::fromJson(request_raw, &parse_error);
@@ -76,6 +78,7 @@ void Server::parse_client_request(){
         response = QString("Request of type " + request_type + " not supported").toUtf8();
     }
 
+    qDebug() << response;
     client_connection->write(response);
 }
 
@@ -94,21 +97,21 @@ QByteArray Server::handle_publish_image_request(QJsonObject request){
 QByteArray Server::handle_get_chip8_info_request(){
     QJsonObject jsonObject;
     jsonObject.insert("is_beeping", chip8->is_beeping());
-    jsonObject.insert("key_1", chip8->get_keyboard()[0]);
-    jsonObject.insert("key_2", chip8->get_keyboard()[1]);
-    jsonObject.insert("key_3", chip8->get_keyboard()[2]);
-    jsonObject.insert("key_C", chip8->get_keyboard()[3]);
+    jsonObject.insert("key_0", chip8->get_keyboard()[0]);
+    jsonObject.insert("key_1", chip8->get_keyboard()[1]);
+    jsonObject.insert("key_2", chip8->get_keyboard()[2]);
+    jsonObject.insert("key_3", chip8->get_keyboard()[3]);
     jsonObject.insert("key_4", chip8->get_keyboard()[4]);
     jsonObject.insert("key_5", chip8->get_keyboard()[5]);
     jsonObject.insert("key_6", chip8->get_keyboard()[6]);
-    jsonObject.insert("key_D", chip8->get_keyboard()[7]);
-    jsonObject.insert("key_7", chip8->get_keyboard()[8]);
-    jsonObject.insert("key_8", chip8->get_keyboard()[9]);
-    jsonObject.insert("key_9", chip8->get_keyboard()[10]);
-    jsonObject.insert("key_E", chip8->get_keyboard()[11]);
-    jsonObject.insert("key_A", chip8->get_keyboard()[12]);
-    jsonObject.insert("key_0", chip8->get_keyboard()[13]);
-    jsonObject.insert("key_B", chip8->get_keyboard()[14]);
+    jsonObject.insert("key_7", chip8->get_keyboard()[7]);
+    jsonObject.insert("key_8", chip8->get_keyboard()[8]);
+    jsonObject.insert("key_9", chip8->get_keyboard()[9]);
+    jsonObject.insert("key_A", chip8->get_keyboard()[10]);
+    jsonObject.insert("key_B", chip8->get_keyboard()[11]);
+    jsonObject.insert("key_C", chip8->get_keyboard()[12]);
+    jsonObject.insert("key_D", chip8->get_keyboard()[13]);
+    jsonObject.insert("key_E", chip8->get_keyboard()[14]);
     jsonObject.insert("key_F", chip8->get_keyboard()[15]);
     QJsonDocument doc(jsonObject);
     return doc.toJson();

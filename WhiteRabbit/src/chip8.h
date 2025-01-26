@@ -13,10 +13,12 @@ class CHIP8
 public:
     CHIP8();
     CHIP8(std::string program_path);
-    enum KeyStrokes {key_1, key_2, key_3, key_C,
+    enum KeyStrokes {key_0, key_1, key_2, key_3, key_4, key_5, key_6, key_7,
+                     key_8, key_9, key_A, key_B, key_C, key_D, key_E, key_F};
+    /*enum KeyStrokes {key_1, key_2, key_3, key_C,
                      key_4, key_5, key_6, key_D,
                      key_7, key_8, key_9, key_E,
-                     key_A, key_0, key_B, key_F};
+                     key_A, key_0, key_B, key_F};*/
     bool new_drawing_available {false};
 
     void load_program(const std::string file_path);
