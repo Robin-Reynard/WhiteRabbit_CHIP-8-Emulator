@@ -3,6 +3,7 @@
 
 #include <QGraphicsRectItem>
 #include <QFileDialog>
+#include <QMainWindow>
 #include "chip8.h"
 #include "server.h"
 

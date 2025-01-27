@@ -44,8 +44,6 @@ void Server::parse_client_request(){
     // Get client request
     QByteArray request_raw = client_connection->readAll();
 
-    qDebug() << request_raw;
-
     // Convert request to JSON
     QJsonParseError parse_error;
     QJsonDocument request_json = QJsonDocument::fromJson(request_raw, &parse_error);
@@ -78,7 +76,7 @@ void Server::parse_client_request(){
         response = QString("Request of type " + request_type + " not supported").toUtf8();
     }
 
-    qDebug() << response;
+    // Send response to client
     client_connection->write(response);
 }
 
@@ -137,6 +135,7 @@ QByteArray Server::handle_publish_command_request(QJsonObject request){
     QString command_action = request.value("command_action").toString();
     CHIP8::KeyStrokes key = Utils::convert_to_keystroke(command_key);
 
+    // Making sure that the client didn't send bogus input
     if(key == CHIP8::key_F && command_key != "F"){
         return "ERROR: Command key not recognized";
     }
