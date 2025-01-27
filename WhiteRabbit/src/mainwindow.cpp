@@ -41,7 +41,7 @@ void MainWindow::run_emulator(){
 }
 
 void MainWindow::run_next_instruction(){
-    chip8->emulate_cycle();
+    chip8->execute_next_opcode();
     //ui->display->updateDisplay(chip8->get_display());
     for(int i {0}; i < 2048; i++){
         if(chip8->get_display()[i] == 0){

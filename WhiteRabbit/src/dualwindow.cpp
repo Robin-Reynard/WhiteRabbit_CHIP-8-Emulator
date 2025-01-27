@@ -31,45 +31,41 @@ DualWindow::DualWindow(QWidget *parent)
     // Start server
     server->start_server(ui->image_output, ui->console, chip8);
 
-    connect(ui->button_0, SIGNAL(pressed()), this, SLOT(on_keyboard_key_pressed()));
-    connect(ui->button_1, SIGNAL(pressed()), this, SLOT(on_keyboard_key_pressed()));
-    connect(ui->button_2, SIGNAL(pressed()), this, SLOT(on_keyboard_key_pressed()));
-    connect(ui->button_3, SIGNAL(pressed()), this, SLOT(on_keyboard_key_pressed()));
-    connect(ui->button_4, SIGNAL(pressed()), this, SLOT(on_keyboard_key_pressed()));
-    connect(ui->button_5, SIGNAL(pressed()), this, SLOT(on_keyboard_key_pressed()));
-    connect(ui->button_6, SIGNAL(pressed()), this, SLOT(on_keyboard_key_pressed()));
-    connect(ui->button_7, SIGNAL(pressed()), this, SLOT(on_keyboard_key_pressed()));
-    connect(ui->button_8, SIGNAL(pressed()), this, SLOT(on_keyboard_key_pressed()));
-    connect(ui->button_9, SIGNAL(pressed()), this, SLOT(on_keyboard_key_pressed()));
-    connect(ui->button_A, SIGNAL(pressed()), this, SLOT(on_keyboard_key_pressed()));
-    connect(ui->button_B, SIGNAL(pressed()), this, SLOT(on_keyboard_key_pressed()));
-    connect(ui->button_C, SIGNAL(pressed()), this, SLOT(on_keyboard_key_pressed()));
-    connect(ui->button_D, SIGNAL(pressed()), this, SLOT(on_keyboard_key_pressed()));
-    connect(ui->button_E, SIGNAL(pressed()), this, SLOT(on_keyboard_key_pressed()));
-    connect(ui->button_F, SIGNAL(pressed()), this, SLOT(on_keyboard_key_pressed()));
-    connect(ui->button_0, SIGNAL(released()), this, SLOT(onl_keyboard_key_released()));
-    connect(ui->button_1, SIGNAL(released()), this, SLOT(onl_keyboard_key_released()));
-    connect(ui->button_2, SIGNAL(released()), this, SLOT(onl_keyboard_key_released()));
-    connect(ui->button_3, SIGNAL(released()), this, SLOT(onl_keyboard_key_released()));
-    connect(ui->button_4, SIGNAL(released()), this, SLOT(onl_keyboard_key_released()));
-    connect(ui->button_5, SIGNAL(released()), this, SLOT(onl_keyboard_key_released()));
-    connect(ui->button_6, SIGNAL(released()), this, SLOT(onl_keyboard_key_released()));
-    connect(ui->button_7, SIGNAL(released()), this, SLOT(onl_keyboard_key_released()));
-    connect(ui->button_8, SIGNAL(released()), this, SLOT(onl_keyboard_key_released()));
-    connect(ui->button_9, SIGNAL(released()), this, SLOT(onl_keyboard_key_released()));
-    connect(ui->button_A, SIGNAL(released()), this, SLOT(onl_keyboard_key_released()));
-    connect(ui->button_B, SIGNAL(released()), this, SLOT(onl_keyboard_key_released()));
-    connect(ui->button_C, SIGNAL(released()), this, SLOT(onl_keyboard_key_released()));
-    connect(ui->button_D, SIGNAL(released()), this, SLOT(onl_keyboard_key_released()));
-    connect(ui->button_E, SIGNAL(released()), this, SLOT(onl_keyboard_key_released()));
-    connect(ui->button_F, SIGNAL(released()), this, SLOT(onl_keyboard_key_released()));
+    connect(ui->button_0, SIGNAL(pressed()), this, SLOT(keyboard_button_pressed()));
+    connect(ui->button_1, SIGNAL(pressed()), this, SLOT(keyboard_button_pressed()));
+    connect(ui->button_2, SIGNAL(pressed()), this, SLOT(keyboard_button_pressed()));
+    connect(ui->button_3, SIGNAL(pressed()), this, SLOT(keyboard_button_pressed()));
+    connect(ui->button_4, SIGNAL(pressed()), this, SLOT(keyboard_button_pressed()));
+    connect(ui->button_5, SIGNAL(pressed()), this, SLOT(keyboard_button_pressed()));
+    connect(ui->button_6, SIGNAL(pressed()), this, SLOT(keyboard_button_pressed()));
+    connect(ui->button_7, SIGNAL(pressed()), this, SLOT(keyboard_button_pressed()));
+    connect(ui->button_8, SIGNAL(pressed()), this, SLOT(keyboard_button_pressed()));
+    connect(ui->button_9, SIGNAL(pressed()), this, SLOT(keyboard_button_pressed()));
+    connect(ui->button_A, SIGNAL(pressed()), this, SLOT(keyboard_button_pressed()));
+    connect(ui->button_B, SIGNAL(pressed()), this, SLOT(keyboard_button_pressed()));
+    connect(ui->button_C, SIGNAL(pressed()), this, SLOT(keyboard_button_pressed()));
+    connect(ui->button_D, SIGNAL(pressed()), this, SLOT(keyboard_button_pressed()));
+    connect(ui->button_E, SIGNAL(pressed()), this, SLOT(keyboard_button_pressed()));
+    connect(ui->button_F, SIGNAL(pressed()), this, SLOT(keyboard_button_pressed()));
+    connect(ui->button_0, SIGNAL(released()), this, SLOT(keyboard_button_released()));
+    connect(ui->button_1, SIGNAL(released()), this, SLOT(keyboard_button_released()));
+    connect(ui->button_2, SIGNAL(released()), this, SLOT(keyboard_button_released()));
+    connect(ui->button_3, SIGNAL(released()), this, SLOT(keyboard_button_released()));
+    connect(ui->button_4, SIGNAL(released()), this, SLOT(keyboard_button_released()));
+    connect(ui->button_5, SIGNAL(released()), this, SLOT(keyboard_button_released()));
+    connect(ui->button_6, SIGNAL(released()), this, SLOT(keyboard_button_released()));
+    connect(ui->button_7, SIGNAL(released()), this, SLOT(keyboard_button_released()));
+    connect(ui->button_8, SIGNAL(released()), this, SLOT(keyboard_button_released()));
+    connect(ui->button_9, SIGNAL(released()), this, SLOT(keyboard_button_released()));
+    connect(ui->button_A, SIGNAL(released()), this, SLOT(keyboard_button_released()));
+    connect(ui->button_B, SIGNAL(released()), this, SLOT(keyboard_button_released()));
+    connect(ui->button_C, SIGNAL(released()), this, SLOT(keyboard_button_released()));
+    connect(ui->button_D, SIGNAL(released()), this, SLOT(keyboard_button_released()));
+    connect(ui->button_E, SIGNAL(released()), this, SLOT(keyboard_button_released()));
+    connect(ui->button_F, SIGNAL(released()), this, SLOT(keyboard_button_released()));
 }
 
-void DualWindow::run_emulator(){
-    run_next_instruction();
-}
-
-void DualWindow::run_next_instruction(){
+void DualWindow::execute_frame(){
     // Restart the timer
     timer.restart();
 
@@ -78,7 +74,7 @@ void DualWindow::run_next_instruction(){
             continue;
         }
         // Run a chip8 instruction
-        chip8->emulate_cycle();
+        chip8->execute_next_opcode();
         // Draw to screen if available
         if (chip8->new_drawing_available){
             draw_pixels_to_screen();
@@ -148,7 +144,7 @@ void DualWindow::on_reset_button_clicked()
     chip8 = new CHIP8({current_chip8_program_path});
 }
 
-void DualWindow::on_keyboard_key_pressed(){
+void DualWindow::keyboard_button_pressed(){
     QPushButton* buttonSender = qobject_cast<QPushButton*>(sender());
     auto buttonText = buttonSender->text().toStdString();
     std::cout << buttonText << std::endl;
@@ -188,7 +184,7 @@ void DualWindow::on_keyboard_key_pressed(){
     qDebug() << chip8->get_keyboard();
 }
 
-void DualWindow::onl_keyboard_key_released(){
+void DualWindow::keyboard_button_released(){
     QPushButton* buttonSender = qobject_cast<QPushButton*>(sender());
     auto buttonText = buttonSender->text().toStdString();
     std::cout << buttonText << std::endl;

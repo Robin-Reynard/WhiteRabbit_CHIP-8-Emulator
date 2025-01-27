@@ -44,6 +44,8 @@ int main(int argc, char *argv[])
 
     while(w.isVisible()){
         a.processEvents();
-        w.run_emulator();
+        w.execute_frame();
+        //w.run_emulator();
     }
+    //a.exec();
 }

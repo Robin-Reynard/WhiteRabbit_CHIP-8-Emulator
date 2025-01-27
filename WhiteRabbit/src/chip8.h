@@ -1,10 +1,6 @@
 #ifndef CHIP8_H
 #define CHIP8_H
-#include <iostream>
 #include <fstream>
-#include <string>
-#include <thread>
-#include <chrono>
 #include "opcode.h"
 using namespace Opcode;
 
@@ -13,25 +9,30 @@ class CHIP8
 public:
     CHIP8();
     CHIP8(std::string program_path);
+    // Keyboard inputs
     enum KeyStrokes {key_0, key_1, key_2, key_3, key_4, key_5, key_6, key_7,
                      key_8, key_9, key_A, key_B, key_C, key_D, key_E, key_F};
-    /*enum KeyStrokes {key_1, key_2, key_3, key_C,
-                     key_4, key_5, key_6, key_D,
-                     key_7, key_8, key_9, key_E,
-                     key_A, key_0, key_B, key_F};*/
+
+    // Reduces the number of times the screen has to be redrawn
     bool new_drawing_available {false};
 
+    // Load program into memory
     void load_program(const std::string file_path);
+
+    // Decodes and runs the next opcode
+    void execute_next_opcode();
+
+    // Display-related methods
+    bool* get_display();
+    void display_graphics_ascii();
+
+    // Keyboard and keyboard-event related methods
+    bool* get_keyboard();
     void press_key(KeyStrokes keystroke);
     void release_key(KeyStrokes keystroke);
 
-    void emulate_cycle();
-    void display_graphics_ascii();
-    bool* get_display();
-    bool* get_keyboard();
-    //void set_delay_between_instructions(uint ms_delay);
+    // Returns whether the CHIP8 is making sound
     bool is_beeping();
-
 
 private:
     //--- MEMORY
@@ -60,7 +61,6 @@ private:
     //Display resolution of 64*32 pixels, monochrome; XOR sprites
     bool graphics[64*32];
 
-    //uint ms_delay_between_instructions;
     static void print_as_byte(int number);
 };
 

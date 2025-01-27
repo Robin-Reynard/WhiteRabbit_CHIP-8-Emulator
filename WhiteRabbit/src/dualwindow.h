@@ -1,7 +1,6 @@
 #ifndef DUALWINDOW_H
 #define DUALWINDOW_H
 
-#include <memory>
 #include <QMainWindow>
 #include <QGraphicsRectItem>
 #include <QFileDialog>
@@ -27,7 +26,7 @@ class DualWindow : public QMainWindow
 public:
     explicit DualWindow(QWidget *parent = nullptr);
     ~DualWindow();
-    void run_emulator();
+    void execute_frame();
 
 private slots:
     void on_load_button_clicked();
@@ -38,14 +37,15 @@ private slots:
     void keyboard_button_released();
 
 private:
+    // Ms to allow for 60FPS
+    static const int TARGET_FPS_SPEED = 16;
+
     Ui::DualWindow *ui;
     QGraphicsRectItem *pixels [32*64];
     QGraphicsScene* scene;
     CHIP8 *chip8;
     Server *server;
     QElapsedTimer timer;
-
-    static const int TARGET_FPS_SPEED = 16;
 
     int board_rows {32};
     int board_columns {64};
@@ -56,8 +56,6 @@ private:
 
     std::string current_chip8_program_path {"../../white_rabbit.ch8"};
 
-
-    void run_next_instruction();
     void draw_pixels_to_screen();
 };
 

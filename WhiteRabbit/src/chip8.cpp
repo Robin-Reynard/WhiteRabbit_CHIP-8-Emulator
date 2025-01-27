@@ -53,7 +53,7 @@ void CHIP8::load_program(const string file_path){
     }
 }
 
-void CHIP8::emulate_cycle(){
+void CHIP8::execute_next_opcode(){
     //Fetch opcode
     opcode = memory[program_counter] << 8 | memory[program_counter + 1];
     //print_as_byte(opcode);
