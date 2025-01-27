@@ -6,7 +6,7 @@
 #include <QTcpServer>
 #include <QtNetwork>
 #include <QPlainTextEdit>
-#include "utils.h"
+#include "keyboard.h"
 #include "chip8.h"
 
 class Server : public QObject

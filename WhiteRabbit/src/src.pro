@@ -19,18 +19,18 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     chip8.cpp \
     dualwindow.cpp \
+    keyboard.cpp \
     main.cpp \
     opcode.cpp \
-    server.cpp \
-    utils.cpp
+    server.cpp
 
 HEADERS += \
     assets.h \
     chip8.h \
     dualwindow.h \
+    keyboard.h \
     opcode.h \
-    server.h \
-    utils.h
+    server.h
 
 FORMS += \
     dualwindow.ui

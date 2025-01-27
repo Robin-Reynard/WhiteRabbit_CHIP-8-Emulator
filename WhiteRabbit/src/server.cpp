@@ -133,7 +133,7 @@ QByteArray Server::handle_publish_text_request(QJsonObject request){
 QByteArray Server::handle_publish_command_request(QJsonObject request){
     QString command_key = request.value("command_key").toString();
     QString command_action = request.value("command_action").toString();
-    CHIP8::KeyStrokes key = Utils::convert_to_keystroke(command_key);
+    CHIP8::KeyStrokes key = Keyboard::convert_to_keystroke(command_key);
 
     // Making sure that the client didn't send bogus input
     if(key == CHIP8::key_F && command_key != "F"){

@@ -1,6 +1,6 @@
-#include "utils.h"
+#include "keyboard.h"
 
-namespace Utils {
+namespace Keyboard {
     CHIP8::KeyStrokes convert_to_keystroke(QString key){
         key = key.toUpper();
         if(key == "0"){

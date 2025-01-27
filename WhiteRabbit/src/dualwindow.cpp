@@ -144,10 +144,10 @@ void DualWindow::setup_keyboard_signals()
 
 void DualWindow::keyboard_button_pressed(){
     QPushButton* buttonSender = qobject_cast<QPushButton*>(sender());
-    Utils::register_key_press(buttonSender->text(), chip8);
+    Keyboard::register_key_press(buttonSender->text(), chip8);
 }
 
 void DualWindow::keyboard_button_released(){
     QPushButton* buttonSender = qobject_cast<QPushButton*>(sender());
-    Utils::register_key_release(buttonSender->text(), chip8);
+    Keyboard::register_key_release(buttonSender->text(), chip8);
 }
