@@ -1245,37 +1245,10 @@
       </item>
      </layout>
     </item>
-    <item row="5" column="2">
-     <widget class="QLabel" name="image_output">
-      <property name="frameShape">
-       <enum>QFrame::Box</enum>
-      </property>
-      <property name="text">
-       <string>Image Placeholder</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="2">
-     <widget class="QLabel" name="client_title">
-      <property name="text">
-       <string>running something.py</string>
-      </property>
-     </widget>
-    </item>
     <item row="0" column="1" rowspan="9">
      <widget class="Line" name="line">
       <property name="orientation">
        <enum>Qt::Vertical</enum>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="2">
-     <widget class="QLabel" name="label_3">
-      <property name="text">
-       <string>Load | Play | Pause | Stop | Reset</string>
       </property>
      </widget>
     </item>
@@ -1351,6 +1324,41 @@
      <widget class="Line" name="line_3">
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="2" rowspan="2">
+     <widget class="QLabel" name="image_output">
+      <property name="frameShape">
+       <enum>QFrame::Box</enum>
+      </property>
+      <property name="text">
+       <string>Waiting for image input from client</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="2" rowspan="2">
+     <widget class="QLabel" name="label_3">
+      <property name="font">
+       <font>
+        <family>Ubuntu Condensed</family>
+        <pointsize>16</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Client Communication</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="2">
+     <widget class="QLabel" name="label_2">
+      <property name="text">
+       <string>(\ (^.^) /)   .../ It’s not about the tea, it’s about the bread and butter. |</string>
       </property>
      </widget>
     </item>
