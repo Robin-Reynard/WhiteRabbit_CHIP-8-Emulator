@@ -20,7 +20,6 @@ SOURCES += \
     chip8.cpp \
     dualwindow.cpp \
     main.cpp \
-    mainwindow.cpp \
     opcode.cpp \
     server.cpp \
     utils.cpp
@@ -29,14 +28,12 @@ HEADERS += \
     assets.h \
     chip8.h \
     dualwindow.h \
-    mainwindow.h \
     opcode.h \
     server.h \
     utils.h
 
 FORMS += \
-    dualwindow.ui \
-    mainwindow.ui
+    dualwindow.ui
 
 LIBS += -lSDL2
 
