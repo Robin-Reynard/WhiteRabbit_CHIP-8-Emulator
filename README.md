@@ -17,6 +17,7 @@ The emulator can ...
 ⏲️ Adjust the speed of the game execution      
 ⏯️ Play/pause the game      
 ↩️ Reset the game     
+⌨️ Respond to key presses from the on-screen keyboard
 
 The server can connect to clients and send ...              
 ➡️ 📺 On-screen display from the emulator (No need to continuously screenshot your screen to get visual input!)               
@@ -24,7 +25,7 @@ The server can connect to clients and send ...
 ➡️ 🎵 Get sound status       
 
 The server can receive from the connected clients ...     
-⬅️ 🎹 CHIP8 keyboard commands (press or release a key) and relays information to the emulator (No need to have the agent take control of the keyboard to play the game!)         
+⬅️ 🎹 CHIP8 keyboard press/release key commands (No need to have the agent take control of your mouse/keyboard to play the game!)         
 ⬅️ 🖼️ Publish images to the emulator GUI          
 ⬅️ 📜 Publish text to the emulator GUI            
 
@@ -125,17 +126,18 @@ To indicate that the WhiteRabbit server has received the request (in the cases w
 ```
 
 ## Get started
-This is the simplest and headache-free method of making sure it runs.
-1️⃣ Install Qt
-2️⃣ git clone the repository
-3️⃣ Open and run the project from Qt
+This is the simplest and headache-free method of making sure it runs.             
+1️⃣ Install Qt           
+2️⃣ git clone the repository             
+3️⃣ Open and run the project from Qt          
 
 ## Special Thanks
-Big thanks to the authors and maintainers of the following resources, without whom the project would hav been exponentially harder to finish.
-**CHIP8 Documentation**
-https://multigesture.net/articles/how-to-write-an-emulator-chip-8-interpreter/    
-http://devernay.free.fr/hacks/chip8/C8TECH10.HTM
-https://en.wikipedia.org/wiki/CHIP-8
-**TCP Server in Qt**
-https://doc.qt.io/qt-6/qtnetwork-fortuneserver-example.html    
-https://doc.qt.io/qt-6/qtnetwork-fortuneclient-example.html   
+Big thanks to the authors and maintainers of the following resources, without whom the project would have been exponentially harder to finish.
+**CHIP8 Documentation**                  
+https://multigesture.net/articles/how-to-write-an-emulator-chip-8-interpreter/              
+http://devernay.free.fr/hacks/chip8/C8TECH10.HTM             
+https://en.wikipedia.org/wiki/CHIP-8             
+
+**TCP Server in Qt**           
+https://doc.qt.io/qt-6/qtnetwork-fortuneserver-example.html             
+https://doc.qt.io/qt-6/qtnetwork-fortuneclient-example.html          
