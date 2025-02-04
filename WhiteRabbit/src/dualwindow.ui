@@ -1358,7 +1358,7 @@
     <item row="2" column="2">
      <widget class="QLabel" name="label_2">
       <property name="text">
-       <string>(\ (^.^) /)   .../ It’s not about the tea, it’s about the bread and butter. |</string>
+       <string>(\ (^.^) /)  ~~ The Queen of Hearts, she made some tarts, all on a summer day!</string>
       </property>
      </widget>
     </item>
