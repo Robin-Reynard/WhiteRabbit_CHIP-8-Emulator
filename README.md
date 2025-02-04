@@ -1,13 +1,14 @@
 # :rabbit: WhiteRabbit, a CHIP8 Emulator for Automation and Agents
 ## Down the rabbit-hole
-As I was sitting near my computer one hot summer day, I was considering in my own mind whether the pleasure of coding another agent to auto-play a Mario minigame would be worth the trouble of determining the pixel-perfect location for the emulator to allow the agent to collect viable screenshots, when suddently a White Rabbit ran close by me.           
+As I was sitting near my computer one hot summer day, I was considering in my own mind whether the pleasure of coding another agent to auto-play a Mario minigame would be worth the trouble of determining the pixel-perfect location for the emulator to allow the agent to collect viable screenshots, when suddenly a White Rabbit ran close by me.           
 
-There was nothing so very remarkable in that; nor did I think it so very much out of the way to hear the Rabbit say to itself "Oh dear! Oh dear! I shall be late!"; but when the Rabbit actually took out an emulator that could directly communicate with agents, I started to my feet, for it flashed my mind that I had never seen an emulator interface directly with Python scripts and thus not require complete control of screen, keyboard, and mouse, and burning with curiosity, I ran accross the field after it, and fortunately was just in time to see it pop down a large rabbit-hole under the hedge.           
+There was nothing so very remarkable in that; nor did I think it so very much out of the way to hear the Rabbit say to itself "Oh dear! Oh dear! I shall be late!"; but when the Rabbit actually took out an emulator that could directly communicate with agents, I started to my feet, for it flashed across my mind that I had never seen an emulator interface directly with Python scripts and thus not require complete control of the screen, keyboard, and mouse, and burning with curiosity, I ran across the field after it, and fortunately was just in time to see it pop down a large rabbit-hole under the hedge.           
 
 📖 Alice in Wonderland Chapter 1, probably, if Lewis Carroll had seen my (really) cool emulator
 
 ## So what is WhiteRabbit?
-It's a CHIP8 emulator with a TCP/IP Server written in C++ using the Qt framework. It looks like this!     
+It's a CHIP8 emulator with a TCP/IP Server written in C++ using the Qt framework. It looks like this!       
+
 ![WR](https://github.com/user-attachments/assets/82226911-af33-437a-abf5-ecaa56014b94)
 
 ## What can it do?
@@ -18,7 +19,7 @@ The emulator can ...
 ↩️ Reset the game     
 
 The server can connect to clients and send ...              
-➡️ 📺 On-screen display from the emulator (No need to continously screenshot your screen to get visual input!)               
+➡️ 📺 On-screen display from the emulator (No need to continuously screenshot your screen to get visual input!)               
 ➡️ 🎹 Pressed and released keys from the CHIP8 keyboard         
 ➡️ 🎵 Get sound status       
 
@@ -28,7 +29,7 @@ The server can receive from the connected clients ...
 ⬅️ 📜 Publish text to the emulator GUI            
 
 ## White Rabbit Chip8 (Chip-8 Program)
-Now you might be wondering what that cool-looking rabbit with a watch is at the top left of the program. It's an interactive program I've written in the Chip-8 language where upon pressing the "A" key (either on the displayed keyboard or via request through the server) will have the rabbit vanish! Don't worry; releasing the "A" key will bring it back.    
+Now you might be wondering what that cool-looking rabbit with a watch is at the top left of the program. It's an interactive program I've written in the Chip-8 language where upon pressing the "A" key (either on the displayed keyboard or via request through the server), the rabbit vanishes! Don't worry; releasing the "A" key will bring it back.    
 Its purpose? To welcome you 🐰              
 
 ## Demo Client (Python Script)
@@ -50,7 +51,7 @@ key_A Pressed - Rabbit is gone!| key_A Released - Rabbit is back |  Client Demo 
 
 
 ## Server Requests 
-Ah! I see you ventured this far into the rabbit-hole, perchance you have an agent/automation project in mind? 👀 The following information shall prove useful then.  
+Ah! I see you ventured this far into the rabbit hole, perchance you have an agent/automation project in mind? 👀 The following information shall prove useful then.  
 ### Server Info
 **Server IP**: 127.0.0.1               
 **Port Number**: 3000                 
@@ -106,7 +107,7 @@ b'\x00\x00\x01\x00\x00\x01\x00\x00\x00\x00\x00\x01\x00\ ... truncated ... \x00\x
 **Function**: The equivalent of pressing/releasing a key on the keyboard             
 **Input**: 
 * command_key (YOUR_KEY as either a number 0-9 or a letter A-F, depending on the key)
-* command_action (either PRESS or RELEASE depending on desired action)                 
+* command_action (either PRESS or RELEASE depending on the desired action)                 
 ```
 '{"request": "PUBLISH_COMMAND","command_key": "YOUR_KEY","command_action": "PRESS|RELEASE"}'
 ```
